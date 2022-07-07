@@ -4,27 +4,64 @@ function openPage() {
     console.log(searchResult);
     console.log(resultChopped);
     if (resultChopped === "bulldog") {
-        window.location.href="./index.html";
+        window.location.href = "./index.html";
         console.log(searchResult);
     }
 
     if (resultChopped === "goldenretriever") { //Change this to function as "Check database for resultChopped and if it's there, go there"
-        window.location.href="./index.html";
+        window.location.href = "./index.html";
         console.log(searchResult);
     }
-    getImage(searchResult);
+    // call sub-breed api function
+    getBreed(resultChopped);
+    //getBreedImage(resultChopped);
 }
 
-function getImage(searchResult) {
-    var apiUrl = "https://dog.ceo/api/breed/" + searchResult + "/images";
+// fetch dog sub-breed list
+function getBreed(resultChopped) {
+    var apiUrl = "https://dog.ceo/api/breed/" + resultChopped + "/list";
 
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data);
+                if (data.message.length === 0) {
+                    console.log("BLANK ARRAY");
+                    getBreedImage(resultChopped);
+                    // fetch breed images
+                    function getBreedImage(resultChopped) {
+                        var apiImageUrl = "https://dog.ceo/api/breed/" + resultChopped + "/images";
+
+                        fetch(apiImageUrl).then(function (response) {
+                            if (response.ok) {
+                                response.json().then(function (data) {
+                                    console.log(data);
+                                });
+                            } else {
+                                console.log("breed IMAGE not found");
+                            }
+                        });
+                    }
+                }
             });
         } else {
             console.log("dog breed not found");
+        }
+    });
+
+}
+
+// fetch breed image
+function getBreedImage(resultChopped) {
+    var apiImageUrl = "https://dog.ceo/api/breed/" + resultChopped + "/images";
+
+    fetch(apiImageUrl).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                console.log(data);
+            });
+        } else {
+            console.log("breed IMAGE not found");
         }
     });
 }
@@ -33,7 +70,7 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
     var recentSearch = [];
     recentSearch.push($('#search').val());
 
-    $.each(recentSearch, function(index, value) {
+    $.each(recentSearch, function (index, value) {
         const p = document.createElement("p");
         p.innerHTML = value;
         document.getElementById("historyLine1").appendChild(p);
@@ -51,6 +88,13 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
     //Also, make it so it saves the history variables to browser
 
     //Would like to make it so clicking the search bar icon does a search, but didn't get to it
+
+
+
+    // ALEX Pseudo Code
+    // when breed family is searched, display clickable buttons of sub-breeds
+    // if no sub-breeds return (array length 0), but family returns (ex pitbull) - display images of family
+    // when sub-breed buttons are clicked, display images for sub-breed
 
 
 
