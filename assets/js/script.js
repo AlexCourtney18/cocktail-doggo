@@ -165,21 +165,6 @@ var getDogInfo = function(resultChopped) {
     })
 
 };
-//THE FOLLOWING IS THE API call to a different API that may need to be used...  >>>>>>>>
-    // $.ajax({
-    //     method: "GET",
-    //     url: "https://api.api-ninjas.com/v1/dogs?name=" + resultChopped,
-    //     headers: { "X-Api-Key": "m1XEFgtJy+tOPfM7jpV2uw==DtLxNYGo7mhPpvOz"},
-    //     contentType: "application/json",
-    //     success: function(data) {
-    //         console.log(data);
-    //     }
- 
-    // });
-//END>>>>>>>>>>
-
-
-
 
     //Pseudo Code
 
