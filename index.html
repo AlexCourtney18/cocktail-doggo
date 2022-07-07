@@ -7,14 +7,20 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <!-- TODO: Implement Bulma -->
     <title>Doggypedia</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
     <body>
 
         <!-- WIP: Header with settings button? -->
         <header>
             <h2>Doggypedia</h2>
-            <h3>Search for a cocktail:</h3>
+            <h3>Search for a good boy:</h3>
             <!-- Search Bar Goes Here -->
+            <input type="search" value="" id="search" onchange="searchHistory(), openPage()">
+            
+            <div id="historyLine1"></div>
+            <div id="historyLine2"></div>
+            <div id="historyLine3"></div>
         </header>
 
         <!-- WIP: Error message, hidden by default, shown when searchFail() -->
