@@ -5,18 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <!-- TODO: Implement Bulma -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css" integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bulma suggests Font Awesome for icons -->
     <title>Doggypedia</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
     <body>
 
         <!-- WIP: Header with settings button? -->
-        <header>
-            <h2>Doggypedia</h2>
-            <h3>Search for a good boy:</h3>
+        <header class="block">
+            <h2 class="title is-2">Doggypedia</h2>
+            <h3 class="title subtitle is-4">Search for a good boy:</h3>
             <!-- Search Bar Goes Here -->
-            <input type="search" value="" id="search" onchange="searchHistory(), openPage()">
+            <input type="search" value="" id="search" class="subtitle" onchange="searchHistory(), openPage()">
             
             <div id="historyLine1"></div>
             <div id="historyLine2"></div>
@@ -24,15 +26,15 @@
         </header>
 
         <!-- WIP: Error message, hidden by default, shown when searchFail() -->
-        <article>
+        <article class="box">
             <div> 
                 <!-- Random Dog Image API --> 
             </div>
 
             <div>
-                <span>Sorry about that!</span>
+                <span class="content is-medium">Sorry about that!</span>
                 <br>
-                <span>The dog breed you specified could not be found in our database. For your troubles, here's a random dog fact!</span>
+                <span class="content is-medium">The dog breed you specified could not be found in our database. For your troubles, here's a random dog fact!</span>
                 <br>
                 <!-- Random Dog Fact API -->
             </div>
