@@ -155,7 +155,7 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
 //This is the wikipedia API call
 var getDogInfo = function(resultChopped) {
      
-    var dogInfo = "https://en.wikipedia.org/w/api.php?action=query&titles=" + resultChopped + "&prop=extracts&format=json&exintro=1&origin=*" 
+    var dogInfo = "https://en.wikipedia.org/w/api.php?action=query&titles=" + resultChopped + "&prop=extracts&format=json&exintro=1&origin=*"; 
 
     fetch(dogInfo).then(function(response) {
         if (response.ok) {
