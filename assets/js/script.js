@@ -1,18 +1,19 @@
 function openPage() {
-    var searchResult = document.getElementById("search").value.toLowerCase().replace(/\s/g, ''); // This grabs the result, makes it all lowercase, and removes the spaces from the variable.
+    var searchResult = document.getElementById("search").value; // Grabs result
+    var resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
     console.log(searchResult);
-    if (searchResult.toLowerCase() === "bulldog") {
+    if (resultChopped === "bulldog") {
         window.location.href="./index.html";
         console.log(searchResult);
     }
 
-    if (searchResult.toLowerCase() === "goldenretriever") { //Change this to function as "Check database for searchResult and if it's there, go to that page"
+    if (resultChopped === "goldenretriever") { //Change this to function as "Check database for resultChopped and if it's there, go there"
         window.location.href="./index.html";
         console.log(searchResult);
     }
 }
 
-function searchHistory() {
+function searchHistory() { //rudimentary way of grabbing the recent search so we can get the information and save it to local storage (not implemented)
     var recentSearch = [];
     recentSearch.push($('#search').val());
 
@@ -21,7 +22,7 @@ function searchHistory() {
         p.innerHTML = value;
         document.getElementById("historyLine1").appendChild(p);
     })
-
+}
     //Pseudo Code
 
     //Search for something
@@ -29,28 +30,8 @@ function searchHistory() {
     //If any history is empty, do not show box logic
     //Only show search history when search bar is clicked
     //Also, make it so it saves the history variables to browser
-}
 
-//Search Bar testing
-//I screwed something up by the way, can't tell why the X icon is posting whatever I have in the search form, maybe because of onChange
-
-const clearIcon = document.querySelector(".clear-icon");
-const searchBar = document.querySelector(".search");
-const searchIcon = document.querySelector(".search-icon");
-
-clearIcon.addEventListener("click", () => {
-  searchBar.value = "";
-  clearIcon.style.visibility = "hidden";
-})
-
-searchIcon.addEventListener("click", () => {
-    searchBar.value = "";
-    clearIcon.style.visibility = "hidden";
-})
-
-
-
-
+    //Would like to make it so clicking the search bar icon does a search, but didn't get to it
 
 
 
