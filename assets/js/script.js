@@ -166,8 +166,7 @@ var getDogInfo = function(resultChopped) {
 
 };
 
-    //Pseudo Code
-
+    // JONNY Pseudo Code
     //Search for something
     //Search becomes history 1, history 2 becomes history 1, and history 3 becomes history 2
     //If any history is empty, do not show box logic
