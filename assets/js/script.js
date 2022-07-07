@@ -63,7 +63,8 @@ function getBreed(resultChopped) {
                     // fetch breed images
                     function getBreedImage(resultChopped) {
                         var apiImageUrl = "https://dog.ceo/api/breed/" + resultChopped + "/images";
-
+                        
+                        subImagesEl.textContent = "";
                         fetch(apiImageUrl).then(function (response) {
                             if (response.ok) {
                                 response.json().then(function (data) {
