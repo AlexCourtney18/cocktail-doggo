@@ -1,8 +1,9 @@
 var subBreedButtonEl = document.querySelector("#sub-button");
+var resultChopped;
 
 function openPage() {
     var searchResult = document.getElementById("search").value; // Grabs result
-    var resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
+    resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
     console.log(searchResult);
     console.log(resultChopped);
     // if (resultChopped === "bulldog") {
@@ -51,7 +52,7 @@ function getBreed(resultChopped) {
                         subBreedButtonEl.appendChild(buttonEl);
 
                         // add click event listener for sub-breed buttons
-                        subBreedButtonEl.addEventListener("click", getBreedImage);
+                        subBreedButtonEl.addEventListener("click", buttonClick);
                         //console.log(click);
                     }
                 }
@@ -81,6 +82,11 @@ function getBreed(resultChopped) {
 
 }
 
+function buttonClick(event) {
+    var btnClick = event.target.textContent;
+    getBreedImage(resultChopped + "/" + btnClick);
+}
+
 // fetch breed image
 function getBreedImage(resultChopped) {
     var apiImageUrl = "https://dog.ceo/api/breed/" + resultChopped + "/images";
@@ -100,7 +106,7 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
     var recentSearch = [];
     recentSearch.push($('#search').val());
 
-    $.each(recentSearch, function (index, value) {
+    $.each(recentSearch, function(index, value) {
         const p = document.createElement("p");
         p.innerHTML = value;
         document.getElementById("historyLine1").appendChild(p);
