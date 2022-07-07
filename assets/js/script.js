@@ -5,15 +5,15 @@ function openPage() {
     var resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
     console.log(searchResult);
     console.log(resultChopped);
-    if (resultChopped === "bulldog") {
-        window.location.href = "./index.html";
-        console.log(searchResult);
-    }
+    // if (resultChopped === "bulldog") {
+    //     window.location.href = "./index.html";
+    //     console.log(searchResult);
+    // }
 
-    if (resultChopped === "goldenretriever") { //Change this to function as "Check database for resultChopped and if it's there, go there"
-        window.location.href = "./index.html";
-        console.log(searchResult);
-    }
+    // if (resultChopped === "goldenretriever") { //Change this to function as "Check database for resultChopped and if it's there, go there"
+    //     window.location.href = "./index.html";
+    //     console.log(searchResult);
+    // }
     // call sub-breed api function
     getBreed(resultChopped);
     //getBreedImage(resultChopped);
@@ -30,6 +30,7 @@ function getBreed(resultChopped) {
                 createButton(data);
                 // create buttons for sub-breeds
                 function createButton(data) {
+                    // clear any existing buttons
                     subBreedButtonEl.textContent = "";
                     for (var i = 0; i < data.message.length; i++) {
                         if (data.message[i]) {
@@ -71,8 +72,6 @@ function getBreed(resultChopped) {
                             }
                         });
                     }
-                } else {
-                    //createButton(data);
                 }
             });
         } else {
