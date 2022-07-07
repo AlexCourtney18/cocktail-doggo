@@ -2,6 +2,7 @@ function openPage() {
     var searchResult = document.getElementById("search").value; // Grabs result
     var resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
     console.log(searchResult);
+    console.log(resultChopped);
     if (resultChopped === "bulldog") {
         window.location.href="./index.html";
         console.log(searchResult);
@@ -11,6 +12,21 @@ function openPage() {
         window.location.href="./index.html";
         console.log(searchResult);
     }
+    getImage(searchResult);
+}
+
+function getImage(searchResult) {
+    var apiUrl = "https://dog.ceo/api/breed/" + searchResult + "/images";
+
+    fetch(apiUrl).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                console.log(data);
+            });
+        } else {
+            console.log("dog breed not found");
+        }
+    });
 }
 
 function searchHistory() { //rudimentary way of grabbing the recent search so we can get the information and save it to local storage (not implemented)
@@ -23,6 +39,9 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
         document.getElementById("historyLine1").appendChild(p);
     })
 }
+
+
+
     //Pseudo Code
 
     //Search for something
