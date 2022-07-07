@@ -174,7 +174,11 @@ var getDogInfo = function(resultChopped) {
     //Also, make it so it saves the history variables to browser
     //Would like to make it so clicking the search bar icon does a search, but didn't get to it
 
-
+    $("#searchBar").on("click", function() {
+        console.log("it worked");
+    });
+    
+      
 
     // ALEX Pseudo Code
     // when breed family is searched, display clickable buttons of sub-breeds
