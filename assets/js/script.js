@@ -131,6 +131,7 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
     // when breed family is searched, display clickable buttons of sub-breeds
     // if no sub-breeds return (array length 0), but family returns (ex pitbull) - display images of family
     // when sub-breed buttons are clicked, display images for sub-breed
+    // test comments 
 
 
 
