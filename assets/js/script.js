@@ -1,4 +1,5 @@
 var subBreedButtonEl = document.querySelector("#sub-button");
+var subImagesEl = document.querySelector("#sub-images");
 var resultChopped;
 
 function openPage() {
@@ -67,6 +68,23 @@ function getBreed(resultChopped) {
                             if (response.ok) {
                                 response.json().then(function (data) {
                                     console.log(data);
+
+                                    for (var i = 0; i < 4; i++) {
+                                        if (data.message[i]) {
+
+                                            var subParentEl = document.createElement("div");
+                                            subImagesEl.appendChild(subParentEl);
+
+                                            subImage = data.message[i];
+
+                                            console.log(subImage + " SUB IMAGE");
+
+                                            // create a container for each sub-image
+                                            var imageEl = document.createElement("img");
+                                            imageEl.setAttribute("src", subImage);
+                                            subParentEl.appendChild(imageEl);
+                                        }
+                                    }
                                 });
                             } else {
                                 console.log("breed IMAGE not found");
@@ -79,7 +97,6 @@ function getBreed(resultChopped) {
             console.log("dog breed not found");
         }
     });
-
 }
 
 function buttonClick(event) {
@@ -91,10 +108,28 @@ function buttonClick(event) {
 function getBreedImage(resultChopped) {
     var apiImageUrl = "https://dog.ceo/api/breed/" + resultChopped + "/images";
 
+    subImagesEl.textContent = "";
     fetch(apiImageUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data);
+
+                for (var i = 0; i < 4; i++) {
+                    if (data.message[i]) {
+
+                        var subParentEl = document.createElement("div");
+                        subImagesEl.appendChild(subParentEl);
+
+                        subImage = data.message[i];
+
+                        console.log(subImage + " SUB IMAGE");
+
+                        // create a container for each sub-image
+                        var imageEl = document.createElement("img");
+                        imageEl.setAttribute("src", subImage);
+                        subParentEl.appendChild(imageEl);
+                    }
+                }
             });
         } else {
             console.log("breed IMAGE not found");
@@ -106,7 +141,7 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
     var recentSearch = [];
     recentSearch.push($('#search').val());
 
-    $.each(recentSearch, function(index, value) {
+    $.each(recentSearch, function (index, value) {
         const p = document.createElement("p");
         p.innerHTML = value;
         document.getElementById("historyLine1").appendChild(p);
