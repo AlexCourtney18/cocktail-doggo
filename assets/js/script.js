@@ -7,6 +7,9 @@ function openPage() {
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
     console.log(searchResult);
     console.log(resultChopped);
+    if (resultChopped) {
+        getDogInfo(resultChopped);
+    }
     // if (resultChopped === "bulldog") {
     //     window.location.href = "./index.html";
     //     console.log(searchResult);
@@ -149,7 +152,20 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
     })
 }
 
+//This is the wikipedia API call
+var getDogInfo = function(resultChopped) {
+     
+    var dogInfo = "https://en.wikipedia.org/w/api.php?action=query&titles=" + resultChopped + "&prop=extracts&format=json&exintro=1&origin=*" 
 
+    fetch(dogInfo).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+                console.log(data);
+            }) 
+        }
+    })
+
+};
 
     //Pseudo Code
 
@@ -158,7 +174,6 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
     //If any history is empty, do not show box logic
     //Only show search history when search bar is clicked
     //Also, make it so it saves the history variables to browser
-
     //Would like to make it so clicking the search bar icon does a search, but didn't get to it
 
 
@@ -168,13 +183,6 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
     // if no sub-breeds return (array length 0), but family returns (ex pitbull) - display images of family
     // when sub-breed buttons are clicked, display images for sub-breed
     // test comments 
-
-
-
-
-
-
-
 
 
 
