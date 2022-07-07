@@ -1,3 +1,5 @@
+var subBreedButtonEl = document.querySelector("#sub-button");
+
 function openPage() {
     var searchResult = document.getElementById("search").value; // Grabs result
     var resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
@@ -25,6 +27,33 @@ function getBreed(resultChopped) {
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data);
+                createButton(data);
+                // create buttons for sub-breeds
+                function createButton(data) {
+                    subBreedButtonEl.textContent = "";
+                    for (var i = 0; i < data.message.length; i++) {
+                        if (data.message[i]) {
+                            subBreed = data.message[i];
+                            //console.log(subBreed + "SUB BREED");
+                        }
+                        console.log(subBreed + " SUB BREED");
+
+                        // create a container for each sub-breed
+                        var buttonEl = document.createElement("button");
+
+                        // create a span element to hold sub-breed name
+                        var titleEl = document.createElement("span");
+                        titleEl.textContent = subBreed;
+
+                        buttonEl.appendChild(titleEl);
+
+                        subBreedButtonEl.appendChild(buttonEl);
+
+                        // add click event listener for sub-breed buttons
+                        subBreedButtonEl.addEventListener("click", getBreedImage);
+                        //console.log(click);
+                    }
+                }
                 if (data.message.length === 0) {
                     console.log("BLANK ARRAY");
                     getBreedImage(resultChopped);
@@ -42,6 +71,8 @@ function getBreed(resultChopped) {
                             }
                         });
                     }
+                } else {
+                    //createButton(data);
                 }
             });
         } else {
