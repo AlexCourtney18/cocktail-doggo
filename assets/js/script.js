@@ -1,8 +1,10 @@
 var subBreedButtonEl = document.querySelector("#sub-button");
+var subImagesEl = document.querySelector("#sub-images");
+var resultChopped;
 
 function openPage() {
     var searchResult = document.getElementById("search").value; // Grabs result
-    var resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
+    resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
     console.log(searchResult);
     console.log(resultChopped);
     // if (resultChopped === "bulldog") {
@@ -51,7 +53,7 @@ function getBreed(resultChopped) {
                         subBreedButtonEl.appendChild(buttonEl);
 
                         // add click event listener for sub-breed buttons
-                        subBreedButtonEl.addEventListener("click", getBreedImage);
+                        subBreedButtonEl.addEventListener("click", buttonClick);
                         //console.log(click);
                     }
                 }
@@ -66,6 +68,23 @@ function getBreed(resultChopped) {
                             if (response.ok) {
                                 response.json().then(function (data) {
                                     console.log(data);
+
+                                    for (var i = 0; i < 4; i++) {
+                                        if (data.message[i]) {
+
+                                            var subParentEl = document.createElement("div");
+                                            subImagesEl.appendChild(subParentEl);
+
+                                            subImage = data.message[i];
+
+                                            console.log(subImage + " SUB IMAGE");
+
+                                            // create a container for each sub-image
+                                            var imageEl = document.createElement("img");
+                                            imageEl.setAttribute("src", subImage);
+                                            subParentEl.appendChild(imageEl);
+                                        }
+                                    }
                                 });
                             } else {
                                 console.log("breed IMAGE not found");
@@ -78,17 +97,39 @@ function getBreed(resultChopped) {
             console.log("dog breed not found");
         }
     });
+}
 
+function buttonClick(event) {
+    var btnClick = event.target.textContent;
+    getBreedImage(resultChopped + "/" + btnClick);
 }
 
 // fetch breed image
 function getBreedImage(resultChopped) {
     var apiImageUrl = "https://dog.ceo/api/breed/" + resultChopped + "/images";
 
+    subImagesEl.textContent = "";
     fetch(apiImageUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
                 console.log(data);
+
+                for (var i = 0; i < 4; i++) {
+                    if (data.message[i]) {
+
+                        var subParentEl = document.createElement("div");
+                        subImagesEl.appendChild(subParentEl);
+
+                        subImage = data.message[i];
+
+                        console.log(subImage + " SUB IMAGE");
+
+                        // create a container for each sub-image
+                        var imageEl = document.createElement("img");
+                        imageEl.setAttribute("src", subImage);
+                        subParentEl.appendChild(imageEl);
+                    }
+                }
             });
         } else {
             console.log("breed IMAGE not found");
@@ -125,6 +166,8 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
     // when breed family is searched, display clickable buttons of sub-breeds
     // if no sub-breeds return (array length 0), but family returns (ex pitbull) - display images of family
     // when sub-breed buttons are clicked, display images for sub-breed
+    // test comments 
+
 
 
 
