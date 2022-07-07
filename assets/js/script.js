@@ -19,25 +19,34 @@ function searchHistory() {
     $.each(recentSearch, function(index, value) {
         const p = document.createElement("p");
         p.innerHTML = value;
-        document.getElementById("historyLine").appendChild(p);
+        document.getElementById("historyLine1").appendChild(p);
     })
-
-    // Ordering
-
-    // Search Bar
-    // History 1
-    // History 2
-    // History 3
 
     //Pseudo Code
 
     //Search for something
     //Search becomes history 1, history 2 becomes history 1, and history 3 becomes history 2
     //If any history is empty, do not show box logic
-    //Only show when search bar is clicked
+    //Only show search history when search bar is clicked
+    //Also, make it so it saves the history variables to browser
 }
 
+//Search Bar testing
+//I screwed something up by the way, can't tell why the X icon is posting whatever I have in the search form, maybe because of onChange
 
+const clearIcon = document.querySelector(".clear-icon");
+const searchBar = document.querySelector(".search");
+const searchIcon = document.querySelector(".search-icon");
+
+clearIcon.addEventListener("click", () => {
+  searchBar.value = "";
+  clearIcon.style.visibility = "hidden";
+})
+
+searchIcon.addEventListener("click", () => {
+    searchBar.value = "";
+    clearIcon.style.visibility = "hidden";
+})
 
 
 
