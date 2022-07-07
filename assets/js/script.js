@@ -5,6 +5,9 @@ function openPage() {
     var resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
     console.log(searchResult);
     console.log(resultChopped);
+    if (resultChopped) {
+        getDogInfo(resultChopped);
+    }
     // if (resultChopped === "bulldog") {
     //     window.location.href = "./index.html";
     //     console.log(searchResult);
@@ -106,6 +109,34 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
         document.getElementById("historyLine1").appendChild(p);
     })
 }
+
+//This is the wikipedia API call
+var getDogInfo = function(resultChopped) {
+     
+    var dogInfo = "https://en.wikipedia.org/w/api.php?action=query&titles=" + resultChopped + "&prop=extracts&format=json&exintro=1&origin=*" 
+
+    fetch(dogInfo).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+                console.log(data);
+            }) 
+        }
+    })
+
+};
+//THE FOLLOWING IS THE API call to a different API that may need to be used...  >>>>>>>>
+    // $.ajax({
+    //     method: "GET",
+    //     url: "https://api.api-ninjas.com/v1/dogs?name=" + resultChopped,
+    //     headers: { "X-Api-Key": "m1XEFgtJy+tOPfM7jpV2uw==DtLxNYGo7mhPpvOz"},
+    //     contentType: "application/json",
+    //     success: function(data) {
+    //         console.log(data);
+    //     }
+ 
+    // });
+//END>>>>>>>>>>
+
 
 
 
