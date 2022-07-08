@@ -5,51 +5,21 @@ const url = "https://dog.ceo/api/breeds/list/all";
 
 let breeds = [];
 
+
 const dogApi = async () => {
   let response = await fetch(url);
   let data = await response.json();
   let breedName = Object.keys(data.message);
-
-
-  var result = breedName.find(obj => {
-    return breedName === 6
-  });
-
- 
-
   const card = userCardTemplate.content.cloneNode(true).children[0];
   const body = card.querySelector("[data-body]");
   body.textContent = breedName
-     console.log(result)
-     userCardContainer.append(card);
-     return (result);
+  console.log(breedName)
+  userCardContainer.append(card);
+  return (breedName);
 };
+
 dogApi();
 
-
-// let users = [];
-
-// searchInput.addEventListener("input", e => {
-//     const value = e.target.value.toLowerCase();
-//     users.forEach(user => {
-//         const isVisible = user.name.toLowerCase().includes(value) || user.email.toLowerCase().includes(value);
-//         user.element.classList.toggle("hide", !isVisible);
-//     });
-// });
-
-// fetch("https://jsonplaceholder.typicode.com/users")
-//   .then(res => res.json())
-//   .then(data => {
-//     users = data.map(user => {
-//       const card = userCardTemplate.content.cloneNode(true).children[0];
-//       const header = card.querySelector("[data-header]");
-//       const body = card.querySelector("[data-body]");
-//       header.textContent = user.name;
-//       body.textContent = user.email;
-//       userCardContainer.append(card);
-//       return { name: user.name, email: user.email, element: card };
-//     });
-//   });
 
 
 // const userCardTemplate = document.querySelector("[data-user-template]");
