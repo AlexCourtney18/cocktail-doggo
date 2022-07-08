@@ -1,45 +1,38 @@
+import { createMenuBreed } from "./util";
+
+const userCardTemplate = document.querySelector("[data-user-template]");
+const userCardContainer = document.querySelector("[data-user-cards-container]");
+const searchInput = document.querySelector("[data-search]");
+const url = "https://dog.ceo/api/breeds/list/all";
+
+
+const dogAPI = async () => {
+  try {
+    let response = await fetch(url);
+    let data = await response.json();
+
+    let breedGroup = Object.values(data.message);
+    let breedName = Object.keys(data.message);
+    return breedGroup.map((subBreed) => {
+      let breedIndex = breedGroup.indexOf(subBreed);
+      let breedName = breedListNames[breedIndex];
+      if(subBreed.length > 0) {
+        return createMenuBreedGroup(breedName, subBreed);
+      }
+      return createMenuBreed(breedName);
+    });
+  }
+}
+dogAPI();
+
+
+
+
+
 // const userCardTemplate = document.querySelector("[data-user-template]");
 // const userCardContainer = document.querySelector("[data-user-cards-container]");
 // const searchInput = document.querySelector("[data-search]");
-
-
-// let users = [] 
-
-const showBreed = async () => {
-  let selection = $('#theValue').val();
-  let image = await fetch("https://dog.ceo/api/breed/${selection}/images/random")
-      .then(data => data.json()).then(({ message }) => message);
-      $("header").append($('<img>',{src:image}))
-};
-const init = async () => {
-  const breeds = await fetch('https://dog.ceo/api/breeds/list/all')
-      .then(data => data.json())
-      .then(data => Object.keys(data.message));
-  breeds.forEach(breed => {
-      $('#theValue').append($("body", { text: breed }));
-  });
-  showBreed();
-};
-init();
-  
-  // {
-  //   users = data.map(user => {
-  //     const card = userCardTemplate.content.cloneNode(true).children[0];
-  //     const header = card.querySelector("[data-header]");
-  //     const body = card.querySelector("[data-body]");
-  //     header.textContent = user.name;
-  //     body.textContent = user.email;
-  //     userCardContainer.append(card);
-  //     return { name: user.name, email: user.email, element: card };
-  //   });
-  // });
-
-
-
-  // const userCardTemplate = document.querySelector("[data-user-template]");
-// const userCardContainer = document.querySelector("[data-user-cards-container]");
-// const searchInput = document.querySelector("[data-search]");
-
+// const url = "https://dog.ceo/api/breeds/list/all";
 
 // let users = [] 
 
