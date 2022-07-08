@@ -1,7 +1,10 @@
 var subBreedButtonEl = document.querySelector("#sub-button");
 var subImagesEl = document.querySelector("#sub-images");
 var wikipedia = document.getElementById("wikipedia"); //This is the element with the random dog facts inside. Should change the name to be something other than wikipedia later.
+<<<<<<< HEAD
 var statistics = document.getElementById("statistics");
+=======
+>>>>>>> 27a5a5a27cc9c0f321bf84a6a3ff0b32d7319cd0
 var resultChopped;
 var dogFamily;
 
