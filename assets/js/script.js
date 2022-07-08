@@ -9,8 +9,11 @@ function openPage() {
     console.log(searchResult);
     console.log(resultChopped);
     
+    //THESE TWO are the calls to the dog facts APIs>>>>>>>
+    dogBreedFacts(resultChopped)
     getDogInfo(resultChopped);
-    
+    //>>>>>>>>>>>>
+
     getBreed(resultChopped);
     //getBreedImage(resultChopped);
 }
@@ -161,12 +164,12 @@ var getDogInfo = function(resultChopped) {
     factHeader.innerText = "Quick dog facts:";
     wikipedia.appendChild(factHeader);
 
-    var dogInfo = "https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5"   //"https://en.wikipedia.org/w/api.php?action=query&titles=" + resultChopped + "dog&prop=extracts&format=json&exintro=1&explaintext&origin=*"   //"https://en.wikipedia.org/w/api.php?action=opensearch&search=" + resultChopped + " dog&limit=1&namespace=0&format=json&explaintext&origin=*" ;         "https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/all"  
+    var dogInfo = "https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5"  
 
     fetch(dogInfo).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-                console.log(data);
+                //console.log(data);
                 dataArr = data.facts;
                 //console.log(dataArr);
                 for (var i = 0; i < dataArr.length; i++) {
@@ -178,6 +181,21 @@ var getDogInfo = function(resultChopped) {
             }) 
         }
     })
+};
+
+
+var dogBreedFacts = function(resultChopped) {
+
+        $.ajax({
+            method: "GET",
+            url: "https://api.api-ninjas.com/v1/dogs?name=" + resultChopped,
+            headers: { "X-Api-Key": "m1XEFgtJy+tOPfM7jpV2uw==DtLxNYGo7mhPpvOz"},
+            contentType: "application/json",
+            success: function(data) {
+                console.log(data);
+            }
+     
+        });
 };
 
     //Pseudo Code
