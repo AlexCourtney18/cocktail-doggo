@@ -13,10 +13,10 @@ searchInput.addEventListener("input", e => {
     });
 });
 
-fetch("https://dog.ceo/api/breeds/list/all")
+fetch("https://jsonplaceholder.typicode.com/users")
   .then(res => res.json())
   .then(data => {
-    users = data.map(data => {
+    users = data.map(user => {
       const card = userCardTemplate.content.cloneNode(true).children[0];
       const header = card.querySelector("[data-header]");
       const body = card.querySelector("[data-body]");
@@ -26,8 +26,6 @@ fetch("https://dog.ceo/api/breeds/list/all")
       return { name: user.name, email: user.email, element: card };
     });
   });
-
-
 
 
 
@@ -49,7 +47,7 @@ fetch("https://dog.ceo/api/breeds/list/all")
 // fetch("https://jsonplaceholder.typicode.com/users")
 //   .then(res => res.json())
 //   .then(data => {
-//     users = data.map(data => {
+//     users = data.map(user => {
 //       const card = userCardTemplate.content.cloneNode(true).children[0];
 //       const header = card.querySelector("[data-header]");
 //       const body = card.querySelector("[data-body]");
