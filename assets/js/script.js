@@ -3,20 +3,26 @@ const userCardContainer = document.querySelector("[data-user-cards-container]");
 const searchInput = document.querySelector("[data-search]");
 const url = "https://dog.ceo/api/breeds/list/all";
 
-
+let breeds = [];
 
 const dogApi = async () => {
   let response = await fetch(url);
   let data = await response.json();
-  let breedGroup = Object.values(data.message);
   let breedName = Object.keys(data.message);
+
+
+  var result = breedName.find(obj => {
+    return breedName === 6
+  });
+
+ 
+
   const card = userCardTemplate.content.cloneNode(true).children[0];
-  const header = card.querySelector("[data-header]");
   const body = card.querySelector("[data-body]");
-  header.textContent = breedGroup
   body.textContent = breedName
-     console.log(breedGroup);
-     console.log(breedName)
+     console.log(result)
+     userCardContainer.append(card);
+     return (result);
 };
 dogApi();
 
