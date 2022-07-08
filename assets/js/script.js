@@ -37,7 +37,6 @@ function getBreed(resultChopped) {
                     for (var i = 0; i < data.message.length; i++) {
                         if (data.message[i]) {
                             subBreed = data.message[i];
-                            //console.log(subBreed + "SUB BREED");
                         }
                         console.log(subBreed + " SUB BREED");
 
@@ -48,15 +47,16 @@ function getBreed(resultChopped) {
                         var titleEl = document.createElement("span");
                         titleEl.textContent = subBreed;
 
+                        // append elements
                         buttonEl.appendChild(titleEl);
 
                         subBreedButtonEl.appendChild(buttonEl);
 
                         // add click event listener for sub-breed buttons
                         subBreedButtonEl.addEventListener("click", buttonClick);
-                        //console.log(click);
                     }
                 }
+                // functionality to load breed images immediately if there are no sub-breeds listed in the api
                 if (data.message.length === 0) {
                     console.log("BLANK ARRAY");
                     getBreedImage(resultChopped);
@@ -81,7 +81,7 @@ function getBreed(resultChopped) {
 
                                             console.log(subImage + " SUB IMAGE");
 
-                                            // create a container for each sub-image
+                                            // create a container for each sub-image/append
                                             var imageEl = document.createElement("img");
                                             imageEl.setAttribute("src", subImage);
                                             subParentEl.appendChild(imageEl);
@@ -96,12 +96,14 @@ function getBreed(resultChopped) {
                 }
             });
         } else {
+            // clear previous content even when breed is searched that returns "not found"
             subImagesEl.textContent = "";
             subBreedButtonEl.textContent = "";
             console.log("dog breed not found");
         }
     });
 }
+// button click function for sub-breed buttons to pass through breed family + btnClick sub breed to breed images function
 
 var doggieButtonClick;
 
