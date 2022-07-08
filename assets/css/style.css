@@ -43,6 +43,10 @@
     background-color: white;
 }
 
+.hidden {
+    display: none;
+}
+
 /* Add Media Queries for browser sizes/mobile */
 
 @media only screen and (max-width: 720px) {

@@ -25,19 +25,17 @@
                 <img class="clear-icon" src=null>
               </div>  
             <div id="historyLine1"></div>
-                <label>Value: <input type="text" id="theValue">
-                <input type="button" id="setValue" value="Set"></label>
             <div id="historyLine2"></div>
             <div id="historyLine3"></div>
         </header>
 
         <!-- WIP: Error message, hidden by default, shown when searchFail() -->
-        <article class="box">
+        <article id=error-page-box class="box hidden">
             <div> 
                 <!-- Random Dog Image API --> 
             </div>
 
-            <div>
+            <div id="error-page-content" class="hidden">
                 <span class="content is-medium">Sorry about that!</span>
                 <br>
                 <span class="content is-medium">The dog breed you specified could not be found in our database. For your troubles, here's a random dog fact!</span>

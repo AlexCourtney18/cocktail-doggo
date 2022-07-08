@@ -1,15 +1,17 @@
 var subBreedButtonEl = document.querySelector("#sub-button");
 var subImagesEl = document.querySelector("#sub-images");
 var resultChopped;
-
+var searchFlag = false; // This variable is asking "Have you searched before?"
+var successfulSearchFlag = true; // This variable is asking "Have you succeeded at a search before?"
+var errorPage = document.getElementById(error-page);
 function openPage() {
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
     console.log(searchResult);
     console.log(resultChopped);
-    if (resultChopped) {
-        getDogInfo(resultChopped);
-    }
+    // if (resultChopped) {
+    //     getDogInfo(resultChopped);
+    // }
     // if (resultChopped === "bulldog") {
     //     window.location.href = "./index.html";
     //     console.log(searchResult);
@@ -71,7 +73,6 @@ function getBreed(resultChopped) {
                             if (response.ok) {
                                 response.json().then(function (data) {
                                     console.log(data);
-
                                     for (var i = 0; i < 4; i++) {
                                         if (data.message[i]) {
 
@@ -81,7 +82,7 @@ function getBreed(resultChopped) {
                                             subImage = data.message[i];
 
                                             console.log(subImage + " SUB IMAGE");
-
+                                            
                                             // create a container for each sub-image
                                             var imageEl = document.createElement("img");
                                             imageEl.setAttribute("src", subImage);
@@ -96,8 +97,12 @@ function getBreed(resultChopped) {
                     }
                 }
             });
+            document.querySelector("#error-page-box").classList.add('hidden');
+            document.querySelector("#error-page-content").classList.add('hidden');
         } else {
             console.log("dog breed not found");
+            document.querySelector("#error-page-box").classList.remove('hidden');
+            document.querySelector("#error-page-content").classList.remove('hidden');
         }
     });
 }
