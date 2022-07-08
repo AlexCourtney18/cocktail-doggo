@@ -1,5 +1,6 @@
 var subBreedButtonEl = document.querySelector("#sub-button");
 var subImagesEl = document.querySelector("#sub-images");
+var wikipedia = document.getElementById("wikipedia");
 var resultChopped;
 
 function openPage() {
