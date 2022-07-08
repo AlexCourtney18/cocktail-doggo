@@ -98,6 +98,8 @@ function getBreed(resultChopped) {
                 }
             });
         } else {
+            subImagesEl.textContent = "";
+            subBreedButtonEl.textContent = "";
             console.log("dog breed not found");
         }
     });
