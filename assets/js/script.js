@@ -12,7 +12,6 @@ function openPage() {
     getDogInfo(resultChopped);
     
     getBreed(resultChopped);
-    //getBreedImage(resultChopped);
 }
 
 // fetch dog sub-breed list
