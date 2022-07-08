@@ -1,16 +1,23 @@
 var subBreedButtonEl = document.querySelector("#sub-button");
 var subImagesEl = document.querySelector("#sub-images");
 var wikipedia = document.getElementById("wikipedia"); //This is the element with the random dog facts inside. Should change the name to be something other than wikipedia later.
+var statistics = document.getElementById("statistics");
 var resultChopped;
+var dogFamily;
 
 function openPage() {
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
+    
+    //dogFamily = resultChopped;
+    console.log(dogFamily); //Sam added these console.logs to keep track of data needed to get the dog stats API working
     console.log(searchResult);
     console.log(resultChopped);
     
+    //THIS IS the call to the dog facts API>>>>>>>
     getDogInfo(resultChopped);
-    
+    //>>>>>>>>>>>>
+
     getBreed(resultChopped);
 }
 
@@ -53,6 +60,7 @@ function getBreed(resultChopped) {
                 if (data.message.length === 0) {
                     console.log("BLANK ARRAY");
                     getBreedImage(resultChopped);
+                    //dogBreedFacts(); //SAM. Work on getting functionality to work in API
                     // fetch breed images
                     function getBreedImage(resultChopped) {
                         var apiImageUrl = "https://dog.ceo/api/breed/" + resultChopped + "/images";
@@ -95,9 +103,16 @@ function getBreed(resultChopped) {
     });
 }
 
+var doggieButtonClick;
+
 function buttonClick(event) {
     var btnClick = event.target.textContent;
     getBreedImage(resultChopped + "/" + btnClick);
+
+    doggieButtonClick = event.target.textContent;
+    console.log(doggieButtonClick);
+    //console.log(dogFamily);
+    dogBreedFacts();
 }
 
 // fetch breed image
@@ -151,28 +166,28 @@ $(subBreedButtonEl).on("click", "button", function() {
 });
 
 //This is the random dog facts API call
-var getDogInfo = function(resultChopped) {
+var getDogInfo = function() {
     
     //this while loop is removing all the previously created elements so the container can be filled with new information
     while (wikipedia.firstChild) {
         wikipedia.removeChild(wikipedia.firstChild);
     }
 
-    var factHeader = document.createElement("h2")
+    var factHeader = document.createElement("h2") //THIS IS THE h2 for the random dog facts.
     factHeader.classList.add("randomfactheader");
     factHeader.innerText = "Quick dog facts:";
     wikipedia.appendChild(factHeader);
 
-    var dogInfo = "https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5"   //"https://en.wikipedia.org/w/api.php?action=query&titles=" + resultChopped + "dog&prop=extracts&format=json&exintro=1&explaintext&origin=*"   //"https://en.wikipedia.org/w/api.php?action=opensearch&search=" + resultChopped + " dog&limit=1&namespace=0&format=json&explaintext&origin=*" ;         "https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/all"  
+    var dogInfo = "https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5"  
 
     fetch(dogInfo).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-                console.log(data);
+                //console.log(data);
                 dataArr = data.facts;
                 //console.log(dataArr);
                 for (var i = 0; i < dataArr.length; i++) {
-                    var randomFact = document.createElement("p");
+                    var randomFact = document.createElement("li");
                     randomFact.classList.add("randomfact");
                     randomFact.innerText = dataArr[i];
                     wikipedia.appendChild(randomFact);
@@ -181,6 +196,97 @@ var getDogInfo = function(resultChopped) {
         }
     })
 };
+
+var dogBreedFacts = function() {
+
+        $.ajax({
+            method: "GET",
+            url: "https://api.api-ninjas.com/v1/dogs?name=" + doggieButtonClick,
+            headers: { "X-Api-Key": "m1XEFgtJy+tOPfM7jpV2uw==DtLxNYGo7mhPpvOz"},
+            contentType: "application/json",
+            success: function(data) {
+                console.log(data);
+
+                maxLife = "Life span: " + data[0].max_life_expectancy + " years."
+                console.log(maxLife);
+
+                maxHeight = "Maximum height: " + data[0].max_height_male + " inches.";
+                console.log(maxHeight);
+
+                maxWeight = "Maximum weight: " + data[0].max_weight_male + " lbs.";
+                console.log(maxWeight);
+
+                playful = "Playfulness: " + data[0].playfulness;
+                console.log(playful);
+
+                training = "Trainability: " + data[0].trainability;
+                console.log(training);
+
+                shedding = "Shedding: " + data[0].shedding;
+                console.log(shedding);
+
+                energy = "Energy: " + data[0].energy;
+                console.log(energy);
+
+                drooling = "Drooling: " + data[0].drooling;
+                console.log(drooling);
+                printDoggieFacts();
+            }
+
+        });
+};
+
+//THIS FUNCTION has all of the dog statistic elements to be styled. NOTE: To dynamically create
+//a class for each element, use (well use statHeader as an example) statHeader.setAttribute("class", "apple", "orange", "lemon"), etc.
+//NOTE FOR STYLING: If it is easier, all of the <li> elements can be turned into <p> elements, and be appended to a <div> rather thant a <ul>.
+//same goes for the random dog facts (they can be turned into <p> elements instead of <li> if its better that way);
+function printDoggieFacts() {
+
+    while(statistics.firstChild) {
+        statistics.removeChild(statistics.firstChild);
+    }
+
+    var statHeader = document.createElement("h2");
+    statHeader.innerText = "Doggie stats for this good girl:"
+    statistics.appendChild(statHeader);
+
+    var life = document.createElement("li");
+    life.innerText = maxLife;
+    statistics.appendChild(life);
+
+    var weight = document.createElement("li")
+    weight.innerText = maxWeight;
+    statistics.appendChild(weight);
+
+    var height = document.createElement("li");
+    height.innerText = maxHeight;
+    statistics.appendChild(height);
+
+    var secondaryHeader = document.createElement("h3");
+    secondaryHeader.innerText = "The following stats are rated on a scale from 0 through 5:";
+    statistics.appendChild(secondaryHeader);
+
+    var play = document.createElement("li");
+    play.innerText = playful;
+    statistics.appendChild(play);
+
+    var train = document.createElement("li");
+    train.innerText = training;
+    statistics.appendChild(train);
+
+    var shed = document.createElement("li");
+    shed.innerText = shedding;
+    statistics.appendChild(shed);
+
+    var clif = document.createElement("li");
+    clif.innerText = energy;
+    statistics.appendChild(clif);
+
+    var drool = document.createElement("li");
+    drool.innerText = drooling;
+    statistics.appendChild(drool);
+}; 
+
 
     //Pseudo Code
 
