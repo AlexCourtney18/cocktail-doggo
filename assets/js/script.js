@@ -1,6 +1,6 @@
 var subBreedButtonEl = document.querySelector("#sub-button");
 var subImagesEl = document.querySelector("#sub-images");
-var wikipedia = document.getElementById("wikipedia");
+var wikipedia = document.getElementById("wikipedia"); //This is the element with the random dog facts inside. Should change the name to be something other than wikipedia later.
 var resultChopped;
 
 function openPage() {
@@ -8,19 +8,9 @@ function openPage() {
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
     console.log(searchResult);
     console.log(resultChopped);
-    if (resultChopped) {
-        getDogInfo(resultChopped);
-    }
-    // if (resultChopped === "bulldog") {
-    //     window.location.href = "./index.html";
-    //     console.log(searchResult);
-    // }
-
-    // if (resultChopped === "goldenretriever") { //Change this to function as "Check database for resultChopped and if it's there, go there"
-    //     window.location.href = "./index.html";
-    //     console.log(searchResult);
-    // }
-    // call sub-breed api function
+    
+    getDogInfo(resultChopped);
+    
     getBreed(resultChopped);
     //getBreedImage(resultChopped);
 }
@@ -152,19 +142,42 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
     })
 }
 
-//This is the wikipedia API call
+//BELOW IS THE WORK ON GETTING DOG DATA
+//This is to change with quick dog facts each time a sub-breed button is clicked
+$(subBreedButtonEl).on("click", "button", function() {
+    getDogInfo();
+});
+
+//This is the random dog facts API call
 var getDogInfo = function(resultChopped) {
-     
-    var dogInfo = "https://en.wikipedia.org/w/api.php?action=query&titles=" + resultChopped + "&prop=extracts&format=json&exintro=1&origin=*" 
+    
+    //this while loop is removing all the previously created elements so the container can be filled with new information
+    while (wikipedia.firstChild) {
+        wikipedia.removeChild(wikipedia.firstChild);
+    }
+
+    var factHeader = document.createElement("h2")
+    factHeader.classList.add("randomfactheader");
+    factHeader.innerText = "Quick dog facts:";
+    wikipedia.appendChild(factHeader);
+
+    var dogInfo = "https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5"   //"https://en.wikipedia.org/w/api.php?action=query&titles=" + resultChopped + "dog&prop=extracts&format=json&exintro=1&explaintext&origin=*"   //"https://en.wikipedia.org/w/api.php?action=opensearch&search=" + resultChopped + " dog&limit=1&namespace=0&format=json&explaintext&origin=*" ;         "https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/all"  
 
     fetch(dogInfo).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
                 console.log(data);
+                dataArr = data.facts;
+                //console.log(dataArr);
+                for (var i = 0; i < dataArr.length; i++) {
+                    var randomFact = document.createElement("p");
+                    randomFact.classList.add("randomfact");
+                    randomFact.innerText = dataArr[i];
+                    wikipedia.appendChild(randomFact);
+                }
             }) 
         }
     })
-
 };
 
     //Pseudo Code
