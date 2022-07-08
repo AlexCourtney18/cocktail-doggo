@@ -1,4 +1,4 @@
-.center {
+/* .center {
     text-align: center;
 }
 
@@ -41,12 +41,12 @@
 .search:hover, .search:focus {
     border: 1.5px solid #009688;
     background-color: white;
-}
+} */
 
 /* Add Media Queries for browser sizes/mobile */
 
-@media only screen and (max-width: 720px) {
+/* @media only screen and (max-width: 720px) {
     body {
     max-width: 100%;
 }
-}
+} */
