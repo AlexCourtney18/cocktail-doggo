@@ -1,31 +1,69 @@
-const userCardTemplate = document.querySelector("[data-user-template]");
-const userCardContainer = document.querySelector("[data-user-cards-container]");
-const searchInput = document.querySelector("[data-search]");
+// const userCardTemplate = document.querySelector("[data-user-template]");
+// const userCardContainer = document.querySelector("[data-user-cards-container]");
+// const searchInput = document.querySelector("[data-search]");
 
 
-let users = [] 
+// let users = [] 
 
-searchInput.addEventListener("input", e => {
-    const value = e.target.value.toLowerCase();
-    users.forEach(user => {
-        const isVisible = user.name.toLowerCase().includes(value) || user.email.toLowerCase().includes(value);
-        user.element.classList.toggle("hide", !isVisible);
-    });
-});
-
-fetch("https://jsonplaceholder.typicode.com/users")
-  .then(res => res.json())
-  .then(data => {
-    users = data.map(user => {
-      const card = userCardTemplate.content.cloneNode(true).children[0];
-      const header = card.querySelector("[data-header]");
-      const body = card.querySelector("[data-body]");
-      header.textContent = user.name;
-      body.textContent = user.email;
-      userCardContainer.append(card);
-      return { name: user.name, email: user.email, element: card };
-    });
+const showBreed = async () => {
+  let selection = $('#theValue').val();
+  let image = await fetch("https://dog.ceo/api/breed/${selection}/images/random")
+      .then(data => data.json()).then(({ message }) => message);
+      $("header").append($('<img>',{src:image}))
+};
+const init = async () => {
+  const breeds = await fetch('https://dog.ceo/api/breeds/list/all')
+      .then(data => data.json())
+      .then(data => Object.keys(data.message));
+  breeds.forEach(breed => {
+      $('#theValue').append($("body", { text: breed }));
   });
+  showBreed();
+};
+init();
+  
+  // {
+  //   users = data.map(user => {
+  //     const card = userCardTemplate.content.cloneNode(true).children[0];
+  //     const header = card.querySelector("[data-header]");
+  //     const body = card.querySelector("[data-body]");
+  //     header.textContent = user.name;
+  //     body.textContent = user.email;
+  //     userCardContainer.append(card);
+  //     return { name: user.name, email: user.email, element: card };
+  //   });
+  // });
+
+
+
+  // const userCardTemplate = document.querySelector("[data-user-template]");
+// const userCardContainer = document.querySelector("[data-user-cards-container]");
+// const searchInput = document.querySelector("[data-search]");
+
+
+// let users = [] 
+
+// searchInput.addEventListener("input", e => {
+//     const value = e.target.value.toLowerCase();
+//     users.forEach(user => {
+//         const isVisible = user.name.toLowerCase().includes(value) || user.email.toLowerCase().includes(value);
+//         user.element.classList.toggle("hide", !isVisible);
+//     });
+// });
+
+// fetch("https://jsonplaceholder.typicode.com/users")
+//   .then(res => res.json())
+//   .then(data => {
+//     users = data.map(user => {
+//       const card = userCardTemplate.content.cloneNode(true).children[0];
+//       const header = card.querySelector("[data-header]");
+//       const body = card.querySelector("[data-body]");
+//       header.textContent = user.name;
+//       body.textContent = user.email;
+//       userCardContainer.append(card);
+//       return { name: user.name, email: user.email, element: card };
+//     });
+//   });
 
 
 
