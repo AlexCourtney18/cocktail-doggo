@@ -26,6 +26,59 @@ function openPage() {
     getBreed(resultChopped);
 }
 
+
+
+// Reference to Card Template
+const userCardTemplate = document.querySelector("[data-user-template]");
+const userCardContainer = document.querySelector("[data-user-cards-container]");
+const searchInput = document.querySelector("[data-search]");
+const url = "https://dog.ceo/api/breeds/list/all";
+
+let breeds = [];
+
+const handleSearchInput = (event) => {
+  // Clear Card Container
+  userCardContainer.innerHTML = "";
+
+  // Get Search Textbox Value
+  const searchTerm = event.target.value.toLowerCase();
+  
+  // Don't Add Cards if Search Input is Empty
+  if (searchTerm === "") {
+    return;
+  };
+
+  // Filter Breeds by Search Term 
+  const filterBreeds = breeds.filter(breed => {
+    return breed.includes(searchTerm);
+  });
+
+  // Add Cards of Filtered Breeds
+  filterBreeds.forEach(breed => {
+    // Clone Card Template
+    const card = userCardTemplate.content.cloneNode(true).children[0];
+    const body = card.querySelector("[data-body]");
+
+    // Set Cloned Card Text to Breed Name
+    body.textContent = breed;
+
+    // Append Card to Container
+    userCardContainer.append(card);
+  });
+};
+
+// Search Input Event Listener
+searchInput.addEventListener("input", handleSearchInput);
+
+
+const getDogBreeds = async () => {
+  let response = await fetch(url);
+  let data = await response.json();
+  breeds = Object.keys(data.message);
+};
+
+getDogBreeds();
+
 // fetch dog sub-breed list
 function getBreed(resultChopped) {
     var apiUrl = "https://dog.ceo/api/breed/" + resultChopped + "/list";
@@ -351,8 +404,3 @@ function printDoggieFacts() {
     // if no sub-breeds return (array length 0), but family returns (ex pitbull) - display images of family
     // when sub-breed buttons are clicked, display images for sub-breed
     // test comments 
-
-
-
-
-
