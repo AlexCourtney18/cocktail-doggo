@@ -5,20 +5,34 @@ const url = "https://dog.ceo/api/breeds/list/all";
 
 let breeds = [];
 
+const handleSearchInput = () => {
+  userCardContainer.innerHTML = "";
+  
+  const searchTerm = searchInput.value.toLowerCase();
+  breeds.filter(breed => {
+    return breed.includes(searchTerm);
+  });
 
-const dogApi = async () => {
-  let response = await fetch(url);
-  let data = await response.json();
-  let breedName = Object.keys(data.message);
+
+
+
+
+
+
   const card = userCardTemplate.content.cloneNode(true).children[0];
   const body = card.querySelector("[data-body]");
-  body.textContent = breedName
-  console.log(breedName)
+  body.textContent = breedNames;
+  console.log(breedNames);
   userCardContainer.append(card);
-  return (breedName);
 };
 
-dogApi();
+const getDogBreeds = async () => {
+  let response = await fetch(url);
+  let data = await response.json();
+  breeds = Object.keys(data.message);
+};
+
+getDogBreeds();
 
 
 
