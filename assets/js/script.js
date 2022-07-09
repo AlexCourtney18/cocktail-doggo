@@ -14,13 +14,18 @@ var doggieButtonClick;
 
 searchButtonOriginal.addEventListener("click", openPage);
 
+var searchFlag = false; // This variable is asking "Have you searched before?" 
+var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
+
 function openPage() {
     while(userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
     };
+    document.querySelector("#webpage-title").classList.add('titleLefted');
+    document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
+    document.querySelector("#search-container").classList.add('searchRighted')
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
-  
     searchHistory(resultChopped);
 
     //THIS IS the call to the dog facts API>>>>>>>
@@ -71,6 +76,9 @@ const handleSearchInput = (event) => {
     $(card).on("click", function() {
         resultChopped = body.textContent;
         console.log(resultChopped);
+        document.querySelector("#webpage-title").classList.add('titleLefted');
+        document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
+        document.querySelector("#search-container").classList.add('searchRighted')
         getDogInfo();
         searchHistory(resultChopped);
         getBreed(resultChopped);
@@ -172,13 +180,21 @@ function getBreed(resultChopped) {
                             }
                         });
                     }
+                    
                 }
             });
             document.querySelector("#error-page-box").classList.add('hidden');
             document.querySelector("#error-page-content").classList.add('hidden');
+<<<<<<< HEAD
             document.querySelector("#error-dog-fact").classList.add('hidden');
             doggieButtonClick = resultChopped;
             while (statistics.firstChild) {
+=======
+            document.querySelector("#dog-facts").classList.add('hidden');
+
+                doggieButtonClick = resultChopped;
+                while(statistics.firstChild) {
+>>>>>>> 2db9bd8d820b87a91500622b5ee743286226ac3d
                 statistics.removeChild(statistics.firstChild);
             }
             console.log(doggieButtonClick);
@@ -190,8 +206,13 @@ function getBreed(resultChopped) {
             console.log("dog breed not found");
             document.querySelector("#error-page-box").classList.remove('hidden');
             document.querySelector("#error-page-content").classList.remove('hidden');
+<<<<<<< HEAD
             document.querySelector("#error-dog-fact").classList.remove('hidden');
             while (statistics.firstChild) {
+=======
+            document.querySelector("#dog-facts").classList.remove('hidden');
+            while(statistics.firstChild) {
+>>>>>>> 2db9bd8d820b87a91500622b5ee743286226ac3d
                 statistics.removeChild(statistics.firstChild);
             }
         }
@@ -310,9 +331,20 @@ var dogBreedFacts = function () {
         success: function (data) {
             console.log(data);
 
+<<<<<<< HEAD
             if (data.length === 0) {
                 while (statistics.firstChild) {
                     statistics.removeChild(statistics.firstChild);
+=======
+                if (data.length === 0) {
+                    while(statistics.firstChild) {
+                        statistics.removeChild(statistics.firstChild);
+                    }
+                    statError = document.createElement("p")
+                    statError.innerText = "We're sorry, our database does not have any statistics for this amazing friend just yet."
+                    statistics.appendChild(statError);
+                    return;
+>>>>>>> 2db9bd8d820b87a91500622b5ee743286226ac3d
                 }
                 statError = document.createElement("p")
                 statError.innerText = "Were sorry, our database does not have any statistics for this good boy!"
@@ -345,6 +377,11 @@ var dogBreedFacts = function () {
                 console.log(drooling);
 
                 printDoggieFacts();
+<<<<<<< HEAD
+=======
+                window.scrollTo(0, document.body.scrollHeight);
+                }
+>>>>>>> 2db9bd8d820b87a91500622b5ee743286226ac3d
             }
         }
 
@@ -352,8 +389,8 @@ var dogBreedFacts = function () {
 };
 
 //THIS FUNCTION has all of the dog statistic elements to be styled. NOTE: To dynamically create
-//a class for each element, use (well use statHeader as an example) statHeader.setAttribute("class", "apple", "orange", "lemon"), etc.
-//NOTE FOR STYLING: If it is easier, all of the <li> elements can be turned into <p> elements, and be appended to a <div> rather thant a <ul>.
+//a class for each element, use (we'll use statHeader as an example) statHeader.setAttribute("class", "apple", "orange", "lemon"), etc.
+//NOTE FOR STYLING: If it is easier, all of the <li> elements can be turned into <p> elements, and be appended to a <div> rather than a <ul>.
 //same goes for the random dog facts (they can be turned into <p> elements instead of <li> if its better that way);
 function printDoggieFacts() {
 
@@ -362,7 +399,7 @@ function printDoggieFacts() {
     }
 
     var statHeader = document.createElement("h2");
-    statHeader.innerText = "Doggie stats for this good girl:"
+    statHeader.innerText = "Doggie stats for your new best friend:"
     statistics.appendChild(statHeader);
 
     var life = document.createElement("li");
@@ -400,8 +437,13 @@ function printDoggieFacts() {
     var drool = document.createElement("li");
     drool.innerText = drooling;
     statistics.appendChild(drool);
+<<<<<<< HEAD
 };
+=======
+>>>>>>> 2db9bd8d820b87a91500622b5ee743286226ac3d
 
+    window.scrollTo(0, document.body.scrollHeight);
+};
 
     //Pseudo Code
 
