@@ -1,9 +1,14 @@
 var subBreedButtonEl = document.querySelector("#sub-button");
 var subImagesEl = document.querySelector("#sub-images");
+var errorBoxEl = document.querySelector("#error-page-box");
+var errorContentEl = document.querySelector("#error-page-content");
 var wikipedia = document.getElementById("wikipedia"); //This is the element with the random dog facts inside. Should change the name to be something other than wikipedia later.
 var statistics = document.getElementById("statistics");
 var resultChopped;
 var dogFamily;
+
+var searchFlag = false; // This variable is asking "Have you searched before?" 
+var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
 
 function openPage() {
     var searchResult = document.getElementById("search").value; // Grabs result
@@ -37,7 +42,6 @@ function getBreed(resultChopped) {
                     for (var i = 0; i < data.message.length; i++) {
                         if (data.message[i]) {
                             subBreed = data.message[i];
-                            //console.log(subBreed + "SUB BREED");
                         }
                         console.log(subBreed + " SUB BREED");
 
@@ -48,15 +52,16 @@ function getBreed(resultChopped) {
                         var titleEl = document.createElement("span");
                         titleEl.textContent = subBreed;
 
+                        // append elements
                         buttonEl.appendChild(titleEl);
 
                         subBreedButtonEl.appendChild(buttonEl);
 
                         // add click event listener for sub-breed buttons
                         subBreedButtonEl.addEventListener("click", buttonClick);
-                        //console.log(click);
                     }
                 }
+                // functionality to load breed images immediately if there are no sub-breeds listed in the api
                 if (data.message.length === 0) {
                     console.log("BLANK ARRAY");
                     getBreedImage(resultChopped);
@@ -70,8 +75,7 @@ function getBreed(resultChopped) {
                             if (response.ok) {
                                 response.json().then(function (data) {
                                     console.log(data);
-
-                                    for (var i = 0; i < 4; i++) {
+                                    for (var i = 0; i < 3; i++) {
                                         if (data.message[i]) {
 
                                             var subParentEl = document.createElement("div");
@@ -81,10 +85,20 @@ function getBreed(resultChopped) {
 
                                             console.log(subImage + " SUB IMAGE");
 
-                                            // create a container for each sub-image
+                                            // create a container for each sub-image/append
                                             var imageEl = document.createElement("img");
                                             imageEl.setAttribute("src", subImage);
                                             subParentEl.appendChild(imageEl);
+                                            if(imageEl.height >= imageEl.width)
+                                            {
+                                                imageEl.setAttribute("height", imageEl.width);
+                                                imageEl.setAttribute("class", "maxW");
+                                                imageEl.setAttribute("class", "theH");
+                                            } else {
+                                                imageEl.setAttribute("width", imageEl.height);
+                                                imageEl.setAttribute("class", "theH");
+                                                imageEl.setAttribute("class", "maxW");
+                                            }
                                         }
                                     }
                                 });
@@ -95,13 +109,23 @@ function getBreed(resultChopped) {
                     }
                 }
             });
+            document.querySelector("#error-page-box").classList.add('hidden');
+            document.querySelector("#error-page-content").classList.add('hidden');
+            document.querySelector("#error-dog-fact").classList.add('hidden');
         } else {
+            // clear previous content even when breed is searched that returns "not found"
             subImagesEl.textContent = "";
             subBreedButtonEl.textContent = "";
             console.log("dog breed not found");
+            document.querySelector("#error-page-box").classList.remove('hidden');
+            document.querySelector("#error-page-content").classList.remove('hidden');
+            document.querySelector("#error-dog-fact").classList.remove('hidden');
         }
     });
 }
+// button click function for sub-breed buttons to pass through breed family + btnClick sub breed to breed images function
+
+var doggieButtonClick;
 
 var doggieButtonClick;
 
@@ -125,7 +149,7 @@ function getBreedImage(resultChopped) {
             response.json().then(function (data) {
                 console.log(data);
 
-                for (var i = 0; i < 4; i++) {
+                for (var i = 0; i < 3; i++) {
                     if (data.message[i]) {
 
                         var subParentEl = document.createElement("div");
@@ -139,6 +163,16 @@ function getBreedImage(resultChopped) {
                         var imageEl = document.createElement("img");
                         imageEl.setAttribute("src", subImage);
                         subParentEl.appendChild(imageEl);
+                        if(imageEl.height >= imageEl.width)
+                        {
+                            imageEl.setAttribute("height", imageEl.width);
+                            imageEl.setAttribute("class", "maxW");
+                            imageEl.setAttribute("class", "theH");
+                        } else {
+                            imageEl.setAttribute("width", imageEl.height);
+                            imageEl.setAttribute("class", "theH");
+                            imageEl.setAttribute("class", "maxW");
+                        }
                     }
                 }
             });
@@ -175,7 +209,7 @@ var getDogInfo = function() {
 
     var factHeader = document.createElement("h2") //THIS IS THE h2 for the random dog facts.
     factHeader.classList.add("randomfactheader");
-    factHeader.innerText = "Quick dog facts:";
+    factHeader.innerText = "";
     wikipedia.appendChild(factHeader);
 
     var dogInfo = "https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5"  
