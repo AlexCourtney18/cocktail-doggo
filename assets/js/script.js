@@ -21,9 +21,11 @@ function openPage() {
     while(userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
     };
+    document.querySelector("#webpage-title").classList.add('titleLefted');
+    document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
+    document.querySelector("#search-container").classList.add('searchRighted')
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
-  
     searchHistory(resultChopped);
 
     //THIS IS the call to the dog facts API>>>>>>>
@@ -74,6 +76,9 @@ const handleSearchInput = (event) => {
     $(card).on("click", function() {
         resultChopped = body.textContent;
         console.log(resultChopped);
+        document.querySelector("#webpage-title").classList.add('titleLefted');
+        document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
+        document.querySelector("#search-container").classList.add('searchRighted')
         getDogInfo();
         searchHistory(resultChopped);
         getBreed(resultChopped);
@@ -176,11 +181,13 @@ function getBreed(resultChopped) {
                             }
                         });
                     }
+                    
                 }
             });
             document.querySelector("#error-page-box").classList.add('hidden');
             document.querySelector("#error-page-content").classList.add('hidden');
-            document.querySelector("#error-dog-fact").classList.add('hidden');
+            document.querySelector("#dog-facts").classList.add('hidden');
+
                 doggieButtonClick = resultChopped;
                 while(statistics.firstChild) {
                 statistics.removeChild(statistics.firstChild);
@@ -194,7 +201,7 @@ function getBreed(resultChopped) {
             console.log("dog breed not found");
             document.querySelector("#error-page-box").classList.remove('hidden');
             document.querySelector("#error-page-content").classList.remove('hidden');
-            document.querySelector("#error-dog-fact").classList.remove('hidden');
+            document.querySelector("#dog-facts").classList.remove('hidden');
             while(statistics.firstChild) {
                 statistics.removeChild(statistics.firstChild);
             }
@@ -350,6 +357,7 @@ var dogBreedFacts = function() {
                 console.log(drooling);
 
                 printDoggieFacts();
+                window.scrollTo(0, document.body.scrollHeight);
                 }
             }
 
@@ -358,7 +366,7 @@ var dogBreedFacts = function() {
 
 //THIS FUNCTION has all of the dog statistic elements to be styled. NOTE: To dynamically create
 //a class for each element, use (we'll use statHeader as an example) statHeader.setAttribute("class", "apple", "orange", "lemon"), etc.
-//NOTE FOR STYLING: If it is easier, all of the <li> elements can be turned into <p> elements, and be appended to a <div> rather thant a <ul>.
+//NOTE FOR STYLING: If it is easier, all of the <li> elements can be turned into <p> elements, and be appended to a <div> rather than a <ul>.
 //same goes for the random dog facts (they can be turned into <p> elements instead of <li> if its better that way);
 function printDoggieFacts() {
 
@@ -405,8 +413,9 @@ function printDoggieFacts() {
     var drool = document.createElement("li");
     drool.innerText = drooling;
     statistics.appendChild(drool);
-}; 
 
+    window.scrollTo(0, document.body.scrollHeight);
+};
 
     //Pseudo Code
 

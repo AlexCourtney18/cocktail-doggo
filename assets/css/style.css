@@ -1,6 +1,30 @@
+.fixedPos {
+    position: fixed;
+}
+
+#header-container {
+    flex-direction: row;
+}
+
+#nav-left {
+    top: 0;
+    left: 20px;
+}
+
+#nav-right { 
+    top: -55px;
+    right: 20px;
+}
+
+.mass {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    padding-top: 30vh;
+}
+
 .search-wrapper {
     text-align: center;
-    margin-top: 150px;
+    margin-top: 75px;
 }
 
 .user-cards {
@@ -13,12 +37,6 @@
 
 .center {
     text-align: center;
-}
-
-.websiteOverlay {
-    display: grid;
-    grid-template-columns: 20% 60% 20%;
-    padding-top: 30vh;
 }
 
 .rounded {
@@ -68,8 +86,26 @@
 
 #sub-images {
     display: flex;
-    flex-flow: row wrap;
-    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.titleLefted {
+    position: absolute;
+    top: 20px;
+    left: 18px;
+}
+
+.subtitleLefted {
+    position: absolute;
+    top: 85px;
+    left: 20px
+}
+
+.searchRighted {
+    position: absolute;
+    top: -50px;
+    right: 30px;
 }
 
 .maxW {
@@ -120,8 +156,18 @@
 }
 
 #error-text {
-    font-family: 'Cinzel', serif;
+    font-family: 'Playfair Display', serif;
     font-weight: 500;
+}
+
+#dog-facts {
+    font-family: 'Playfair Display', sans-serif;
+    font-weight: 400;
+}
+
+#stats-container {
+    font-family: 'Playfair Display', sans-serif;
+    margin-bottom: 20px;
 }
 
 /* Add Media Queries for browser sizes/mobile */
