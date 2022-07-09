@@ -1,3 +1,16 @@
+.search-wrapper {
+    text-align: center;
+    margin-top: 150px;
+}
+
+.user-cards {
+    text-align: center;
+    display: column;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: .25rem;
+    margin-top: 1rem;
+}
+
 .center {
     text-align: center;
 }
