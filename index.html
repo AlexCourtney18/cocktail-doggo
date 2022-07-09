@@ -12,7 +12,8 @@
     
 </head>
 
-    <body>
+    <body class="websiteOverlay">
+        <div></div>
 
         <!-- WIP: Header with settings button? -->
         <header class="block center">
@@ -30,6 +31,9 @@
             <div id="historyLine3"></div>
         </header>
 
+        <div></div> <!-- Some divs are added to reserve areas on the webpage separated in a grid. They DO matter! -->
+        <div></div>
+
         <!-- WIP: Error message, hidden by default, shown when searchFail() -->
         <article id=error-page-box class="box hidden">
             <div> 
@@ -37,10 +41,26 @@
             </div>
 
             <div id="error-page-content" class="hidden">
-                <span class="content is-medium">Sorry about that!</span>
+                <span class="content bold is-medium">Sorry about that!</span>
                 <br>
                 <span class="content is-medium">The dog breed you specified could not be found in our database. For your troubles, here's some random dog facts!</span>
                 <br>
+                <span class="content is-medium" id="error-dog-fact">        <!--This section has all the quick facts/ stats in it. The facts are in one container (id=wikipedia) and the facts are in the other (id=statistics)-->
+                    <section>
+                        <!--THIS IS where the quick dog facts is appended to (the <ul> with id=wikipedia)-->
+                        <div>
+                            <ul id="wikipedia">
+            
+                            </ul>
+                        </div>
+                    </br>
+                        <!--THIS IS where the dog facts are appended to (the <ul> with id=statistics)-->
+                        <div>
+                            <ul id="statistics">
+            
+                            </ul>
+                        </div>
+                    </section></span> 
                 <!-- Random Dog Fact API -->
             </div>
         </article>
@@ -51,34 +71,8 @@
             <div id="sub-button">
 
             </div>
+            <div id="sub-images"></div>
         </article>
-        <article id="sub-images">
-
-        </article>
-        <!-- Start section for dog facts appendChild-->
-        <section>
-            <div id="wikipedia">
-            
-        </article>
-
-        <!--This section has all the quick facts/ stats in it. The facts are in one container (id=wikipedia) and the facts are in the other (id=statistics)-->
-        <section>
-            <!--THIS IS where the quick dog facts is appended to (the <ul> with id=wikipedia)-->
-            <div>
-                <ul id="wikipedia">
-
-                </ul>
-            </div>
-        </br>
-            <!--THIS IS where the dog facts are appended to (the <ul> with id=statistics)-->
-            <div>
-                <ul id="statistics">
-
-                </ul>
-            </div>
-        </section>
-
-
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="./assets/js/script.js"></script>

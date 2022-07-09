@@ -1,12 +1,14 @@
 var subBreedButtonEl = document.querySelector("#sub-button");
 var subImagesEl = document.querySelector("#sub-images");
+var errorBoxEl = document.querySelector("#error-page-box");
+var errorContentEl = document.querySelector("#error-page-content");
 var wikipedia = document.getElementById("wikipedia"); //This is the element with the random dog facts inside. Should change the name to be something other than wikipedia later.
 var statistics = document.getElementById("statistics");
 var resultChopped;
-var searchFlag = false; // This variable is asking "Have you searched before?"
-var successfulSearchFlag = true; // This variable is asking "Have you succeeded at a search before?"
-var errorPage = document.getElementById(error-page);
 var dogFamily;
+
+var searchFlag = false; // This variable is asking "Have you searched before?" 
+var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
 
 function openPage() {
     var searchResult = document.getElementById("search").value; // Grabs result
@@ -73,7 +75,7 @@ function getBreed(resultChopped) {
                             if (response.ok) {
                                 response.json().then(function (data) {
                                     console.log(data);
-                                    for (var i = 0; i < 4; i++) {
+                                    for (var i = 0; i < 10; i++) {
                                         if (data.message[i]) {
 
                                             var subParentEl = document.createElement("div");
@@ -87,6 +89,16 @@ function getBreed(resultChopped) {
                                             var imageEl = document.createElement("img");
                                             imageEl.setAttribute("src", subImage);
                                             subParentEl.appendChild(imageEl);
+                                            if(imageEl.height >= imageEl.width)
+                                            {
+                                                imageEl.setAttribute("height", imageEl.width);
+                                                imageEl.setAttribute("class", "maxW");
+                                                imageEl.setAttribute("class", "theH");
+                                            } else {
+                                                imageEl.setAttribute("width", imageEl.height);
+                                                imageEl.setAttribute("class", "theH");
+                                                imageEl.setAttribute("class", "maxW");
+                                            }
                                         }
                                     }
                                 });
@@ -99,6 +111,7 @@ function getBreed(resultChopped) {
             });
             document.querySelector("#error-page-box").classList.add('hidden');
             document.querySelector("#error-page-content").classList.add('hidden');
+            document.querySelector("#error-dog-fact").classList.add('hidden');
         } else {
             // clear previous content even when breed is searched that returns "not found"
             subImagesEl.textContent = "";
@@ -106,6 +119,7 @@ function getBreed(resultChopped) {
             console.log("dog breed not found");
             document.querySelector("#error-page-box").classList.remove('hidden');
             document.querySelector("#error-page-content").classList.remove('hidden');
+            document.querySelector("#error-dog-fact").classList.remove('hidden');
         }
     });
 }
@@ -133,7 +147,7 @@ function getBreedImage(resultChopped) {
             response.json().then(function (data) {
                 console.log(data);
 
-                for (var i = 0; i < 4; i++) {
+                for (var i = 0; i < 10; i++) {
                     if (data.message[i]) {
 
                         var subParentEl = document.createElement("div");
@@ -147,6 +161,16 @@ function getBreedImage(resultChopped) {
                         var imageEl = document.createElement("img");
                         imageEl.setAttribute("src", subImage);
                         subParentEl.appendChild(imageEl);
+                        if(imageEl.height >= imageEl.width)
+                        {
+                            imageEl.setAttribute("height", imageEl.width);
+                            imageEl.setAttribute("class", "maxW");
+                            imageEl.setAttribute("class", "theH");
+                        } else {
+                            imageEl.setAttribute("width", imageEl.height);
+                            imageEl.setAttribute("class", "theH");
+                            imageEl.setAttribute("class", "maxW");
+                        }
                     }
                 }
             });
@@ -183,7 +207,7 @@ var getDogInfo = function() {
 
     var factHeader = document.createElement("h2") //THIS IS THE h2 for the random dog facts.
     factHeader.classList.add("randomfactheader");
-    factHeader.innerText = "Quick dog facts:";
+    factHeader.innerText = "";
     wikipedia.appendChild(factHeader);
 
     var dogInfo = "https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5"  

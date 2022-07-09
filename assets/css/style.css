@@ -2,6 +2,12 @@
     text-align: center;
 }
 
+.websiteOverlay {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    padding-top: 30vh;
+}
+
 .rounded {
     border-radius: 10px;
 }
@@ -53,4 +59,26 @@
     body {
     max-width: 100%;
 }
+}
+
+#sub-images {
+    display: flex;
+    flex-flow: row wrap;
+    text-align: center;
+}
+
+.maxW {
+    width: 200px;
+}
+
+.maxH {
+    max-height: 200px;
+}
+
+.theW {
+    width: 200px;
+}
+
+.theH {
+    height: 200px;
 }
