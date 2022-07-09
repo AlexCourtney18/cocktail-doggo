@@ -11,45 +11,76 @@
     <title>Doggypedia</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
-    <body>
+
+    <body class="websiteOverlay">
+        <div></div>
 
         <!-- WIP: Header with settings button? -->
         <header class="block center">
             <h2 class="title is-2"><a href="./index.html">Doggypedia</a></h2>
             <h3 class="title subtitle is-4">Search for a good boy:</h3>
+            <h3>Please search for your breed by "family" eg "hound", "terrier", "spaniel"</br>If the breed family has sub-breeds, buttons will populate for you to select!</h3>
             <!-- Search Bar Goes Here -->
-            <div class="searchBox">
-                <img class="search-icon" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU2Ljk2NiA1Ni45NjYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDU2Ljk2NiA1Ni45NjY7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij4KPHBhdGggZD0iTTU1LjE0Niw1MS44ODdMNDEuNTg4LDM3Ljc4NmMzLjQ4Ni00LjE0NCw1LjM5Ni05LjM1OCw1LjM5Ni0xNC43ODZjMC0xMi42ODItMTAuMzE4LTIzLTIzLTIzcy0yMywxMC4zMTgtMjMsMjMgIHMxMC4zMTgsMjMsMjMsMjNjNC43NjEsMCw5LjI5OC0xLjQzNiwxMy4xNzctNC4xNjJsMTMuNjYxLDE0LjIwOGMwLjU3MSwwLjU5MywxLjMzOSwwLjkyLDIuMTYyLDAuOTIgIGMwLjc3OSwwLDEuNTE4LTAuMjk3LDIuMDc5LTAuODM3QzU2LjI1NSw1NC45ODIsNTYuMjkzLDUzLjA4LDU1LjE0Niw1MS44ODd6IE0yMy45ODQsNmM5LjM3NCwwLDE3LDcuNjI2LDE3LDE3cy03LjYyNiwxNy0xNywxNyAgcy0xNy03LjYyNi0xNy0xN1MxNC42MSw2LDIzLjk4NCw2eiIgZmlsbD0iIzAwMDAwMCIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />
-                <input type="search" placeholder="Search..." name="search" id="search" class="subtitle rounded search" onchange="openPage(), searchHistory()">
-                <img class="clear-icon" src=null>
-              </div>  
+            <div class="search-wrapper">
+                <label for="search">Search Dogs</label>
+                <input type="search" id="search" data-search>
+                <button id="orange">Search</button> <!--added this button to the search bar so the search triggers when search is clicked.-->
+            </div>
+              <div class="user-cards" data-user-cards-container></div>
+              <template data-user-template>
+                <div class="card">
+                  <div class="body" data-body></div>
+                </div>
+              </template>
+               
             <div id="historyLine1"></div>
-                <label>Value: <input type="text" id="theValue">
-                <input type="button" id="setValue" value="Set"></label>
             <div id="historyLine2"></div>
             <div id="historyLine3"></div>
         </header>
 
+        <div></div> <!-- Some divs are added to reserve areas on the webpage separated in a grid. They DO matter! onchange="openPage(), searchHistory()"-->
+        <div></div>
+
         <!-- WIP: Error message, hidden by default, shown when searchFail() -->
-        <article class="box">
+        <article id=error-page-box class="box hidden">
             <div> 
                 <!-- Random Dog Image API --> 
             </div>
 
-            <div>
-                <span class="content is-medium">Sorry about that!</span>
+            <div id="error-page-content" class="hidden">
+                <span class="content bold is-medium">Sorry about that!</span>
                 <br>
-                <span class="content is-medium">The dog breed you specified could not be found in our database. For your troubles, here's a random dog fact!</span>
+                <span class="content is-medium">The dog breed you specified could not be found in our database. For your troubles, here's some random dog facts!</span>
                 <br>
+                <span class="content is-medium" id="error-dog-fact">        <!--This section has all the quick facts/ stats in it. The facts are in one container (id=wikipedia) and the facts are in the other (id=statistics)-->
+                    <section>
+                        <!--THIS IS where the quick dog facts is appended to (the <ul> with id=wikipedia)-->
+                        <div>
+                            <ul id="wikipedia">
+            
+                            </ul>
+                        </div>
+                    </section></span> 
                 <!-- Random Dog Fact API -->
             </div>
         </article>
 
-        <!-- Search success, populate with specific search data -->
+        
+        <!-- Start section for breed buttons and breed images appendChild -->
         <article>
+            <div id="sub-button">
 
+            </div>
+            <div id="sub-images"></div>
+            <!--THIS IS where the dog facts are appended to (the <ul> with id=statistics)-->
+                <div class="content is-medium">
+                    <ul id="statistics">
+    
+                    </ul>
+                </div>
         </article>
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="./assets/js/script.js"></script>
     </body>
 </html>
