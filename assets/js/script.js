@@ -12,7 +12,7 @@ var successfulSearchFlag; // This variable is asking "Have you succeeded at a se
 
 var doggieButtonClick;
 
-searchButtonOriginal.addEventListener("click", openPage)
+searchButtonOriginal.addEventListener("click", openPage);
 
 function openPage() {
     while(userCardContainer.firstChild) {
@@ -20,7 +20,9 @@ function openPage() {
     };
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
+  
     searchHistory(resultChopped);
+
     //THIS IS the call to the dog facts API>>>>>>>
     getDogInfo(resultChopped);
     //>>>>>>>>>>>>
