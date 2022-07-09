@@ -15,10 +15,12 @@ var doggieButtonClick;
 searchButtonOriginal.addEventListener("click", openPage)
 
 function openPage() {
-    searchHistory();
+    while(userCardContainer.firstChild) {
+        userCardContainer.removeChild(userCardContainer.firstChild);
+    };
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
-    
+    searchHistory(resultChopped);
     //THIS IS the call to the dog facts API>>>>>>>
     getDogInfo(resultChopped);
     //>>>>>>>>>>>>
@@ -63,6 +65,17 @@ const handleSearchInput = (event) => {
 
     // Append Card to Container
     userCardContainer.append(card);
+
+    $(card).on("click", function() {
+        resultChopped = body.textContent;
+        console.log(resultChopped);
+        getDogInfo();
+        searchHistory(resultChopped);
+        getBreed(resultChopped);
+        while(userCardContainer.firstChild) {
+            userCardContainer.removeChild(userCardContainer.firstChild);
+        }
+    })
   });
 };
 
@@ -240,7 +253,7 @@ function getBreedImage(resultChopped) {
 
 function searchHistory() { //rudimentary way of grabbing the recent search so we can get the information and save it to local storage (not implemented)
     var recentSearch = [];
-    recentSearch.push($('#search').val());
+     recentSearch.push(resultChopped); 
 
     $.each(recentSearch, function (index, value) {
         const p = document.createElement("p");
