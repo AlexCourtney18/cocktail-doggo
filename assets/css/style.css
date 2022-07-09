@@ -19,6 +19,12 @@
     text-align: center;
 }
 
+.websiteOverlay {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    padding-top: 30vh;
+}
+
 .rounded {
     border-radius: 10px;
 }
@@ -60,10 +66,44 @@
     background-color: white;
 } */
 
+.hidden {
+    display: none;
+}
+
 /* Add Media Queries for browser sizes/mobile */
 
 /* @media only screen and (max-width: 720px) {
     body {
     max-width: 100%;
 }
-} */
+}
+
+#sub-images {
+    display: flex;
+    flex-flow: row wrap;
+    text-align: center;
+}
+
+.maxW {
+    width: 200px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.maxH {
+    max-height: 200px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.theW {
+    width: 200px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.theH {
+    height: 200px;
+    margin: 5px;
+    padding: 5px;
+}
