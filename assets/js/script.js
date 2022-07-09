@@ -215,7 +215,7 @@ var getDogInfo = function() {
     fetch(dogInfo).then(function(response) {
         if (response.ok) {
             response.json().then(function(data) {
-                //console.log(data);
+                console.log(data);
                 dataArr = data.facts;
                 //console.log(dataArr);
                 for (var i = 0; i < dataArr.length; i++) {
