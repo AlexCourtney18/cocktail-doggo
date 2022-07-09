@@ -69,16 +69,24 @@
 
 .maxW {
     width: 200px;
+    margin: 5px;
+    padding: 5px;
 }
 
 .maxH {
     max-height: 200px;
+    margin: 5px;
+    padding: 5px;
 }
 
 .theW {
     width: 200px;
+    margin: 5px;
+    padding: 5px;
 }
 
 .theH {
     height: 200px;
+    margin: 5px;
+    padding: 5px;
 }

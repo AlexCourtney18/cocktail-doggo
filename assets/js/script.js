@@ -75,7 +75,7 @@ function getBreed(resultChopped) {
                             if (response.ok) {
                                 response.json().then(function (data) {
                                     console.log(data);
-                                    for (var i = 0; i < 10; i++) {
+                                    for (var i = 0; i < 3; i++) {
                                         if (data.message[i]) {
 
                                             var subParentEl = document.createElement("div");
@@ -147,7 +147,7 @@ function getBreedImage(resultChopped) {
             response.json().then(function (data) {
                 console.log(data);
 
-                for (var i = 0; i < 10; i++) {
+                for (var i = 0; i < 3; i++) {
                     if (data.message[i]) {
 
                         var subParentEl = document.createElement("div");
