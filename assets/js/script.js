@@ -1,3 +1,4 @@
+// Reference to Card Template
 const userCardTemplate = document.querySelector("[data-user-template]");
 const userCardContainer = document.querySelector("[data-user-cards-container]");
 const searchInput = document.querySelector("[data-search]");
@@ -5,26 +6,33 @@ const url = "https://dog.ceo/api/breeds/list/all";
 
 let breeds = [];
 
-const handleSearchInput = () => {
+const handleSearchInput = (event) => {
+  // Clear Card Container
   userCardContainer.innerHTML = "";
+
+  // Get Search Textbox Value
+  const searchTerm = event.target.value.toLowerCase();
   
-  const searchTerm = searchInput.value.toLowerCase();
-  breeds.filter(breed => {
+  // Filter Breeds by Search Term 
+  const filterBreeds = breeds.filter(breed => {
     return breed.includes(searchTerm);
   });
 
-
-
-
-
-
-
-  const card = userCardTemplate.content.cloneNode(true).children[0];
-  const body = card.querySelector("[data-body]");
-  body.textContent = breedNames;
-  console.log(breedNames);
-  userCardContainer.append(card);
+  // Add Cards of Filtered Breeds
+  filterBreeds.forEach(breed => {
+    const card = userCardTemplate.content.cloneNode(true).children[0];
+    const body = card.querySelector("[data-body]");
+    body.textContent = breed;
+    userCardContainer.append(card);
+  });
 };
+
+// Search Input Event Listener
+searchInput.addEventListener("input", handleSearchInput)
+
+
+
+
 
 const getDogBreeds = async () => {
   let response = await fetch(url);
@@ -43,8 +51,8 @@ getDogBreeds();
 
 // let users = [] 
 
-// searchInput.addEventListener("input", e => {
-//     const value = e.target.value.toLowerCase();
+// searchInput.addEventListener("input", event => {
+//     const value = event.target.value.toLowerCase();
 //     users.forEach(user => {
 //         const isVisible = user.name.toLowerCase().includes(value) || user.email.toLowerCase().includes(value);
 //         user.element.classList.toggle("hide", !isVisible);
