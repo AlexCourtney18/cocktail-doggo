@@ -23,7 +23,7 @@
             <!-- Search Bar Goes Here -->
             <div class="search-wrapper">
                 <label for="search">Search Dogs</label>
-                <input type="search" id="search" data-search>
+                <input type="search" id="search" onchange="openPage(), searchHistory()" data-search>
               </div>
               <div class="user-cards" data-user-cards-container></div>
               <template data-user-template>
