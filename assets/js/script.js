@@ -320,7 +320,7 @@ var dogBreedFacts = function() {
                         statistics.removeChild(statistics.firstChild);
                     }
                     statError = document.createElement("p")
-                    statError.innerText = "Were sorry, our database does not have any statistics for this good boy!"
+                    statError.innerText = "We're sorry, our database does not have any statistics for this amazing friend just yet."
                     statistics.appendChild(statError);
                     return;
                 }
@@ -357,7 +357,7 @@ var dogBreedFacts = function() {
 };
 
 //THIS FUNCTION has all of the dog statistic elements to be styled. NOTE: To dynamically create
-//a class for each element, use (well use statHeader as an example) statHeader.setAttribute("class", "apple", "orange", "lemon"), etc.
+//a class for each element, use (we'll use statHeader as an example) statHeader.setAttribute("class", "apple", "orange", "lemon"), etc.
 //NOTE FOR STYLING: If it is easier, all of the <li> elements can be turned into <p> elements, and be appended to a <div> rather thant a <ul>.
 //same goes for the random dog facts (they can be turned into <p> elements instead of <li> if its better that way);
 function printDoggieFacts() {
@@ -367,7 +367,7 @@ function printDoggieFacts() {
     }
 
     var statHeader = document.createElement("h2");
-    statHeader.innerText = "Doggie stats for this good girl:"
+    statHeader.innerText = "Doggie stats for your new best friend:"
     statistics.appendChild(statHeader);
 
     var life = document.createElement("li");

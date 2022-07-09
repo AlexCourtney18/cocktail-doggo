@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css" integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Playfair+Display:wght@500&family=Work+Sans&display=swap" rel="stylesheet">
     <!-- Bulma suggests Font Awesome for icons -->
     <title>Doggypedia</title>
     
@@ -17,12 +20,12 @@
 
         <!-- WIP: Header with settings button? -->
         <header class="block center">
-            <h2 class="title is-2"><a href="./index.html">Doggypedia</a></h2>
-            <h3 class="title subtitle is-4">Search for a good boy:</h3>
-            <h3>Please search for your breed by "family" eg "hound", "terrier", "spaniel"</br>If the breed family has sub-breeds, buttons will populate for you to select!</h3>
+            <h2 class="title webpTitle"><a href="./index.html">Doggypedia</a></h2>
+            <h3 class="title webpSubtitle is-4">Where your newest best friend is only a click away</h3>
+            <!-- <h3>Please search for your breed by "family" eg "hound", "terrier", "spaniel"</br>If the breed family has sub-breeds, buttons will populate for you to select!</h3> -->
             <!-- Search Bar Goes Here -->
             <div class="search-wrapper">
-                <label for="search">Search Dogs</label>
+                <label for="search"></label>
                 <input type="search" id="search" data-search>
                 <button id="orange">Search</button> <!--added this button to the search bar so the search triggers when search is clicked.-->
             </div>
@@ -48,9 +51,9 @@
             </div>
 
             <div id="error-page-content" class="hidden">
-                <span class="content bold is-medium">Sorry about that!</span>
+                <span id="error-title" class="content is-medium">Oops!</span>
                 <br>
-                <span class="content is-medium">The dog breed you specified could not be found in our database. For your troubles, here's some random dog facts!</span>
+                <span id="error-text" class="content is-medium">The dog breed you specified could not be found in our database. For your troubles, here's some random dog facts!</span>
                 <br>
                 <span class="content is-medium" id="error-dog-fact">        <!--This section has all the quick facts/ stats in it. The facts are in one container (id=wikipedia) and the facts are in the other (id=statistics)-->
                     <section>

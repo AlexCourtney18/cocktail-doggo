@@ -66,14 +66,6 @@
     display: none;
 }
 
-/* Add Media Queries for browser sizes/mobile */
-
-@media only screen and (max-width: 720px) {
-    body {
-    max-width: 100%;
-}
-}
-
 #sub-images {
     display: flex;
     flex-flow: row wrap;
@@ -102,4 +94,40 @@
     height: 200px;
     margin: 5px;
     padding: 5px;
+}
+
+.webpTitle {
+    font-family: 'Cinzel', serif;
+    font-size: 64px;
+    font-weight: 900;
+}
+
+.webpSubtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 500;
+}
+
+.webpText {
+    font-family: 'Cinzel', serif;
+    font-weight: 400;
+}
+
+#error-title {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+#error-text {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+}
+
+/* Add Media Queries for browser sizes/mobile */
+
+@media only screen and (max-width: 720px) {
+    body {
+    max-width: 100%;
+    }
 }
