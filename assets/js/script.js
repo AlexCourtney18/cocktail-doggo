@@ -13,6 +13,11 @@ const handleSearchInput = (event) => {
   // Get Search Textbox Value
   const searchTerm = event.target.value.toLowerCase();
   
+  if (searchTerm = "") {
+    return userCardContainer
+  };
+
+
   // Filter Breeds by Search Term 
   const filterBreeds = breeds.filter(breed => {
     return breed.includes(searchTerm);
@@ -20,18 +25,20 @@ const handleSearchInput = (event) => {
 
   // Add Cards of Filtered Breeds
   filterBreeds.forEach(breed => {
+    // Clone Card Template
     const card = userCardTemplate.content.cloneNode(true).children[0];
     const body = card.querySelector("[data-body]");
+
+    // Set Cloned Card Text to Breed Name
     body.textContent = breed;
+
+    // Append Card to Container
     userCardContainer.append(card);
   });
 };
 
 // Search Input Event Listener
-searchInput.addEventListener("input", handleSearchInput)
-
-
-
+searchInput.addEventListener("input", handleSearchInput);
 
 
 const getDogBreeds = async () => {
