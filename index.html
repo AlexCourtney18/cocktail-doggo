@@ -7,80 +7,89 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css" integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,500;1,700&family=Work+Sans&display=swap" rel="stylesheet">
     <!-- Bulma suggests Font Awesome for icons -->
     <title>Doggypedia</title>
     
 </head>
 
-    <body class="websiteOverlay">
-        <div></div>
+    <body>
+        
+        <div class="block mass" id="main-container">
 
-        <!-- WIP: Header with settings button? -->
-        <header class="block center">
-            <h2 class="title is-2"><a href="./index.html">Doggypedia</a></h2>
-            <h3 class="title subtitle is-4">Search for a good boy:</h3>
-            <h3>Please search for your breed by "family" eg "hound", "terrier", "spaniel"</br>If the breed family has sub-breeds, buttons will populate for you to select!</h3>
-            <!-- Search Bar Goes Here -->
-            <div class="search-wrapper">
-                <label for="search">Search Dogs</label>
-                <input type="search" id="search" data-search>
-                <button id="orange">Search</button> <!--added this button to the search bar so the search triggers when search is clicked.-->
-            </div>
-              <div class="user-cards" data-user-cards-container></div>
-              <template data-user-template>
-                <div class="card">
-                  <div class="body" data-body></div>
-                </div>
-              </template>
-               
-            <div id="historyLine1"></div>
-            <div id="historyLine2"></div>
-            <div id="historyLine3"></div>
-        </header>
+            <div></div> 
+            <!-- Adaptive Header -->
+                <header class="block center">
+                    <h2 class="title webpTitle" id="webpage-title"><a href="./index.html">Doggypedia</a></h2>
+                    <h3 class="title webpSubtitle is-4" id="webpage-subtitle">Where your newest best friend is only a click away</h3>
+                    <!-- <h3>Please search for your breed by "family" eg "hound", "terrier", "spaniel"</br>If the breed family has sub-breeds, buttons will populate for you to select!</h3> -->
+                    <!-- Search Bar Goes Here -->
+                    <div class="search-wrapper" id="search-container">
+                        <label for="search"></label>
+                        <input type="search" id="search" data-search>
+                        <button id="orange">Search</button> <!--added this button to the search bar so the search triggers when search is clicked.-->
+                    </div>
+                    <div class="user-cards" data-user-cards-container></div>
+                    <template data-user-template>
+                        <div class="card">
+                        <div class="body" data-body></div>
+                        </div>
+                    </template>
+                    
+                    <div id="historyLine1"></div>
+                    <div id="historyLine2"></div>
+                    <div id="historyLine3"></div>
+                    
+                </header>
 
-        <div></div> <!-- Some divs are added to reserve areas on the webpage separated in a grid. They DO matter! onchange="openPage(), searchHistory()"-->
-        <div></div>
+                <div></div> <!-- Some divs are added to reserve areas on the webpage separated in a grid. They DO matter! -->
+                <div></div>
 
-        <!-- WIP: Error message, hidden by default, shown when searchFail() -->
-        <article id=error-page-box class="box hidden">
-            <div> 
-                <!-- Random Dog Image API --> 
-            </div>
+                <!-- WIP: Error message, hidden by default, shown when search fails -->
+                <article id=error-page-box class="box hidden">
+                    <div> 
+                        <!-- Random Dog Image API --> 
+                    </div>
 
-            <div id="error-page-content" class="hidden">
-                <span class="content bold is-medium">Sorry about that!</span>
-                <br>
-                <span class="content is-medium">The dog breed you specified could not be found in our database. For your troubles, here's some random dog facts!</span>
-                <br>
-                <span class="content is-medium" id="error-dog-fact">        <!--This section has all the quick facts/ stats in it. The facts are in one container (id=wikipedia) and the facts are in the other (id=statistics)-->
-                    <section>
-                        <!--THIS IS where the quick dog facts is appended to (the <ul> with id=wikipedia)-->
-                        <div>
-                            <ul id="wikipedia">
+                    <div id="error-page-content" class="hidden">
+                        <span id="error-title" class="content is-medium">Oops!</span>
+                        <br>
+                        <span id="error-text" class="content is-medium">The dog breed you specified could not be found in our database. For your troubles, here's some random dog facts!</span>
+                        <br>
+                        <span class="content is-medium" id="dog-facts">        <!--This section has all the quick facts/ stats in it. The facts are in one container (id=wikipedia) and the facts are in the other (id=statistics)-->
+                            <section>
+                                <!--THIS IS where the quick dog facts is appended to (the <ul> with id=wikipedia)-->
+                                <div>
+                                    <ul id="wikipedia">
+                    
+                                    </ul>
+                                </div>
+                            </section></span> 
+                        <!-- Random Dog Fact API -->
+                    </div>
+                </article>
+
+                
+                <!-- Start section for breed buttons and breed images appendChild -->
+                <article id="stats-container">
+                    <div id="sub-button">
+
+                    </div>
+                    <div id="sub-images"></div>
+                    <!--THIS IS where the dog facts are appended to (the <ul> with id=statistics)-->
+                        <div class="content is-medium">
+                            <ul id="statistics">
             
                             </ul>
                         </div>
-                    </section></span> 
-                <!-- Random Dog Fact API -->
-            </div>
-        </article>
+                </article>
 
-        
-        <!-- Start section for breed buttons and breed images appendChild -->
-        <article>
-            <div id="sub-button">
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+                <script src="./assets/js/script.js"></script>
 
-            </div>
-            <div id="sub-images"></div>
-            <!--THIS IS where the dog facts are appended to (the <ul> with id=statistics)-->
-                <div class="content is-medium">
-                    <ul id="statistics">
-    
-                    </ul>
-                </div>
-        </article>
+        </div>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="./assets/js/script.js"></script>
     </body>
 </html>
