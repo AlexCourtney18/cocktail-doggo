@@ -10,21 +10,70 @@ var dogFamily;
 var searchFlag = false; // This variable is asking "Have you searched before?" 
 var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
 
+var doggieButtonClick;
+
 function openPage() {
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
     
-    //dogFamily = resultChopped;
-    console.log(dogFamily); //Sam added these console.logs to keep track of data needed to get the dog stats API working
-    console.log(searchResult);
-    console.log(resultChopped);
-    
     //THIS IS the call to the dog facts API>>>>>>>
     getDogInfo(resultChopped);
     //>>>>>>>>>>>>
-
     getBreed(resultChopped);
 }
+
+
+
+// Reference to Card Template
+const userCardTemplate = document.querySelector("[data-user-template]");
+const userCardContainer = document.querySelector("[data-user-cards-container]");
+const searchInput = document.querySelector("[data-search]");
+const url = "https://dog.ceo/api/breeds/list/all";
+
+let breeds = [];
+
+const handleSearchInput = (event) => {
+  // Clear Card Container
+  userCardContainer.innerHTML = "";
+
+  // Get Search Textbox Value
+  const searchTerm = event.target.value.toLowerCase();
+  
+  // Don't Add Cards if Search Input is Empty
+  if (searchTerm === "") {
+    return;
+  };
+
+  // Filter Breeds by Search Term 
+  const filterBreeds = breeds.filter(breed => {
+    return breed.includes(searchTerm);
+  });
+
+  // Add Cards of Filtered Breeds
+  filterBreeds.forEach(breed => {
+    // Clone Card Template
+    const card = userCardTemplate.content.cloneNode(true).children[0];
+    const body = card.querySelector("[data-body]");
+
+    // Set Cloned Card Text to Breed Name
+    body.textContent = breed;
+
+    // Append Card to Container
+    userCardContainer.append(card);
+  });
+};
+
+// Search Input Event Listener
+searchInput.addEventListener("input", handleSearchInput);
+
+
+const getDogBreeds = async () => {
+  let response = await fetch(url);
+  let data = await response.json();
+  breeds = Object.keys(data.message);
+};
+
+getDogBreeds();
 
 // fetch dog sub-breed list
 function getBreed(resultChopped) {
@@ -65,7 +114,6 @@ function getBreed(resultChopped) {
                 if (data.message.length === 0) {
                     console.log("BLANK ARRAY");
                     getBreedImage(resultChopped);
-                    //dogBreedFacts(); //SAM. Work on getting functionality to work in API
                     // fetch breed images
                     function getBreedImage(resultChopped) {
                         var apiImageUrl = "https://dog.ceo/api/breed/" + resultChopped + "/images";
@@ -112,6 +160,12 @@ function getBreed(resultChopped) {
             document.querySelector("#error-page-box").classList.add('hidden');
             document.querySelector("#error-page-content").classList.add('hidden');
             document.querySelector("#error-dog-fact").classList.add('hidden');
+                doggieButtonClick = resultChopped;
+                while(statistics.firstChild) {
+                statistics.removeChild(statistics.firstChild);
+                }
+                console.log(doggieButtonClick);
+                dogBreedFacts();
         } else {
             // clear previous content even when breed is searched that returns "not found"
             subImagesEl.textContent = "";
@@ -120,12 +174,13 @@ function getBreed(resultChopped) {
             document.querySelector("#error-page-box").classList.remove('hidden');
             document.querySelector("#error-page-content").classList.remove('hidden');
             document.querySelector("#error-dog-fact").classList.remove('hidden');
+            while(statistics.firstChild) {
+                statistics.removeChild(statistics.firstChild);
+            }
         }
     });
 }
 // button click function for sub-breed buttons to pass through breed family + btnClick sub breed to breed images function
-
-var doggieButtonClick;
 
 function buttonClick(event) {
     var btnClick = event.target.textContent;
@@ -239,6 +294,16 @@ var dogBreedFacts = function() {
             success: function(data) {
                 console.log(data);
 
+                if (data.length === 0) {
+                    while(statistics.firstChild) {
+                        statistics.removeChild(statistics.firstChild);
+                    }
+                    statError = document.createElement("p")
+                    statError.innerText = "Were sorry, our database does not have any statistics for this good boy!"
+                    statistics.appendChild(statError);
+                    return;
+                }
+                else if (data[0].max_life_expectancy) {
                 maxLife = "Life span: " + data[0].max_life_expectancy + " years."
                 console.log(maxLife);
 
@@ -262,7 +327,9 @@ var dogBreedFacts = function() {
 
                 drooling = "Drooling: " + data[0].drooling;
                 console.log(drooling);
+
                 printDoggieFacts();
+                }
             }
 
         });
@@ -336,8 +403,3 @@ function printDoggieFacts() {
     // if no sub-breeds return (array length 0), but family returns (ex pitbull) - display images of family
     // when sub-breed buttons are clicked, display images for sub-breed
     // test comments 
-
-
-
-
-
