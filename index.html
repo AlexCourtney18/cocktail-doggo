@@ -23,7 +23,7 @@
             <!-- Search Bar Goes Here -->
             <div class="search-wrapper">
                 <label for="search">Search Dogs</label>
-                <input type="search" id="search" data-search>
+                <input type="search" id="search" onchange="openPage(), searchHistory()" data-search>
               </div>
               <div class="user-cards" data-user-cards-container></div>
               <template data-user-template>
@@ -59,13 +59,6 @@
             
                             </ul>
                         </div>
-                    </br>
-                        <!--THIS IS where the dog facts are appended to (the <ul> with id=statistics)-->
-                        <div>
-                            <ul id="statistics">
-            
-                            </ul>
-                        </div>
                     </section></span> 
                 <!-- Random Dog Fact API -->
             </div>
@@ -78,6 +71,12 @@
 
             </div>
             <div id="sub-images"></div>
+            <!--THIS IS where the dog facts are appended to (the <ul> with id=statistics)-->
+                <div class="content is-medium">
+                    <ul id="statistics">
+    
+                    </ul>
+                </div>
         </article>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
