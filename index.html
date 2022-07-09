@@ -23,8 +23,9 @@
             <!-- Search Bar Goes Here -->
             <div class="search-wrapper">
                 <label for="search">Search Dogs</label>
-                <input type="search" id="search" onchange="openPage(), searchHistory()" data-search>
-              </div>
+                <input type="search" id="search" data-search>
+                <button id="orange">Search</button> <!--added this button to the search bar so the search triggers when search is clicked.-->
+            </div>
               <div class="user-cards" data-user-cards-container></div>
               <template data-user-template>
                 <div class="card">
@@ -37,7 +38,7 @@
             <div id="historyLine3"></div>
         </header>
 
-        <div></div> <!-- Some divs are added to reserve areas on the webpage separated in a grid. They DO matter! -->
+        <div></div> <!-- Some divs are added to reserve areas on the webpage separated in a grid. They DO matter! onchange="openPage(), searchHistory()"-->
         <div></div>
 
         <!-- WIP: Error message, hidden by default, shown when searchFail() -->

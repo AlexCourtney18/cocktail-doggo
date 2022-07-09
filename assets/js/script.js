@@ -6,13 +6,16 @@ var wikipedia = document.getElementById("wikipedia"); //This is the element with
 var statistics = document.getElementById("statistics");
 var resultChopped;
 var dogFamily;
-
+var searchButtonOriginal = document.getElementById("orange");
 var searchFlag = false; // This variable is asking "Have you searched before?" 
 var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
 
 var doggieButtonClick;
 
+searchButtonOriginal.addEventListener("click", openPage)
+
 function openPage() {
+    searchHistory();
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
     
