@@ -120,12 +120,13 @@ function getBreed(resultChopped) {
             document.querySelector("#error-page-box").classList.remove('hidden');
             document.querySelector("#error-page-content").classList.remove('hidden');
             document.querySelector("#error-dog-fact").classList.remove('hidden');
+            while(statistics.firstChild) { //JUST ADDED 11467922
+                statistics.removeChild(statistics.firstChild);
+            }
         }
     });
 }
 // button click function for sub-breed buttons to pass through breed family + btnClick sub breed to breed images function
-
-var doggieButtonClick;
 
 var doggieButtonClick;
 
@@ -241,6 +242,16 @@ var dogBreedFacts = function() {
             success: function(data) {
                 console.log(data);
 
+                if (data.length === 0) {
+                    while(statistics.firstChild) {
+                        statistics.removeChild(statistics.firstChild);
+                    }
+                    statError = document.createElement("p")
+                    statError.innerText = "Were sorry, our database does not have any statistics for this good boy!"
+                    statistics.appendChild(statError);
+                    return;
+                }
+                else if (data[0].max_life_expectancy) {
                 maxLife = "Life span: " + data[0].max_life_expectancy + " years."
                 console.log(maxLife);
 
@@ -264,7 +275,9 @@ var dogBreedFacts = function() {
 
                 drooling = "Drooling: " + data[0].drooling;
                 console.log(drooling);
+
                 printDoggieFacts();
+                }
             }
 
         });
