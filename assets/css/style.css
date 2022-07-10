@@ -139,7 +139,7 @@
 
 .searchRighted {
     position: absolute;
-    top: 20px;
+    top: 0;
     right: 30px;
 }
 
@@ -150,7 +150,7 @@
 
 .resultsRighted {
     position: absolute;
-    top: 60px;
+    top: 110px;
     right: 200px;
 }
 
