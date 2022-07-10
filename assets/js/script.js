@@ -18,7 +18,7 @@ var searchFlag = false; // This variable is asking "Have you searched before?"
 var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
 
 function openPage() {
-    while(userCardContainer.firstChild) {
+    while (userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
     };
     document.querySelector("#webpage-title").classList.add('titleLefted');
@@ -73,20 +73,20 @@ const handleSearchInput = (event) => {
         // Append Card to Container
         userCardContainer.append(card);
 
-    $(card).on("click", function() {
-        resultChopped = body.textContent;
-        console.log(resultChopped);
-        document.querySelector("#webpage-title").classList.add('titleLefted');
-        document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
-        document.querySelector("#search-container").classList.add('searchRighted')
-        getDogInfo();
-        searchHistory(resultChopped);
-        getBreed(resultChopped);
-        while(userCardContainer.firstChild) {
-            userCardContainer.removeChild(userCardContainer.firstChild);
-        }
-    })
-  });
+        $(card).on("click", function () {
+            resultChopped = body.textContent;
+            console.log(resultChopped);
+            document.querySelector("#webpage-title").classList.add('titleLefted');
+            document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
+            document.querySelector("#search-container").classList.add('searchRighted')
+            getDogInfo();
+            searchHistory(resultChopped);
+            getBreed(resultChopped);
+            while (userCardContainer.firstChild) {
+                userCardContainer.removeChild(userCardContainer.firstChild);
+            }
+        })
+    });
 };
 
 // Search Input Event Listener
@@ -180,21 +180,15 @@ function getBreed(resultChopped) {
                             }
                         });
                     }
-                    
+
                 }
             });
             document.querySelector("#error-page-box").classList.add('hidden');
             document.querySelector("#error-page-content").classList.add('hidden');
-<<<<<<< HEAD
-            document.querySelector("#error-dog-fact").classList.add('hidden');
-            doggieButtonClick = resultChopped;
-            while (statistics.firstChild) {
-=======
             document.querySelector("#dog-facts").classList.add('hidden');
 
-                doggieButtonClick = resultChopped;
-                while(statistics.firstChild) {
->>>>>>> 2db9bd8d820b87a91500622b5ee743286226ac3d
+            doggieButtonClick = resultChopped;
+            while (statistics.firstChild) {
                 statistics.removeChild(statistics.firstChild);
             }
             console.log(doggieButtonClick);
@@ -206,13 +200,8 @@ function getBreed(resultChopped) {
             console.log("dog breed not found");
             document.querySelector("#error-page-box").classList.remove('hidden');
             document.querySelector("#error-page-content").classList.remove('hidden');
-<<<<<<< HEAD
-            document.querySelector("#error-dog-fact").classList.remove('hidden');
-            while (statistics.firstChild) {
-=======
             document.querySelector("#dog-facts").classList.remove('hidden');
-            while(statistics.firstChild) {
->>>>>>> 2db9bd8d820b87a91500622b5ee743286226ac3d
+            while (statistics.firstChild) {
                 statistics.removeChild(statistics.firstChild);
             }
         }
@@ -274,7 +263,7 @@ function getBreedImage(resultChopped) {
 
 function searchHistory() { //rudimentary way of grabbing the recent search so we can get the information and save it to local storage (not implemented)
     var recentSearch = [];
-     recentSearch.push(resultChopped); 
+    recentSearch.push(resultChopped);
 
     $.each(recentSearch, function (index, value) {
         const p = document.createElement("p");
@@ -331,23 +320,12 @@ var dogBreedFacts = function () {
         success: function (data) {
             console.log(data);
 
-<<<<<<< HEAD
             if (data.length === 0) {
                 while (statistics.firstChild) {
                     statistics.removeChild(statistics.firstChild);
-=======
-                if (data.length === 0) {
-                    while(statistics.firstChild) {
-                        statistics.removeChild(statistics.firstChild);
-                    }
-                    statError = document.createElement("p")
-                    statError.innerText = "We're sorry, our database does not have any statistics for this amazing friend just yet."
-                    statistics.appendChild(statError);
-                    return;
->>>>>>> 2db9bd8d820b87a91500622b5ee743286226ac3d
                 }
                 statError = document.createElement("p")
-                statError.innerText = "Were sorry, our database does not have any statistics for this good boy!"
+                statError.innerText = "We're sorry, our database does not have any statistics for this amazing friend just yet."
                 statistics.appendChild(statError);
                 return;
             }
@@ -377,14 +355,9 @@ var dogBreedFacts = function () {
                 console.log(drooling);
 
                 printDoggieFacts();
-<<<<<<< HEAD
-=======
                 window.scrollTo(0, document.body.scrollHeight);
-                }
->>>>>>> 2db9bd8d820b87a91500622b5ee743286226ac3d
             }
         }
-
     });
 };
 
@@ -437,12 +410,8 @@ function printDoggieFacts() {
     var drool = document.createElement("li");
     drool.innerText = drooling;
     statistics.appendChild(drool);
-<<<<<<< HEAD
-};
-=======
->>>>>>> 2db9bd8d820b87a91500622b5ee743286226ac3d
 
-    window.scrollTo(0, document.body.scrollHeight);
+window.scrollTo(0, document.body.scrollHeight);
 };
 
     //Pseudo Code
