@@ -67,7 +67,7 @@ const handleSearchInput = (event) => {
         return;
     };
   // Get Search Textbox Value
-  const searchTerm = event.target.value.toLowerCase();
+  // const searchTerm = event.target.value.toLowerCase();
   
   // Don't Add Cards if Search Input is Empty
   if (searchTerm === "") {
@@ -83,9 +83,9 @@ const handleSearchInput = (event) => {
   });
 
     // Filter Breeds by Search Term 
-    const filterBreeds = breeds.filter(breed => {
-        return breed.includes(searchTerm);
-    });
+    // //const filterBreeds = breeds.filter(breed => {
+    //     return breed.includes(searchTerm);
+    // });
 
     // Add Cards of Filtered Breeds
     filterBreeds.forEach(breed => {
