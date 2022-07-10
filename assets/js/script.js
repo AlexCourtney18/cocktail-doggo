@@ -71,21 +71,21 @@ const handleSearchInput = (event) => {
   
   // Don't Add Cards if Search Input is Empty
   if (searchTerm === "") {
-    document.querySelector("#dogQ").classList.add('hidden')
+    document.querySelector("#dogQ").classList.add('hidden');
     return;
   };
 
-  document.querySelector("#dogQ").classList.remove('hidden')
+  document.querySelector("#dogQ").classList.remove('hidden');
 
-  // Filter Breeds by Search Term 
-  const filterBreeds = breeds.filter(breed => {
-    return breed.includes(searchTerm);
-  });
+//   // Filter Breeds by Search Term 
+//   const filterBreeds = breeds.filter(breed => {
+//     return breed.includes(searchTerm);
+//   });
 
     // Filter Breeds by Search Term 
-    // const filterBreeds = breeds.filter(breed => {
-    //     return breed.includes(searchTerm);
-    // });
+    const filterBreeds = breeds.filter(breed => {
+        return breed.includes(searchTerm);
+    });
 
     // Add Cards of Filtered Breeds
     filterBreeds.forEach(breed => {
