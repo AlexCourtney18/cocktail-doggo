@@ -22,12 +22,6 @@ function clearSearch() {
     document.querySelector("#dogQ").classList.add('hidden');
     document.getElementById('search').value = "";
 }
-<<<<<<< HEAD
-=======
-
-var searchFlag = false; // This variable is asking "Have you searched before?" 
-var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
->>>>>>> cceb7e19e3de44baaa766e058aa3c0164766a7e0
 
 function openPage() {
     while (userCardContainer.firstChild) {
@@ -37,10 +31,7 @@ function openPage() {
     document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
     document.querySelector("#search-container").classList.add('searchRighted')
     document.querySelector("#deckbox").classList.add('resultsRighted')
-<<<<<<< HEAD
-=======
 
->>>>>>> cceb7e19e3de44baaa766e058aa3c0164766a7e0
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
     searchHistory(resultChopped);
@@ -224,7 +215,9 @@ function getBreed(resultChopped) {
             document.querySelector("#error-page-content").classList.remove('hidden');
             document.querySelector("#dog-facts").classList.remove('hidden');
             document.querySelector("#main-container").classList.add('vh25');
+
             while (statistics.firstChild) {
+
                 statistics.removeChild(statistics.firstChild);
             }
         }
