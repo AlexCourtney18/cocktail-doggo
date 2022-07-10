@@ -26,10 +26,6 @@ function clearSearch() {
 var searchFlag = false; // This variable is asking "Have you searched before?" 
 var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
 
-var doggieButtonClick;
-
-searchButtonOriginal.addEventListener("click", openPage)
-
 function openPage() {
     while(userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
