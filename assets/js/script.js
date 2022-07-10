@@ -159,6 +159,8 @@ function getBreed(resultChopped) {
                             if (response.ok) {
                                 response.json().then(function (data) {
                                     console.log(data);
+                                    clearSearch();
+                                    document.querySelector("#main-container").classList.add('vh20');
                                     for (var i = 0; i < 3; i++) {
                                         if (data.message[i]) {
 
@@ -212,6 +214,7 @@ function getBreed(resultChopped) {
             document.querySelector("#error-page-box").classList.remove('hidden');
             document.querySelector("#error-page-content").classList.remove('hidden');
             document.querySelector("#dog-facts").classList.remove('hidden');
+            document.querySelector("#main-container").classList.add('vh25');
             while(statistics.firstChild) {
                 statistics.removeChild(statistics.firstChild);
             }
@@ -280,7 +283,7 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
     $.each(recentSearch, function (index, value) {
         const p = document.createElement("p");
         p.innerHTML = value;
-        document.getElementById("historyLine1").appendChild(p);
+        console.log(p);
     })
 }
 
@@ -426,20 +429,3 @@ function printDoggieFacts() {
 
     window.scrollTo(0, document.body.scrollHeight);
 };
-
-    //Pseudo Code
-
-    //Search for something
-    //Search becomes history 1, history 2 becomes history 1, and history 3 becomes history 2
-    //If any history is empty, do not show box logic
-    //Only show search history when search bar is clicked
-    //Also, make it so it saves the history variables to browser
-    //Would like to make it so clicking the search bar icon does a search, but didn't get to it
-
-
-
-    // ALEX Pseudo Code
-    // when breed family is searched, display clickable buttons of sub-breeds
-    // if no sub-breeds return (array length 0), but family returns (ex pitbull) - display images of family
-    // when sub-breed buttons are clicked, display images for sub-breed
-    // test comments 
