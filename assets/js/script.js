@@ -13,6 +13,15 @@ var successfulSearchFlag; // This variable is asking "Have you succeeded at a se
 var doggieButtonClick;
 
 searchButtonOriginal.addEventListener("click", openPage);
+searchButtonOriginal.addEventListener("click", clearSearch);
+
+var searchFlag = false; // This variable is asking "Have you searched before?" 
+var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
+
+function clearSearch() {
+    document.querySelector("#dogQ").classList.add('hidden');
+    document.getElementById('search').value = "";
+}
 
 var searchFlag = false; // This variable is asking "Have you searched before?" 
 var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
@@ -24,6 +33,8 @@ function openPage() {
     document.querySelector("#webpage-title").classList.add('titleLefted');
     document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
     document.querySelector("#search-container").classList.add('searchRighted')
+    document.querySelector("#deckbox").classList.add('resultsRighted')
+
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
     searchHistory(resultChopped);
@@ -55,6 +66,21 @@ const handleSearchInput = (event) => {
     if (searchTerm === "") {
         return;
     };
+  // Get Search Textbox Value
+  const searchTerm = event.target.value.toLowerCase();
+  
+  // Don't Add Cards if Search Input is Empty
+  if (searchTerm === "") {
+    document.querySelector("#dogQ").classList.add('hidden')
+    return;
+  };
+
+  document.querySelector("#dogQ").classList.remove('hidden')
+
+  // Filter Breeds by Search Term 
+  const filterBreeds = breeds.filter(breed => {
+    return breed.includes(searchTerm);
+  });
 
     // Filter Breeds by Search Term 
     const filterBreeds = breeds.filter(breed => {
@@ -67,26 +93,24 @@ const handleSearchInput = (event) => {
         const card = userCardTemplate.content.cloneNode(true).children[0];
         const body = card.querySelector("[data-body]");
 
-        // Set Cloned Card Text to Breed Name
-        body.textContent = breed;
+    // Append Card to Container
+    userCardContainer.append(card);
+    $(card).on("click", function() {
+        resultChopped = body.textContent;
+        console.log(resultChopped);
+        document.querySelector("#webpage-title").classList.add('titleLefted');
+        document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
+        document.querySelector("#search-container").classList.add('searchRighted')
+        document.querySelector("#deckbox").classList.add('resultsRighted')
 
-        // Append Card to Container
-        userCardContainer.append(card);
-
-        $(card).on("click", function () {
-            resultChopped = body.textContent;
-            console.log(resultChopped);
-            document.querySelector("#webpage-title").classList.add('titleLefted');
-            document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
-            document.querySelector("#search-container").classList.add('searchRighted')
-            getDogInfo();
-            searchHistory(resultChopped);
-            getBreed(resultChopped);
-            while (userCardContainer.firstChild) {
-                userCardContainer.removeChild(userCardContainer.firstChild);
-            }
-        })
-    });
+        getDogInfo();
+        searchHistory(resultChopped);
+        getBreed(resultChopped);
+        while(userCardContainer.firstChild) {
+            userCardContainer.removeChild(userCardContainer.firstChild);
+        }
+    })
+  });
 };
 
 // Search Input Event Listener
@@ -149,6 +173,8 @@ function getBreed(resultChopped) {
                             if (response.ok) {
                                 response.json().then(function (data) {
                                     console.log(data);
+                                    clearSearch();
+                                    document.querySelector("#main-container").classList.add('vh20');
                                     for (var i = 0; i < 3; i++) {
                                         if (data.message[i]) {
 
@@ -201,7 +227,8 @@ function getBreed(resultChopped) {
             document.querySelector("#error-page-box").classList.remove('hidden');
             document.querySelector("#error-page-content").classList.remove('hidden');
             document.querySelector("#dog-facts").classList.remove('hidden');
-            while (statistics.firstChild) {
+            document.querySelector("#main-container").classList.add('vh25');
+            while(statistics.firstChild) {
                 statistics.removeChild(statistics.firstChild);
             }
         }
@@ -268,7 +295,7 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
     $.each(recentSearch, function (index, value) {
         const p = document.createElement("p");
         p.innerHTML = value;
-        document.getElementById("historyLine1").appendChild(p);
+        console.log(p);
     })
 }
 
@@ -413,12 +440,3 @@ function printDoggieFacts() {
 
 window.scrollTo(0, document.body.scrollHeight);
 };
-
-    //Pseudo Code
-
-    //Search for something
-    //Search becomes history 1, history 2 becomes history 1, and history 3 becomes history 2
-    //If any history is empty, do not show box logic
-    //Only show search history when search bar is clicked
-    //Also, make it so it saves the history variables to browser
-    //Would like to make it so clicking the search bar icon does a search, but didn't get to it
