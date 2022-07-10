@@ -300,14 +300,14 @@ function save(resultChopped) {
 
     //var newBreed = document.getElementById("search").value;
 
-    if (localStorage.getItem('breeds') == null) {
-        localStorage.setItem('breeds', '[]');
+    if (localStorage.getItem("breeds") == null) {
+        localStorage.setItem("breeds", "[]");
     }
 
-    var oldBreed = JSON.parse(localStorage.getItem('breeds'));
+    var oldBreed = JSON.parse(localStorage.getItem("breeds"));
     oldBreed.push(resultChopped);
 
-    localStorage.setItem('breeds', JSON.stringify(oldBreed));
+    localStorage.setItem("breeds", JSON.stringify(oldBreed));
 
     console.log(resultChopped + "SAVE FUNCTION");
 }
