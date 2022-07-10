@@ -15,6 +15,7 @@ var doggieButtonClick;
 searchButtonOriginal.addEventListener("click", openPage);
 searchButtonOriginal.addEventListener("click", clearSearch);
 
+
 var searchFlag = false; // This variable is asking "Have you searched before?" 
 var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
 
@@ -40,6 +41,7 @@ function openPage() {
     getDogInfo(resultChopped);
     //>>>>>>>>>>>>
     getBreed(resultChopped);
+    save();
 }
 
 
@@ -293,6 +295,21 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
 $(subBreedButtonEl).on("click", "button", function () {
     getDogInfo();
 });
+
+function save() {
+    var newBreed = document.getElementById("search").value;
+
+    if (localStorage.getItem('breeds') == null) {
+        localStorage.setItem('breeds', '[]');
+    }
+
+    var oldBreed = JSON.parse(localStorage.getItem('breeds'));
+    oldBreed.push(newBreed);
+
+    localStorage.setItem('breeds', JSON.stringify(oldBreed));
+
+    console.log(newBreed);
+}
 
 //This is the random dog facts API call
 var getDogInfo = function () {
