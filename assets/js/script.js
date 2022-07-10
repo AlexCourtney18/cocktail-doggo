@@ -13,9 +13,15 @@ var successfulSearchFlag; // This variable is asking "Have you succeeded at a se
 var doggieButtonClick;
 
 searchButtonOriginal.addEventListener("click", openPage);
+searchButtonOriginal.addEventListener("click", clearSearch);
 
 var searchFlag = false; // This variable is asking "Have you searched before?" 
 var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
+
+function clearSearch() {
+    document.querySelector("#dogQ").classList.add('hidden');
+    document.getElementById('search').value = "";
+}
 
 function openPage() {
     while(userCardContainer.firstChild) {
@@ -24,6 +30,7 @@ function openPage() {
     document.querySelector("#webpage-title").classList.add('titleLefted');
     document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
     document.querySelector("#search-container").classList.add('searchRighted')
+    document.querySelector("#deckbox").classList.add('resultsRighted')
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
     searchHistory(resultChopped);
@@ -53,8 +60,11 @@ const handleSearchInput = (event) => {
   
   // Don't Add Cards if Search Input is Empty
   if (searchTerm === "") {
+    document.querySelector("#dogQ").classList.add('hidden')
     return;
   };
+
+  document.querySelector("#dogQ").classList.remove('hidden')
 
   // Filter Breeds by Search Term 
   const filterBreeds = breeds.filter(breed => {
@@ -72,13 +82,13 @@ const handleSearchInput = (event) => {
 
     // Append Card to Container
     userCardContainer.append(card);
-
     $(card).on("click", function() {
         resultChopped = body.textContent;
         console.log(resultChopped);
         document.querySelector("#webpage-title").classList.add('titleLefted');
         document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
         document.querySelector("#search-container").classList.add('searchRighted')
+        document.querySelector("#deckbox").classList.add('resultsRighted')
         getDogInfo();
         searchHistory(resultChopped);
         getBreed(resultChopped);

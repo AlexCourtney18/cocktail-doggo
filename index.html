@@ -23,15 +23,20 @@
             <!-- Adaptive Header -->
                 <header class="block center">
                     <h2 class="title webpTitle" id="webpage-title"><a href="./index.html">Doggypedia</a></h2>
-                    <h3 class="title webpSubtitle is-4" id="webpage-subtitle">Where your newest best friend is only a click away</h3>
+                    <h3 class="subtitle webpSubtitle is-4" id="webpage-subtitle">Where your newest best friend is only a click away</h3>
                     <!-- <h3>Please search for your breed by "family" eg "hound", "terrier", "spaniel"</br>If the breed family has sub-breeds, buttons will populate for you to select!</h3> -->
                     <!-- Search Bar Goes Here -->
                     <div class="search-wrapper" id="search-container">
-                        <label for="search"></label>
+                        <label class=label for="search"></label>
                         <input type="search" id="search" data-search>
-                        <button id="orange">Search</button> <!--added this button to the search bar so the search triggers when search is clicked.-->
+                        <button id="orange" for="">Search</button> <!--added this button to the search bar so the search triggers when search is clicked.-->
                     </div>
-                    <div class="user-cards" data-user-cards-container></div>
+
+                    <div id="deckbox">
+                        <h3 class="subtitle webpDogQ is-5 hidden" id="dogQ">Is this your dog?</h3>
+                        <div class="user-cards" data-user-cards-container></div>
+                    </div>
+
                     <template data-user-template>
                         <div class="card">
                         <div class="body" data-body></div>
