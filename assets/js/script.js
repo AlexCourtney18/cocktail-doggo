@@ -64,23 +64,11 @@ const handleSearchInput = (event) => {
 
     // Don't Add Cards if Search Input is Empty
     if (searchTerm === "") {
+        document.querySelector("#dogQ").classList.add('hidden');
         return;
     };
-  // Get Search Textbox Value
-  //const searchTerm = event.target.value.toLowerCase();
-  
-  // Don't Add Cards if Search Input is Empty
-  if (searchTerm === "") {
-    document.querySelector("#dogQ").classList.add('hidden');
-    return;
-  };
 
-  document.querySelector("#dogQ").classList.remove('hidden');
-
-//   // Filter Breeds by Search Term 
-//   const filterBreeds = breeds.filter(breed => {
-//     return breed.includes(searchTerm);
-//   });
+    document.querySelector("#dogQ").classList.remove('hidden');
 
     // Filter Breeds by Search Term 
     const filterBreeds = breeds.filter(breed => {
@@ -93,24 +81,27 @@ const handleSearchInput = (event) => {
         const card = userCardTemplate.content.cloneNode(true).children[0];
         const body = card.querySelector("[data-body]");
 
-    // Append Card to Container
-    userCardContainer.append(card);
-    $(card).on("click", function() {
-        resultChopped = body.textContent;
-        console.log(resultChopped);
-        document.querySelector("#webpage-title").classList.add('titleLefted');
-        document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
-        document.querySelector("#search-container").classList.add('searchRighted')
-        document.querySelector("#deckbox").classList.add('resultsRighted')
+        // Set Cloned Card Text to Breed Name
+        body.textContent = breed;
 
-        getDogInfo();
-        searchHistory(resultChopped);
-        getBreed(resultChopped);
-        while(userCardContainer.firstChild) {
-            userCardContainer.removeChild(userCardContainer.firstChild);
-        }
-    })
-  });
+        // Append Card to Container
+        userCardContainer.append(card);
+        $(card).on("click", function () {
+            resultChopped = body.textContent;
+            console.log(resultChopped);
+            document.querySelector("#webpage-title").classList.add('titleLefted');
+            document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
+            document.querySelector("#search-container").classList.add('searchRighted')
+            document.querySelector("#deckbox").classList.add('resultsRighted')
+
+            getDogInfo();
+            searchHistory(resultChopped);
+            getBreed(resultChopped);
+            while (userCardContainer.firstChild) {
+                userCardContainer.removeChild(userCardContainer.firstChild);
+            }
+        })
+    });
 };
 
 // Search Input Event Listener
@@ -228,7 +219,7 @@ function getBreed(resultChopped) {
             document.querySelector("#error-page-content").classList.remove('hidden');
             document.querySelector("#dog-facts").classList.remove('hidden');
             document.querySelector("#main-container").classList.add('vh25');
-            while(statistics.firstChild) {
+            while (statistics.firstChild) {
                 statistics.removeChild(statistics.firstChild);
             }
         }
@@ -438,5 +429,5 @@ function printDoggieFacts() {
     drool.innerText = drooling;
     statistics.appendChild(drool);
 
-window.scrollTo(0, document.body.scrollHeight);
+    window.scrollTo(0, document.body.scrollHeight);
 };
