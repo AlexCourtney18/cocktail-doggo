@@ -148,6 +148,7 @@ function getBreed(resultChopped) {
                         // add click event listener for sub-breed buttons
                         subBreedButtonEl.addEventListener("click", buttonClick);
                     }
+                    save(resultChopped);
                 }
                 // functionality to load breed images immediately if there are no sub-breeds listed in the api
                 if (data.message.length === 0) {
@@ -296,19 +297,20 @@ $(subBreedButtonEl).on("click", "button", function () {
     getDogInfo();
 });
 
-function save() {
-    var newBreed = document.getElementById("search").value;
+function save(resultChopped) {
 
-    if (localStorage.getItem('breeds') == null) {
-        localStorage.setItem('breeds', '[]');
+    //var newBreed = document.getElementById("search").value;
+
+    if (localStorage.getItem("breeds") == null) {
+        localStorage.setItem("breeds", "[]");
     }
 
-    var oldBreed = JSON.parse(localStorage.getItem('breeds'));
-    oldBreed.push(newBreed);
+    var oldBreed = JSON.parse(localStorage.getItem("breeds"));
+    oldBreed.push(resultChopped);
 
-    localStorage.setItem('breeds', JSON.stringify(oldBreed));
+    localStorage.setItem("breeds", JSON.stringify(oldBreed));
 
-    console.log(newBreed);
+    console.log(resultChopped + "SAVE FUNCTION");
 }
 
 //This is the random dog facts API call
