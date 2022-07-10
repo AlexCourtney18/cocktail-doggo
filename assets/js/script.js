@@ -23,6 +23,9 @@ function clearSearch() {
     document.getElementById('search').value = "";
 }
 
+var searchFlag = false; // This variable is asking "Have you searched before?" 
+var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
+
 function openPage() {
     while(userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
@@ -31,6 +34,7 @@ function openPage() {
     document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
     document.querySelector("#search-container").classList.add('searchRighted')
     document.querySelector("#deckbox").classList.add('resultsRighted')
+
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
     searchHistory(resultChopped);
@@ -89,6 +93,7 @@ const handleSearchInput = (event) => {
         document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
         document.querySelector("#search-container").classList.add('searchRighted')
         document.querySelector("#deckbox").classList.add('resultsRighted')
+
         getDogInfo();
         searchHistory(resultChopped);
         getBreed(resultChopped);

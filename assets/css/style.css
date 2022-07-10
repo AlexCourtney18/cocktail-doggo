@@ -19,6 +19,7 @@
 .mass {
     display: grid;
     grid-template-columns: 20% 60% 20%;
+
     padding-top: 33vh;
 }
 
@@ -32,6 +33,8 @@
 
 .search-wrapper {
     text-align: center;
+
+    margin-top: 75px;
 }
 
 .user-cards {
@@ -195,7 +198,6 @@
     font-weight: 500;
     padding-top: 10px;
 }
-
 .webpText {
     font-family: 'Cinzel', serif;
     font-weight: 400;
