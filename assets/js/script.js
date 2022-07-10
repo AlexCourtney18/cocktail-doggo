@@ -444,5 +444,6 @@ function printDoggieFacts() {
     drool.innerText = drooling;
     statistics.appendChild(drool);
 
+
     window.scrollTo(0, document.body.scrollHeight);
 };
