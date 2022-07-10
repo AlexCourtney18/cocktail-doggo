@@ -23,9 +23,6 @@ function clearSearch() {
     document.getElementById('search').value = "";
 }
 
-var searchFlag = false; // This variable is asking "Have you searched before?" 
-var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
-
 function openPage() {
     while (userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
@@ -64,11 +61,11 @@ const handleSearchInput = (event) => {
 
     // Don't Add Cards if Search Input is Empty
     if (searchTerm === "") {
-        document.querySelector("#dogQ").classList.add('hidden');
+        document.querySelector("#dogQ").classList.add('hidden')
         return;
     };
 
-    document.querySelector("#dogQ").classList.remove('hidden');
+    document.querySelector("#dogQ").classList.remove('hidden')
 
     // Filter Breeds by Search Term 
     const filterBreeds = breeds.filter(breed => {
@@ -93,7 +90,6 @@ const handleSearchInput = (event) => {
             document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
             document.querySelector("#search-container").classList.add('searchRighted')
             document.querySelector("#deckbox").classList.add('resultsRighted')
-
             getDogInfo();
             searchHistory(resultChopped);
             getBreed(resultChopped);
@@ -219,7 +215,9 @@ function getBreed(resultChopped) {
             document.querySelector("#error-page-content").classList.remove('hidden');
             document.querySelector("#dog-facts").classList.remove('hidden');
             document.querySelector("#main-container").classList.add('vh25');
+
             while (statistics.firstChild) {
+
                 statistics.removeChild(statistics.firstChild);
             }
         }
@@ -314,7 +312,7 @@ var getDogInfo = function () {
     fetch(dogInfo).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                console.log(data);
+                //console.log(data);
                 dataArr = data.facts;
                 //console.log(dataArr);
                 for (var i = 0; i < dataArr.length; i++) {
