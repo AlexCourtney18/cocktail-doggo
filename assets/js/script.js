@@ -436,7 +436,7 @@ function printDoggieFacts() {
         statistics.removeChild(statistics.firstChild);
     }
     var statHeader = document.createElement("h2");
-    statHeader.innerText = "Doggie stats for this good girl:"
+    statHeader.innerText = "Doggie stats for your new best friend:"
     statistics.appendChild(statHeader);
 
     var life = document.createElement("li");
