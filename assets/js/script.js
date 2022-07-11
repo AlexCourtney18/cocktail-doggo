@@ -2,6 +2,7 @@ var subBreedButtonEl = document.querySelector("#sub-button");
 var subImagesEl = document.querySelector("#sub-images");
 var errorBoxEl = document.querySelector("#error-page-box");
 var errorContentEl = document.querySelector("#error-page-content");
+var historyListEl = document.querySelector("#history-list");
 var wikipedia = document.getElementById("wikipedia"); //This is the element with the random dog facts inside. Should change the name to be something other than wikipedia later.
 var statistics = document.getElementById("statistics");
 var resultChopped;
@@ -15,9 +16,25 @@ var doggieButtonClick;
 searchButtonOriginal.addEventListener("click", openPage);
 searchButtonOriginal.addEventListener("click", clearSearch);
 
-
-var searchFlag = false; // This variable is asking "Have you searched before?" 
-var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
+$(historyListEl).on("click", "button", function(event){
+    console.log("CLICK");
+    var melon = event.target.textContent
+    console.log(melon);
+    resultChopped = melon;
+    var oldDogHistory = JSON.parse(localStorage.getItem("breeds"));
+    console.log(oldDogHistory);
+                if(oldDogHistory === null) {
+                    createHistoryButton();
+                }
+                else if(!oldDogHistory.includes(melon)) {
+                    createHistoryButton();
+                }
+                getBreed(resultChopped);
+            })
+            
+            
+            var searchFlag = false; // This variable is asking "Have you searched before?" 
+            var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
 
 function clearSearch() {
     document.querySelector("#dogQ").classList.add('hidden');
@@ -35,13 +52,13 @@ function openPage() {
 
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
+  
     searchHistory(resultChopped);
 
     //THIS IS the call to the dog facts API>>>>>>>
     getDogInfo(resultChopped);
     //>>>>>>>>>>>>
     getBreed(resultChopped);
-    save();
 }
 
 
@@ -148,7 +165,16 @@ function getBreed(resultChopped) {
                         // add click event listener for sub-breed buttons
                         subBreedButtonEl.addEventListener("click", buttonClick);
                     }
-                    save(resultChopped);
+                    var oldDogHistory = JSON.parse(localStorage.getItem("breeds"));
+                    console.log(oldDogHistory);
+                    if(oldDogHistory === null) {
+                        createHistoryButton(resultChopped);
+                        save(resultChopped);
+                    }
+                    else if(!oldDogHistory.includes(resultChopped)) {
+                        createHistoryButton(resultChopped);
+                        save(resultChopped);
+                    }
                 }
                 // functionality to load breed images immediately if there are no sub-breeds listed in the api
                 if (data.message.length === 0) {
@@ -196,7 +222,6 @@ function getBreed(resultChopped) {
                             }
                         });
                     }
-
                 }
             });
             document.querySelector("#error-page-box").classList.add('hidden');
@@ -291,6 +316,24 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
     })
 }
 
+
+function createHistoryButton(breedName) {
+    console.log(breedName);
+
+    var historyEl = document.createElement("button");
+    // historyEl.classList.add("list-item", "btn", "flex-row", "justify-space-between", "align-center");
+    historyEl.textContent = breedName;
+    // var titleEl = document.createElement("span");
+    // titleEl.textContent = breedName;
+
+    // historyEl.appendChild(titleEl);
+    historyListEl.appendChild(historyEl);
+
+    // historyListEl.addEventListener("click", historyClick);
+}
+
+
+
 //BELOW IS THE WORK ON GETTING DOG DATA
 //This is to change with quick dog facts each time a sub-breed button is clicked
 $(subBreedButtonEl).on("click", "button", function () {
@@ -311,6 +354,17 @@ function save(resultChopped) {
     localStorage.setItem("breeds", JSON.stringify(oldBreed));
 
     console.log(resultChopped + "SAVE FUNCTION");
+}
+
+function loadHistory() {
+    populate = JSON.parse(localStorage.getItem("breeds"));
+
+    if(populate !== null) {
+        for(i= 0; i < populate.length; i++) {
+            var breedName = populate[i];
+            createHistoryButton(breedName);
+        }
+    }
 }
 
 //This is the random dog facts API call
@@ -397,8 +451,8 @@ var dogBreedFacts = function () {
 };
 
 //THIS FUNCTION has all of the dog statistic elements to be styled. NOTE: To dynamically create
-//a class for each element, use (we'll use statHeader as an example) statHeader.setAttribute("class", "apple", "orange", "lemon"), etc.
-//NOTE FOR STYLING: If it is easier, all of the <li> elements can be turned into <p> elements, and be appended to a <div> rather than a <ul>.
+//a class for each element, use (well use statHeader as an example) statHeader.setAttribute("class", "apple", "orange", "lemon"), etc.
+//NOTE FOR STYLING: If it is easier, all of the <li> elements can be turned into <p> elements, and be appended to a <div> rather thant a <ul>.
 //same goes for the random dog facts (they can be turned into <p> elements instead of <li> if its better that way);
 function printDoggieFacts() {
 
@@ -407,7 +461,7 @@ function printDoggieFacts() {
     }
 
     var statHeader = document.createElement("h2");
-    statHeader.innerText = "Doggie stats for your new best friend:"
+    statHeader.innerText = "Doggie stats for this good girl:"
     statistics.appendChild(statHeader);
 
     var life = document.createElement("li");
@@ -446,5 +500,7 @@ function printDoggieFacts() {
     drool.innerText = drooling;
     statistics.appendChild(drool);
 
+
     window.scrollTo(0, document.body.scrollHeight);
 };
+loadHistory();
