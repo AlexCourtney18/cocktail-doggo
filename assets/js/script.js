@@ -477,4 +477,5 @@ function printDoggieFacts() {
 
     window.scrollTo(0, document.body.scrollHeight);
 };
+
 loadHistory();
