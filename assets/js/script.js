@@ -475,29 +475,7 @@ function printDoggieFacts() {
     var drool = document.createElement("li");
     drool.innerText = drooling;
     statistics.appendChild(drool);
-<<<<<<< HEAD
-}; 
-
-
-    //Pseudo Code
-
-    //Search for something
-    //Search becomes history 1, history 2 becomes history 1, and history 3 becomes history 2
-    //If any history is empty, do not show box logic
-    //Only show search history when search bar is clicked
-    //Also, make it so it saves the history variables to browser
-    //Would like to make it so clicking the search bar icon does a search, but didn't get to it
-
-
-
-    // ALEX Pseudo Code
-    // when breed family is searched, display clickable buttons of sub-breeds
-    // if no sub-breeds return (array length 0), but family returns (ex pitbull) - display images of family
-    // when sub-breed buttons are clicked, display images for sub-breed
-    // test comments 
-=======
 
     window.scrollTo(0, document.body.scrollHeight);
 };
 loadHistory();
->>>>>>> 5d37a05e425301487945d0dcba7cf91031712437
