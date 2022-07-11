@@ -2,31 +2,62 @@ var subBreedButtonEl = document.querySelector("#sub-button");
 var subImagesEl = document.querySelector("#sub-images");
 var errorBoxEl = document.querySelector("#error-page-box");
 var errorContentEl = document.querySelector("#error-page-content");
+var historyListEl = document.querySelector("#history-list");
 var wikipedia = document.getElementById("wikipedia"); //This is the element with the random dog facts inside. Should change the name to be something other than wikipedia later.
 var statistics = document.getElementById("statistics");
 var resultChopped;
 var dogFamily;
+var searchButtonOriginal = document.getElementById("orange");
+var searchFlag = false; // This variable is asking "Have you searched before?" 
+var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
+
+var doggieButtonClick;
+
+searchButtonOriginal.addEventListener("click", openPage);
+searchButtonOriginal.addEventListener("click", clearSearch);
+
+$(historyListEl).on("click", "button", function (event) {
+    console.log("CLICK");
+    var melon = event.target.textContent;
+    console.log(melon);
+    resultChopped = melon;
+    var oldDogHistory = JSON.parse(localStorage.getItem("breeds"));
+    console.log(oldDogHistory);
+    if (oldDogHistory === null) {
+        createHistoryButton();
+    }
+    else if (!oldDogHistory.includes(melon)) {
+        createHistoryButton();
+    }
+    getBreed(resultChopped);
+})
 
 var searchFlag = false; // This variable is asking "Have you searched before?" 
 var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
 
-function openPage() {
-    var searchResult = document.getElementById("search").value; // Grabs result
-    resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
-    
-    //dogFamily = resultChopped;
-    console.log(dogFamily); //Sam added these console.logs to keep track of data needed to get the dog stats API working
-    console.log(searchResult);
-    console.log(resultChopped);
-    
-    //THIS IS the call to the dog facts API>>>>>>>
-    getDogInfo(resultChopped);
-    //>>>>>>>>>>>>
-
-    getBreed(resultChopped);
+function clearSearch() {
+    document.querySelector("#dogQ").classList.add('hidden');
+    document.getElementById('search').value = "";
 }
 
+function openPage() {
+    while (userCardContainer.firstChild) {
+        userCardContainer.removeChild(userCardContainer.firstChild);
+    };
+    document.querySelector("#webpage-title").classList.add('titleLefted');
+    document.querySelector("#webpage-subtitle").classList.add('subtitleLefted');
+    document.querySelector("#search-container").classList.add('searchRighted');
+    document.querySelector("#deckbox").classList.add('resultsRighted');
 
+    var searchResult = document.getElementById("search").value; // Grabs result
+    resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
+
+    searchHistory(resultChopped);
+
+    //THIS IS the call to the dog facts API>>>>>>>
+    getDogInfo(resultChopped);
+    getBreed(resultChopped);
+}
 
 // Reference to Card Template
 const userCardTemplate = document.querySelector("[data-user-template]");
@@ -37,44 +68,60 @@ const url = "https://dog.ceo/api/breeds/list/all";
 let breeds = [];
 
 const handleSearchInput = (event) => {
-  // Clear Card Container
-  userCardContainer.innerHTML = "";
+    // Clear Card Container
+    userCardContainer.innerHTML = "";
 
-  // Get Search Textbox Value
-  const searchTerm = event.target.value.toLowerCase();
-  
-  // Don't Add Cards if Search Input is Empty
-  if (searchTerm === "") {
-    return;
-  };
+    // Get Search Textbox Value
+    const searchTerm = event.target.value.toLowerCase();
 
-  // Filter Breeds by Search Term 
-  const filterBreeds = breeds.filter(breed => {
-    return breed.includes(searchTerm);
-  });
+    // Don't Add Cards if Search Input is Empty
+    if (searchTerm === "") {
+        document.querySelector("#dogQ").classList.add('hidden')
+        return;
+    };
 
-  // Add Cards of Filtered Breeds
-  filterBreeds.forEach(breed => {
-    // Clone Card Template
-    const card = userCardTemplate.content.cloneNode(true).children[0];
-    const body = card.querySelector("[data-body]");
+    document.querySelector("#dogQ").classList.remove('hidden')
 
-    // Set Cloned Card Text to Breed Name
-    body.textContent = breed;
+    // Filter Breeds by Search Term 
+    const filterBreeds = breeds.filter(breed => {
+        return breed.includes(searchTerm);
+    });
 
-    // Append Card to Container
-    userCardContainer.append(card);
-  });
+    // Add Cards of Filtered Breeds
+    filterBreeds.forEach(breed => {
+        // Clone Card Template
+        const card = userCardTemplate.content.cloneNode(true).children[0];
+        const body = card.querySelector("[data-body]");
+
+        // Set Cloned Card Text to Breed Name
+        body.textContent = breed;
+
+        // Append Card to Container
+        userCardContainer.append(card);
+        $(card).on("click", function () {
+            resultChopped = body.textContent;
+            console.log(resultChopped);
+            document.querySelector("#webpage-title").classList.add('titleLefted');
+            document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
+            document.querySelector("#search-container").classList.add('searchRighted')
+            document.querySelector("#deckbox").classList.add('resultsRighted')
+            getDogInfo();
+            searchHistory(resultChopped);
+            getBreed(resultChopped);
+            while (userCardContainer.firstChild) {
+                userCardContainer.removeChild(userCardContainer.firstChild);
+            }
+        })
+    });
 };
 
 // Search Input Event Listener
 searchInput.addEventListener("input", handleSearchInput);
 
-
 const getDogBreeds = async () => {
-  let response = await fetch(url);
-  let data = await response.json();
-  breeds = Object.keys(data.message);
+    let response = await fetch(url);
+    let data = await response.json();
+    breeds = Object.keys(data.message);
 };
 
 getDogBreeds();
@@ -113,21 +160,32 @@ function getBreed(resultChopped) {
                         // add click event listener for sub-breed buttons
                         subBreedButtonEl.addEventListener("click", buttonClick);
                     }
+                    var oldDogHistory = JSON.parse(localStorage.getItem("breeds"));
+                    console.log(oldDogHistory);
+                    if (oldDogHistory === null) {
+                        createHistoryButton(resultChopped);
+                        save(resultChopped);
+                    }
+                    else if (!oldDogHistory.includes(resultChopped)) {
+                        createHistoryButton(resultChopped);
+                        save(resultChopped);
+                    }
                 }
                 // functionality to load breed images immediately if there are no sub-breeds listed in the api
                 if (data.message.length === 0) {
                     console.log("BLANK ARRAY");
                     getBreedImage(resultChopped);
-                    //dogBreedFacts(); //SAM. Work on getting functionality to work in API
                     // fetch breed images
                     function getBreedImage(resultChopped) {
                         var apiImageUrl = "https://dog.ceo/api/breed/" + resultChopped + "/images";
-                        
+
                         subImagesEl.textContent = "";
                         fetch(apiImageUrl).then(function (response) {
                             if (response.ok) {
                                 response.json().then(function (data) {
                                     console.log(data);
+                                    clearSearch();
+                                    document.querySelector("#main-container").classList.add('vh20');
                                     for (var i = 0; i < 3; i++) {
                                         if (data.message[i]) {
 
@@ -142,8 +200,7 @@ function getBreed(resultChopped) {
                                             var imageEl = document.createElement("img");
                                             imageEl.setAttribute("src", subImage);
                                             subParentEl.appendChild(imageEl);
-                                            if(imageEl.height >= imageEl.width)
-                                            {
+                                            if (imageEl.height >= imageEl.width) {
                                                 imageEl.setAttribute("height", imageEl.width);
                                                 imageEl.setAttribute("class", "maxW");
                                                 imageEl.setAttribute("class", "theH");
@@ -164,7 +221,14 @@ function getBreed(resultChopped) {
             });
             document.querySelector("#error-page-box").classList.add('hidden');
             document.querySelector("#error-page-content").classList.add('hidden');
-            document.querySelector("#error-dog-fact").classList.add('hidden');
+            document.querySelector("#dog-facts").classList.add('hidden');
+
+            doggieButtonClick = resultChopped;
+            while (statistics.firstChild) {
+                statistics.removeChild(statistics.firstChild);
+            }
+            console.log(doggieButtonClick);
+            dogBreedFacts();
         } else {
             // clear previous content even when breed is searched that returns "not found"
             subImagesEl.textContent = "";
@@ -172,13 +236,17 @@ function getBreed(resultChopped) {
             console.log("dog breed not found");
             document.querySelector("#error-page-box").classList.remove('hidden');
             document.querySelector("#error-page-content").classList.remove('hidden');
-            document.querySelector("#error-dog-fact").classList.remove('hidden');
+            document.querySelector("#dog-facts").classList.remove('hidden');
+            document.querySelector("#main-container").classList.add('vh25');
+
+            while (statistics.firstChild) {
+
+                statistics.removeChild(statistics.firstChild);
+            }
         }
     });
 }
 // button click function for sub-breed buttons to pass through breed family + btnClick sub breed to breed images function
-
-var doggieButtonClick;
 
 function buttonClick(event) {
     var btnClick = event.target.textContent;
@@ -214,8 +282,7 @@ function getBreedImage(resultChopped) {
                         var imageEl = document.createElement("img");
                         imageEl.setAttribute("src", subImage);
                         subParentEl.appendChild(imageEl);
-                        if(imageEl.height >= imageEl.width)
-                        {
+                        if (imageEl.height >= imageEl.width) {
                             imageEl.setAttribute("height", imageEl.width);
                             imageEl.setAttribute("class", "maxW");
                             imageEl.setAttribute("class", "theH");
@@ -235,24 +302,56 @@ function getBreedImage(resultChopped) {
 
 function searchHistory() { //rudimentary way of grabbing the recent search so we can get the information and save it to local storage (not implemented)
     var recentSearch = [];
-    recentSearch.push($('#search').val());
+    recentSearch.push(resultChopped);
 
     $.each(recentSearch, function (index, value) {
         const p = document.createElement("p");
         p.innerHTML = value;
-        document.getElementById("historyLine1").appendChild(p);
+        console.log(p);
     })
+}
+
+function createHistoryButton(breedName) {
+    console.log(breedName);
+
+    var historyEl = document.createElement("button");
+    historyEl.textContent = breedName;
+    historyListEl.appendChild(historyEl);
 }
 
 //BELOW IS THE WORK ON GETTING DOG DATA
 //This is to change with quick dog facts each time a sub-breed button is clicked
-$(subBreedButtonEl).on("click", "button", function() {
+$(subBreedButtonEl).on("click", "button", function () {
     getDogInfo();
 });
 
+function save(resultChopped) {
+    if (localStorage.getItem("breeds") == null) {
+        localStorage.setItem("breeds", "[]");
+    }
+
+    var oldBreed = JSON.parse(localStorage.getItem("breeds"));
+    oldBreed.push(resultChopped);
+
+    localStorage.setItem("breeds", JSON.stringify(oldBreed));
+
+    console.log(resultChopped + "SAVE FUNCTION");
+}
+
+function loadHistory() {
+    populate = JSON.parse(localStorage.getItem("breeds"));
+
+    if (populate !== null) {
+        for (i = 0; i < populate.length; i++) {
+            var breedName = populate[i];
+            createHistoryButton(breedName);
+        }
+    }
+}
+
 //This is the random dog facts API call
-var getDogInfo = function() {
-    
+var getDogInfo = function () {
+
     //this while loop is removing all the previously created elements so the container can be filled with new information
     while (wikipedia.firstChild) {
         wikipedia.removeChild(wikipedia.firstChild);
@@ -263,35 +362,43 @@ var getDogInfo = function() {
     factHeader.innerText = "";
     wikipedia.appendChild(factHeader);
 
-    var dogInfo = "https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5"  
+    var dogInfo = "https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5"
 
-    fetch(dogInfo).then(function(response) {
+    fetch(dogInfo).then(function (response) {
         if (response.ok) {
-            response.json().then(function(data) {
-                //console.log(data);
+            response.json().then(function (data) {
                 dataArr = data.facts;
-                //console.log(dataArr);
                 for (var i = 0; i < dataArr.length; i++) {
                     var randomFact = document.createElement("li");
                     randomFact.classList.add("randomfact");
                     randomFact.innerText = dataArr[i];
                     wikipedia.appendChild(randomFact);
                 }
-            }) 
+            })
         }
     })
 };
 
-var dogBreedFacts = function() {
+var dogBreedFacts = function () {
 
-        $.ajax({
-            method: "GET",
-            url: "https://api.api-ninjas.com/v1/dogs?name=" + doggieButtonClick,
-            headers: { "X-Api-Key": "m1XEFgtJy+tOPfM7jpV2uw==DtLxNYGo7mhPpvOz"},
-            contentType: "application/json",
-            success: function(data) {
-                console.log(data);
+    $.ajax({
+        method: "GET",
+        url: "https://api.api-ninjas.com/v1/dogs?name=" + doggieButtonClick,
+        headers: { "X-Api-Key": "m1XEFgtJy+tOPfM7jpV2uw==DtLxNYGo7mhPpvOz" },
+        contentType: "application/json",
+        success: function (data) {
+            console.log(data);
 
+            if (data.length === 0) {
+                while (statistics.firstChild) {
+                    statistics.removeChild(statistics.firstChild);
+                }
+                statError = document.createElement("p")
+                statError.innerText = "We're sorry, our database does not have any statistics for this amazing friend just yet."
+                statistics.appendChild(statError);
+                return;
+            }
+            else if (data[0].max_life_expectancy) {
                 maxLife = "Life span: " + data[0].max_life_expectancy + " years."
                 console.log(maxLife);
 
@@ -315,24 +422,22 @@ var dogBreedFacts = function() {
 
                 drooling = "Drooling: " + data[0].drooling;
                 console.log(drooling);
-                printDoggieFacts();
-            }
 
-        });
+                printDoggieFacts();
+                window.scrollTo(0, document.body.scrollHeight);
+            }
+        }
+    });
 };
 
-//THIS FUNCTION has all of the dog statistic elements to be styled. NOTE: To dynamically create
-//a class for each element, use (well use statHeader as an example) statHeader.setAttribute("class", "apple", "orange", "lemon"), etc.
-//NOTE FOR STYLING: If it is easier, all of the <li> elements can be turned into <p> elements, and be appended to a <div> rather thant a <ul>.
-//same goes for the random dog facts (they can be turned into <p> elements instead of <li> if its better that way);
 function printDoggieFacts() {
 
-    while(statistics.firstChild) {
+    while (statistics.firstChild) {
         statistics.removeChild(statistics.firstChild);
     }
 
     var statHeader = document.createElement("h2");
-    statHeader.innerText = "Doggie stats for this good girl:"
+    statHeader.innerText = "Doggie stats for your new best friend:"
     statistics.appendChild(statHeader);
 
     var life = document.createElement("li");
@@ -370,6 +475,7 @@ function printDoggieFacts() {
     var drool = document.createElement("li");
     drool.innerText = drooling;
     statistics.appendChild(drool);
+<<<<<<< HEAD
 }; 
 
 
@@ -389,3 +495,9 @@ function printDoggieFacts() {
     // if no sub-breeds return (array length 0), but family returns (ex pitbull) - display images of family
     // when sub-breed buttons are clicked, display images for sub-breed
     // test comments 
+=======
+
+    window.scrollTo(0, document.body.scrollHeight);
+};
+loadHistory();
+>>>>>>> 5d37a05e425301487945d0dcba7cf91031712437
