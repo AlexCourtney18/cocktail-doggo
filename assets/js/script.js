@@ -16,25 +16,24 @@ var doggieButtonClick;
 searchButtonOriginal.addEventListener("click", openPage);
 searchButtonOriginal.addEventListener("click", clearSearch);
 
-$(historyListEl).on("click", "button", function(event){
+$(historyListEl).on("click", "button", function (event) {
     console.log("CLICK");
-    var melon = event.target.textContent
+    var melon = event.target.textContent;
     console.log(melon);
     resultChopped = melon;
     var oldDogHistory = JSON.parse(localStorage.getItem("breeds"));
     console.log(oldDogHistory);
-                if(oldDogHistory === null) {
-                    createHistoryButton();
-                }
-                else if(!oldDogHistory.includes(melon)) {
-                    createHistoryButton();
-                }
-                getBreed(resultChopped);
-            })
-            
-            
-            var searchFlag = false; // This variable is asking "Have you searched before?" 
-            var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
+    if (oldDogHistory === null) {
+        createHistoryButton();
+    }
+    else if (!oldDogHistory.includes(melon)) {
+        createHistoryButton();
+    }
+    getBreed(resultChopped);
+})
+
+var searchFlag = false; // This variable is asking "Have you searched before?" 
+var successfulSearchFlag; // This variable is asking "Have you succeeded at a search before?"
 
 function clearSearch() {
     document.querySelector("#dogQ").classList.add('hidden');
@@ -46,22 +45,18 @@ function openPage() {
         userCardContainer.removeChild(userCardContainer.firstChild);
     };
     document.querySelector("#webpage-title").classList.add('titleLefted');
-    document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
-    document.querySelector("#search-container").classList.add('searchRighted')
-    document.querySelector("#deckbox").classList.add('resultsRighted')
+    document.querySelector("#webpage-subtitle").classList.add('subtitleLefted');
+    document.querySelector("#search-container").classList.add('searchRighted');
+    document.querySelector("#deckbox").classList.add('resultsRighted');
 
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
-  
     searchHistory(resultChopped);
 
     //THIS IS the call to the dog facts API>>>>>>>
     getDogInfo(resultChopped);
-    //>>>>>>>>>>>>
     getBreed(resultChopped);
 }
-
-
 
 // Reference to Card Template
 const userCardTemplate = document.querySelector("[data-user-template]");
@@ -122,7 +117,6 @@ const handleSearchInput = (event) => {
 // Search Input Event Listener
 searchInput.addEventListener("input", handleSearchInput);
 
-
 const getDogBreeds = async () => {
     let response = await fetch(url);
     let data = await response.json();
@@ -167,11 +161,11 @@ function getBreed(resultChopped) {
                     }
                     var oldDogHistory = JSON.parse(localStorage.getItem("breeds"));
                     console.log(oldDogHistory);
-                    if(oldDogHistory === null) {
+                    if (oldDogHistory === null) {
                         createHistoryButton(resultChopped);
                         save(resultChopped);
                     }
-                    else if(!oldDogHistory.includes(resultChopped)) {
+                    else if (!oldDogHistory.includes(resultChopped)) {
                         createHistoryButton(resultChopped);
                         save(resultChopped);
                     }
@@ -316,23 +310,13 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
     })
 }
 
-
 function createHistoryButton(breedName) {
     console.log(breedName);
 
     var historyEl = document.createElement("button");
-    // historyEl.classList.add("list-item", "btn", "flex-row", "justify-space-between", "align-center");
     historyEl.textContent = breedName;
-    // var titleEl = document.createElement("span");
-    // titleEl.textContent = breedName;
-
-    // historyEl.appendChild(titleEl);
     historyListEl.appendChild(historyEl);
-
-    // historyListEl.addEventListener("click", historyClick);
 }
-
-
 
 //BELOW IS THE WORK ON GETTING DOG DATA
 //This is to change with quick dog facts each time a sub-breed button is clicked
@@ -341,9 +325,6 @@ $(subBreedButtonEl).on("click", "button", function () {
 });
 
 function save(resultChopped) {
-
-    //var newBreed = document.getElementById("search").value;
-
     if (localStorage.getItem("breeds") == null) {
         localStorage.setItem("breeds", "[]");
     }
@@ -359,8 +340,8 @@ function save(resultChopped) {
 function loadHistory() {
     populate = JSON.parse(localStorage.getItem("breeds"));
 
-    if(populate !== null) {
-        for(i= 0; i < populate.length; i++) {
+    if (populate !== null) {
+        for (i = 0; i < populate.length; i++) {
             var breedName = populate[i];
             createHistoryButton(breedName);
         }
@@ -385,9 +366,7 @@ var getDogInfo = function () {
     fetch(dogInfo).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                //console.log(data);
                 dataArr = data.facts;
-                //console.log(dataArr);
                 for (var i = 0; i < dataArr.length; i++) {
                     var randomFact = document.createElement("li");
                     randomFact.classList.add("randomfact");
@@ -450,10 +429,6 @@ var dogBreedFacts = function () {
     });
 };
 
-//THIS FUNCTION has all of the dog statistic elements to be styled. NOTE: To dynamically create
-//a class for each element, use (well use statHeader as an example) statHeader.setAttribute("class", "apple", "orange", "lemon"), etc.
-//NOTE FOR STYLING: If it is easier, all of the <li> elements can be turned into <p> elements, and be appended to a <div> rather thant a <ul>.
-//same goes for the random dog facts (they can be turned into <p> elements instead of <li> if its better that way);
 function printDoggieFacts() {
 
     while (statistics.firstChild) {
