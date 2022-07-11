@@ -435,7 +435,6 @@ function printDoggieFacts() {
     while (statistics.firstChild) {
         statistics.removeChild(statistics.firstChild);
     }
-
     var statHeader = document.createElement("h2");
     statHeader.innerText = "Doggie stats for this good girl:"
     statistics.appendChild(statHeader);
