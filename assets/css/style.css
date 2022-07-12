@@ -1,39 +1,161 @@
 .fixedPos {
     position: fixed;
+    justify-content: space-between;
 }
 
-#header-container {
-    flex-direction: row;
+#header {
+    background-color: black;
+    display: flex;
+    flex-flow: row-reverse nowrap;
+    height: 66px;
 }
 
-#nav-left {
-    top: 0;
-    left: 20px;
+.clrHistoryBtn {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2px;
 }
 
-#nav-right { 
-    top: -55px;
-    right: 20px;
+.history-list {
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    text-align: center;
+    margin-right: 30px;
 }
 
-.mass {
-    display: grid;
-    grid-template-columns: 20% 60% 20%;
-    padding-top: 33vh;
+.recent {
+    color: white;
+    font-size: 1.5em;
+    margin: 15px 0;
 }
 
-.vh25 {
-    padding-top: 25vh;
+.histories {
+    display: none;
+    flex-flow: column wrap;
 }
 
-.vh20 {
-    padding-top: 20vh;
+.history-list:hover .histories {
+    display: flex;
+    position: absolute;
+    flex-flow: column;
+    top: 66px;
+}
+
+.webpTitle {
+    font-family: 'Cinzel', serif;
+    font-size: 72px;
+    font-weight: 900;
+    margin: 0;
+}
+
+.headered {
+    position: absolute;
+    top: -1px;
+    left: 5px;
+    font-size: 48px;
+}
+
+.searchHeadered {
+    position: absolute;
+    top: -20px;
+    left: 350px;
+    z-index: 2;
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
 }
 
 .search-wrapper {
     text-align: center;
-    margin-top: 75px;
+    margin: 20px auto 5px;
 }
+
+.search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.space {
+    margin: auto 5px;
+}
+
+#randog:active #randogImg{
+    src: "./assets/images/dog_out.jpg" 
+}
+
+.searchBox {
+    position: relative;
+    min-width: 100px;
+}
+
+#search {
+    border: 1px solid grey;
+    border-radius: 10px;
+    height: 32px;
+    width: 20vw;
+    max-width: 500px;
+    min-width: 200px;
+    padding: 2px 12px;
+    background-color: #f5f5f5;
+}
+
+.randog {
+    border-radius: 25%;
+    height: 60px;
+    width: 60px;
+}
+
+.randog:hover {
+    cursor: help;
+}
+
+#search:hover, #search:focus {
+    border: 1.5px solid #009688;
+    background-color: white;
+}
+
+#orange:hover {
+    background-color: rgb(181, 255, 243);
+}
+
+#search-results { /* container for the search results */
+    position: fixed;
+}
+
+/* Fonts & Font Weights */
+
+.fontLora {
+    font-family: 'Lora', serif;
+}
+
+.fontCinzel {
+    font-family: 'Cinzel', serif;
+}
+
+.fontQuicksand {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+}
+
+.fw400 {
+    font-weight: 400;
+}
+
+.fw500 {
+    font-weight: 500;
+}
+
+.factSpace {
+    margin: 12px 0;
+}
+
+/* End Fonts & Font Weights */
 
 .user-cards {
     margin: auto;
@@ -44,10 +166,11 @@
     border: 1px solid grey;
     height: 32px;
     width: max-content;
-    margin: 2px auto;
+    margin: 1px auto;
     padding: 4px 5px 2px 5px;
     background-color: #f5f5f5;
-    font-family: 'Work Sans', sans-serif;   
+    font-family: 'Lora', serif;   
+    cursor: pointer;
 }
 
 .card:hover {
@@ -62,67 +185,8 @@
     border-radius: 10px;
 }
 
-.searchBox {
-    position: relative;
-    min-width: 100px;
-}
-
-.search-icon {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 14px;
-    cursor: pointer;
-}
-
-.clear-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 10px;
-    cursor: pointer;
-    visibility: hidden;
-}
-
-#search {
-    border: 1px solid grey;
-    border-radius: 15px;
-    height: 32px;
-    width: 400px;
-    padding: 2px 23px 2px 30px;
-    outline: 0;
-    background-color: #f5f5f5;
-}
-
-#orange {
-    border: 1px solid grey;
-    border-radius: 15px;
-    height: 32px;
-    width: 75px;
-    padding-right: 2px;
-    outline: 0;
-    background-color: #f5f5f5;
-    font-family: 'Work Sans', sans-serif;   
-    text-align: center;
-}
-
-#orange:hover {
-    background-color: white;
-}
-
-#search:hover, #search:focus {
-    border: 1.5px solid #009688;
-    background-color: white;
-}
-
 .hidden {
     display: none;
-}
-
-#sub-images {
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .titleLefted {
@@ -131,74 +195,22 @@
     left: 18px;
 }
 
-.subtitleLefted {
-    position: absolute;
-    top: 90px;
-    left: 20px
-}
-
-.searchRighted {
-    position: absolute;
-    top: 0;
-    right: 30px;
-}
-
-#deckbox {
+#left-box {
     margin: auto;
-    padding: 10px;
-}
-
-.resultsRighted {
-    position: absolute;
-    top: 110px;
-    right: 200px;
-}
-
-.maxW {
-    width: 200px;
-    margin: 5px;
-    padding: 5px;
-}
-
-.maxH {
-    max-height: 200px;
-    margin: 5px;
-    padding: 5px;
-}
-
-.theW {
-    width: 200px;
-    margin: 5px;
-    padding: 5px;
-}
-
-.theH {
-    height: 200px;
-    margin: 5px;
-    padding: 5px;
-}
-
-.webpTitle {
-    font-family: 'Cinzel', serif;
-    font-size: 72px;
-    font-weight: 900;
-}
-
-.webpSubtitle {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 500;
 }
 
 .webpDogQ {
-    font-family: 'Playfair Display', serif;
     font-size: 20px;
-    font-weight: 500;
     padding-top: 10px;
 }
 .webpText {
     font-family: 'Cinzel', serif;
     font-weight: 400;
+}
+
+#error-page-box {
+    max-width: 60%;
+    margin: auto;
 }
 
 #error-title {
@@ -208,18 +220,40 @@
 }
 
 #error-text {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Lora', serif;
     font-weight: 500;
 }
 
-#dog-facts {
-    font-family: 'Playfair Display', sans-serif;
-    font-weight: 400;
+#sub-images {
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+    max-width: 50vw;
 }
 
-#stats-container {
-    font-family: 'Playfair Display', sans-serif;
-    margin-bottom: 20px;
+.dog-pic {
+    height: 250px;
+    margin: 3px;
+    padding: 3px;
+}
+
+#statistics { 
+    list-style-type: none;
+}
+
+#breed-wrapper {
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+.history-button {
+    margin: 2px auto;
+}
+
+#clear-history-button {
+    right: 10px;
+    max-width: fit-content;
+    margin: auto;
 }
 
 /* Add Media Queries for browser sizes/mobile */
