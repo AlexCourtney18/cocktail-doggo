@@ -354,13 +354,11 @@ function dogBreedFacts() {
         contentType: "application/json",
         success: function (data) {
 
-            if (data.length === 0) {
+            if (data.length === 0) { //if there are no statistics, a call to a function that prints dog facts is made
                 while (statistics.firstChild) {
                     statistics.removeChild(statistics.firstChild);
                 }
-                statError = document.createElement("p")
-                statError.innerText = "We're sorry, our database does not have any statistics for this amazing friend just yet."
-                statistics.appendChild(statError);
+                insteadFacts();
                 return;
             }
             else if (data[0].max_life_expectancy) {
@@ -438,4 +436,28 @@ function printDoggieFacts() {
     window.scrollTo(0, document.body.scrollHeight);
 };
 
+//if there are no statistics for the given (searched for) dog, then fun dog facts are printed in thier place
+function insteadFacts() {
+
+    statError = document.createElement("p")
+    statError.innerText = "We're sorry, our database does not have any statistics for this amazing friend just yet. Here are some fun dog facts in their place!"
+    statistics.appendChild(statError);
+
+    var secondDogInfo = "https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5"
+
+    fetch(secondDogInfo).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                secondDataArr = data.facts;
+                for (var i = 0; i < secondDataArr.length; i++) {
+                var secondRandomFact = document.createElement("li");
+                secondRandomFact.classList.add("randomfact");
+                secondRandomFact.innerText = secondDataArr[i];
+                statistics.appendChild(secondRandomFact);
+                }
+            })
+        }
+    })
+
+};
 loadHistory();
