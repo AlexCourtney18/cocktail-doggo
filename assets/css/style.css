@@ -1,26 +1,129 @@
 .fixedPos {
     position: fixed;
+    justify-content: space-between;
 }
 
-#header-container {
+#header {
+    background-color: black;
+    display: flex;
+    flex-flow: row-reverse nowrap;
+    padding: 5px 0;
+}
+
+.clrHistoryBtn {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2px;
+}
+
+.history-list {
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    text-align: center;
+    margin: 5px 40px 5px 0;
+}
+
+.recent {
+    color: white;
+    font-size: 1.5em;
+}
+
+.histories {
+    display: none;
+    flex-flow: column wrap;
+}
+
+.history-list:hover .histories {
+    display: flex;
+    position: absolute;
+    flex-flow: column;
+    top: 50px;
+}
+
+.webpTitle {
+    font-family: 'Cinzel', serif;
+    font-size: 72px;
+    font-weight: 900;
+    margin: 0;
+}
+
+.headered {
+    position: absolute;
+    top: -8px;
+    left: 5px;
+    font-size: 48px;
+}
+
+.searchHeadered {
+    position: absolute;
+    top: -8px;
+    left: 325px;
+    z-index: 2;
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.search-wrapper {
+    text-align: center;
+    margin: 20px auto 5px;
+}
+
+.search-container {
+    display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
-#nav-left {
-    top: 0;
-    left: 20px;
+.space {
+    margin: auto 5px;
 }
 
-#nav-right { 
-    top: -55px;
-    right: 20px;
+.searchBox {
+    position: relative;
+    min-width: 100px;
 }
 
-.mass {
-    display: grid;
-    grid-template-columns: 20% 60% 20%;
-    padding-top: 33vh;
+#search {
+    border: 1px solid grey;
+    border-radius: 10px;
+    height: 32px;
+    width: 20vw;
+    max-width: 500px;
+    min-width: 200px;
+    padding: 2px 12px;
+    background-color: #f5f5f5;
 }
+
+.randog {
+    border-radius: 25%;
+    height: 80px;
+    width: 80px;
+}
+
+.randog:hover {
+    cursor: help;
+}
+
+#search:hover, #search:focus {
+    border: 1.5px solid #009688;
+    background-color: white;
+}
+
+#orange:hover {
+    background-color: rgb(181, 255, 243);
+}
+
+#search-results { /* container for the search results */
+    position: fixed;
+}
+
+/* Fonts & Font Weights */
 
 .fontLora {
     font-family: 'Lora', serif;
@@ -43,18 +146,7 @@
     font-weight: 500;
 }
 
-.vh25 {
-    padding-top: 25vh;
-}
-
-.vh20 {
-    padding-top: 20vh;
-}
-
-.search-wrapper {
-    text-align: center;
-    margin: 20px auto 5px;
-}
+/* End Fonts & Font Weights */
 
 .user-cards {
     margin: auto;
@@ -65,7 +157,7 @@
     border: 1px solid grey;
     height: 32px;
     width: max-content;
-    margin: 2px auto;
+    margin: 1px auto;
     padding: 4px 5px 2px 5px;
     background-color: #f5f5f5;
     font-family: 'Lora', serif;   
@@ -84,32 +176,6 @@
     border-radius: 10px;
 }
 
-.searchBox {
-    position: relative;
-    min-width: 100px;
-}
-
-#search {
-    border: 1px solid grey;
-    border-radius: 10px;
-    height: 32px;
-    width: 30vw;
-    max-width: 500px;
-    min-width: 200px;
-    margin: 4px 0;
-    padding: 2px 12px;
-    background-color: #f5f5f5;
-}
-
-#orange:hover {
-    background-color: rgb(181, 255, 243);
-}
-
-#search:hover, #search:focus {
-    border: 1.5px solid #009688;
-    background-color: white;
-}
-
 .hidden {
     display: none;
 }
@@ -120,54 +186,8 @@
     left: 18px;
 }
 
-#title-box {
-    margin-bottom: 0;
-}
-
 #left-box {
     margin: auto;
-}
-
-.subtitleLefted {
-    position: absolute;
-    top: 90px;
-    left: 20px
-}
-
-.searchRighted {
-    position: absolute;
-    top: 0;
-    right: 30px;
-}
-
-.deckboxRighted {
-    position: relative;
-    right: 50px;
-}
-
-.boxSquished {
-    height: 1px;
-}
-
-#deckbox { /* container for the search results */
-    position: relative;
-    float: none;
-    display: flex;
-    margin: auto;
-    z-index: 1;
-    flex-flow: column wrap;
-}
-
-.resultsRighted {
-    position: absolute;
-    top: 110px;
-    right: 200px;
-}
-
-.webpTitle {
-    font-family: 'Cinzel', serif;
-    font-size: 72px;
-    font-weight: 900;
 }
 
 .webpDogQ {
@@ -211,33 +231,14 @@
     list-style-type: none;
 }
 
-.historyListButton {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2px;
-}
-
-.history-list {
-    font-family: 'Lora', serif;
-    font-weight: 500;
-    margin: 0 auto;
-    text-align: center;
-}
-
 .history-button {
     margin: 2px auto;
 }
 
 #clear-history-button {
-    position: relative;
+    right: 10px;
     max-width: fit-content;
-    margin: 3px auto 10px;
-}
-
-#history-list {
-    display: flex;
-    flex-flow: column wrap;
+    margin: auto;
 }
 
 /* Add Media Queries for browser sizes/mobile */

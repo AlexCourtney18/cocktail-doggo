@@ -22,17 +22,22 @@
 </head>
 
 <body>
-
-    <div class="block mass" id="main-container">
-
-        <div id="left-box">
-            <div class="historyListButton">
-                <!-- Kit added a Clear History button here -->
-                <button id="clear-history-button" class="button is-warning fontQuicksand">Clear History (Fix me!)</button>
-            </div>
+    <header id="header">
+        <div class="clrHistoryBtn">
+            <!-- Kit added a Clear History button here -->
+            <button id="clear-history-button" class="button is-warning fontQuicksand">Clear History (Fix me!)</button>
         </div>
-        <!-- Adaptive Header -->
-        <header class="block center" id="title-box">
+
+        <div class="history-list">
+            <h4 class="recent fw500">
+                Recent History
+            </h4>
+            <div id="history-list" class="histories"></div>
+        </div>
+    </header>    
+    
+
+        <section class="block center centered" id="title-box">
             <h2 class="webpTitle" id="webpage-title"><a href="./index.html">Doggypedia</a></h2>
             <h3 class="subtitle is-4 fontLora fw500" id="webpage-subtitle">Where your newest best friend is only a click
                 away</h3>
@@ -45,14 +50,15 @@
                     <br>
                     Examples: "hound", "terrier", "spaniel"
                 </span>
-                <label class=label for="search"></label>
-                <input type="search" id="search" data-search>
-                <button id="orange" class="button is-light fontQuicksand" for="">Search</button>
-                <!--added this button to the search bar so the search triggers when search is clicked.-->
-                <div id="deckbox">
-                    <!-- contains the search results for manipulation -->
-                    <h3 class="subtitle webpDogQ is-5 hidden fw500 fontLora" id="dogQ">Is this your dog?</h3>
-                    <div class="user-cards" data-user-cards-container></div>
+                <div class="search-container">
+                    <input type="search" id="search" class="space" data-search>
+                    <div></div>
+                    <button id="orange" class="button is-light fontQuicksand space" for="">Search</button>
+                    <!--added this button to the search bar so the search triggers when search is clicked.-->
+
+                    <div></div>
+
+                    <button id="randog"> <img src=./assets/images/confused_dog.jpg class="randog space"> </button>
                 </div>
             </div>
 
@@ -61,25 +67,16 @@
                     <div class="body" data-body></div>
                 </div>
             </template>
+        </section>
 
-
-        </header>
-
-        <div></div> <!-- Some divs are added to reserve areas on the webpage separated in a grid. They DO matter! -->
-
-        <div>
-            <h2 class="title is-4 history-list">
-                History List
-            </h2>
-            <div id="history-list"></div>
+        <div id="search-results">
+            <!-- contains the search results for manipulation -->
+            <h3 class="subtitle webpDogQ is-5 hidden fw500 fontLora" id="dogQ">Is this your dog?</h3>
+            <div class="user-cards" data-user-cards-container></div>
         </div>
 
         <!-- WIP: Error message, hidden by default, shown when search fails -->
         <article id=error-page-box class="box hidden">
-            <div>
-                <!-- Random Dog Image API -->
-            </div>
-
             <div id="error-page-content" class="hidden">
                 <span id="error-title" class="content is-medium">Oops!</span>
                 <br>
@@ -112,7 +109,6 @@
                 </ul>
             </div>
         </article>
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

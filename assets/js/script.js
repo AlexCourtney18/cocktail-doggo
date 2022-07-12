@@ -6,6 +6,7 @@ var historyListEl = document.querySelector("#history-list");
 var clearHistoryButton = document.querySelector("#clear-history-button");
 var wikipedia = document.getElementById("wikipedia"); //This is the element with the random dog facts inside. Should change the name to be something other than wikipedia later.
 var statistics = document.getElementById("statistics");
+var randomDogBtn = document.getElementById("randog");
 var resultChopped;
 var dogFamily;
 var searchButtonOriginal = document.getElementById("orange");
@@ -14,11 +15,33 @@ var doggieButtonClick;
 searchButtonOriginal.addEventListener("click", openPage);
 searchButtonOriginal.addEventListener("click", clearSearch);
 
+function leavingHome() { //I put all of these in a function so I can just call the function a few times instead of spanning 20 lines
+    document.querySelector("#title-box").classList.remove('centered');
+    document.querySelector("#webpage-title").classList.add('headered');
+    document.querySelector("#search-container").classList.add('searchHeadered');
+    document.querySelector("#webpage-subtitle").classList.add('hidden');
+    document.querySelector("#instructions").classList.add('hidden');
+}
+
+function pictureChange() {
+    document.getElementById("randog").src="./assets/images/confused_dog_clicked.jpg";
+}
+
+/////////////////////////////////////////////////////////////////////
+// This should change the dog button but it doesn't right now help //
+
+$(randomDogBtn).on("click", "button", function () {
+    pictureChange();
+})
+
 // This function should remove all elements within historyListEl (the Div that contains buttons with the class history-button), but it doesn't.
 
 $(clearHistoryButton).on("click", "button", function(){
     $(historyListEl).find(".history-button").remove();
 })
+
+//                this stuff doesn't work                          //
+/////////////////////////////////////////////////////////////////////
 
 $(historyListEl).on("click", "button", function (event) {
     var melon = event.target.textContent;
@@ -30,12 +53,7 @@ $(historyListEl).on("click", "button", function (event) {
     else if (!oldDogHistory.includes(melon)) {
         createHistoryButton();
     }
-    document.querySelector("#webpage-title").classList.add('titleLefted');
-    document.querySelector("#webpage-subtitle").classList.add('subtitleLefted');
-    document.querySelector("#search-container").classList.add('searchRighted');
-    document.querySelector("#deckbox").classList.add('deckboxRighted');
-    document.querySelector("#title-box").classList.add('boxSquished');
-    document.querySelector("#instructions").classList.add('hidden');
+    leavingHome();
     getBreed(resultChopped);
 })
 
@@ -47,13 +65,8 @@ function clearSearch() {
 function openPage() {
     while (userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
-    };
-    document.querySelector("#webpage-title").classList.add('titleLefted');
-    document.querySelector("#webpage-subtitle").classList.add('subtitleLefted');
-    document.querySelector("#search-container").classList.add('searchRighted');
-    document.querySelector("#deckbox").classList.add('deckboxRighted');
-    document.querySelector("#title-box").classList.add('boxSquished');
-    document.querySelector("#instructions").classList.add('hidden');
+    }
+    leavingHome();
 
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
@@ -108,12 +121,7 @@ const handleSearchInput = (event) => {
         //event listener for the card, so that when you click something in the dropdown from the search bar, you get the results from the clicked option
         $(card).on("click", function () {
             resultChopped = body.textContent;
-            document.querySelector("#webpage-title").classList.add('titleLefted');
-            document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
-            document.querySelector("#search-container").classList.add('searchRighted')
-            document.querySelector("#deckbox").classList.add('deckboxRighted')
-            document.querySelector("#title-box").classList.add('boxSquished');
-            document.querySelector("#instructions").classList.add('hidden');
+            leavingHome();
             getDogInfo();
             searchHistory(resultChopped);
             getBreed(resultChopped);
@@ -183,7 +191,6 @@ function getBreed(resultChopped) {
                             if (response.ok) {
                                 response.json().then(function (data) {
                                     clearSearch();
-                                    document.querySelector("#main-container").classList.add('vh20');
                                     for (var i = 0; i < 3; i++) {
                                         if (data.message[i]) {
 
@@ -222,7 +229,6 @@ function getBreed(resultChopped) {
             document.querySelector("#error-page-box").classList.remove('hidden');
             document.querySelector("#error-page-content").classList.remove('hidden');
             document.querySelector("#dog-facts").classList.remove('hidden');
-            document.querySelector("#main-container").classList.add('vh25');
 
             while (statistics.firstChild) {
                 statistics.removeChild(statistics.firstChild);
