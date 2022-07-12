@@ -20,8 +20,6 @@ $(clearHistoryButton).on("click", "button", function(){
     $(historyListEl).find(".history-button").remove();
 })
 
-
-
 $(historyListEl).on("click", "button", function (event) {
     var melon = event.target.textContent;
     resultChopped = melon;
@@ -32,6 +30,11 @@ $(historyListEl).on("click", "button", function (event) {
     else if (!oldDogHistory.includes(melon)) {
         createHistoryButton();
     }
+    document.querySelector("#webpage-title").classList.add('titleLefted');
+    document.querySelector("#webpage-subtitle").classList.add('subtitleLefted');
+    document.querySelector("#search-container").classList.add('searchRighted');
+    document.querySelector("#deckbox").classList.add('resultsRighted');
+    document.querySelector("#title-box").classList.add('boxSquished');
     getBreed(resultChopped);
 })
 
@@ -186,16 +189,8 @@ function getBreed(resultChopped) {
                                             // create a container for each sub-image/append
                                             var imageEl = document.createElement("img");
                                             imageEl.setAttribute("src", subImage);
+                                            imageEl.setAttribute("class", "dog-pic");
                                             subParentEl.appendChild(imageEl);
-                                            if (imageEl.height >= imageEl.width) {
-                                                imageEl.setAttribute("height", imageEl.width);
-                                                imageEl.setAttribute("class", "maxW");
-                                                imageEl.setAttribute("class", "theH");
-                                            } else {
-                                                imageEl.setAttribute("width", imageEl.height);
-                                                imageEl.setAttribute("class", "theH");
-                                                imageEl.setAttribute("class", "maxW");
-                                            }
                                         }
                                     }
                                 });
@@ -209,6 +204,7 @@ function getBreed(resultChopped) {
             document.querySelector("#dog-facts").classList.add('hidden');
 
             doggieButtonClick = resultChopped;
+            doggieButtonClick = doggieButtonClick.charAt(0).toUpperCase() + doggieButtonClick.substring(1, doggieButtonClick.length);
             while (statistics.firstChild) {
                 statistics.removeChild(statistics.firstChild);
             }
@@ -393,11 +389,12 @@ function dogBreedFacts() {
 //this function prints the dog statistics to the screen for the given (searched for) dog
 function printDoggieFacts() {
 
+    doggieButtonClick = doggieButtonClick.charAt(0).toUpperCase() + doggieButtonClick.substring(1, doggieButtonClick.length);
     while (statistics.firstChild) {
         statistics.removeChild(statistics.firstChild);
     }
     var statHeader = document.createElement("h2");
-    statHeader.innerText = "Doggie stats for your new best friend:"
+    statHeader.innerText = doggieButtonClick + " Information" 
     statistics.appendChild(statHeader);
 
     var life = document.createElement("li");
@@ -413,7 +410,7 @@ function printDoggieFacts() {
     statistics.appendChild(height);
 
     var secondaryHeader = document.createElement("h3");
-    secondaryHeader.innerText = "The following stats are rated on a scale from 0 through 5, 0 being the least, and 5 being the most:";
+    secondaryHeader.innerText = "Doggystats (Min: 0, Max: 5)";
     statistics.appendChild(secondaryHeader);
 
     var play = document.createElement("li");
@@ -430,6 +427,7 @@ function printDoggieFacts() {
 
     var clif = document.createElement("li");
     clif.innerText = energy;
+    clif.classList.add('.no-bullets');
     statistics.appendChild(clif);
 
     var drool = document.createElement("li");

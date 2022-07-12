@@ -32,7 +32,7 @@
 
 .search-wrapper {
     text-align: center;
-    margin-top: 75px;
+    margin: 35px auto;
 }
 
 .user-cards {
@@ -111,16 +111,14 @@
     display: none;
 }
 
-#sub-images {
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .titleLefted {
     position: absolute;
     top: 6px;
     left: 18px;
+}
+
+#left-box {
+    margin: auto;
 }
 
 .subtitleLefted {
@@ -135,41 +133,25 @@
     right: 30px;
 }
 
-#deckbox {
-    position: relative;
+.boxSquished {
+    height: 1px;
+}
+
+#deckbox { /* container for the search results */
+    position: absolute;
+    float: none;
+    display: flex;
     margin: auto;
-    padding: 10px;
-    z-index: 2;
+    z-index: 1;
+    flex-direction: column;
+    right: 50vw;
+    top: -50px;
 }
 
 .resultsRighted {
     position: absolute;
     top: 110px;
     right: 200px;
-}
-
-.maxW {
-    width: 200px;
-    margin: 5px;
-    padding: 5px;
-}
-
-.maxH {
-    max-height: 200px;
-    margin: 5px;
-    padding: 5px;
-}
-
-.theW {
-    width: 200px;
-    margin: 5px;
-    padding: 5px;
-}
-
-.theH {
-    height: 200px;
-    margin: 5px;
-    padding: 5px;
 }
 
 .webpTitle {
@@ -216,13 +198,51 @@
     margin-bottom: 20px;
 }
 
-#historyListHeader {
+#sub-images {
     display: flex;
-    flex-direction: row;
+    margin: auto;
+    justify-content: space-around;
+    max-width: 45vw;
+}
+
+.dog-pic {
+    height: 250px;
+    margin: 3px;
+    padding: 3px;
+}
+
+#statistics { 
+    list-style-type: none;
+}
+
+.historyListButton {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2px;
+}
+
+.history-list {
+    font-family: 'Cinzel', serif;
+    font-weight: 500;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.history-button {
+    width: fit-content;
+    margin: 2px auto;
 }
 
 #clear-history-button {
-    margin-left: 30px;
+    position: relative;
+    max-width: 100px;
+    margin: 3px auto 10px;
+}
+
+#history-list {
+    display: flex;
+    flex-flow: column wrap;
 }
 
 /* Add Media Queries for browser sizes/mobile */
