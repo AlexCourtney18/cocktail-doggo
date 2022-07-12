@@ -24,6 +24,7 @@ function leavingHome() { //I put all of these in a function so I can just call t
 }
 
 function pictureChange() {
+    
     document.getElementById("randogImg").src="./assets/images/dog_out.jpg";
 }
 

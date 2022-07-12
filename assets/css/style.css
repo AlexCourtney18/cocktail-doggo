@@ -7,7 +7,7 @@
     background-color: black;
     display: flex;
     flex-flow: row-reverse nowrap;
-    padding: 5px 0;
+    height: 66px;
 }
 
 .clrHistoryBtn {
@@ -21,12 +21,13 @@
     font-family: 'Lora', serif;
     font-weight: 400;
     text-align: center;
-    margin: 5px 40px 5px 0;
+    margin-right: 30px;
 }
 
 .recent {
     color: white;
     font-size: 1.5em;
+    margin: 15px 0;
 }
 
 .histories {
@@ -38,7 +39,7 @@
     display: flex;
     position: absolute;
     flex-flow: column;
-    top: 50px;
+    top: 66px;
 }
 
 .webpTitle {
@@ -50,15 +51,15 @@
 
 .headered {
     position: absolute;
-    top: -8px;
+    top: -1px;
     left: 5px;
     font-size: 48px;
 }
 
 .searchHeadered {
     position: absolute;
-    top: -8px;
-    left: 325px;
+    top: -20px;
+    left: 350px;
     z-index: 2;
 }
 
@@ -106,8 +107,8 @@
 
 .randog {
     border-radius: 25%;
-    height: 80px;
-    width: 80px;
+    height: 60px;
+    width: 60px;
 }
 
 .randog:hover {
@@ -203,6 +204,10 @@
     font-weight: 400;
 }
 
+#error-page-box {
+    max-width: 80%;
+}
+
 #error-title {
     font-family: 'Cinzel', serif;
     font-weight: 700;
@@ -222,7 +227,7 @@
     display: flex;
     margin: auto;
     justify-content: space-around;
-    max-width: 45vw;
+    max-width: 50vw;
 }
 
 .dog-pic {
