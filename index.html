@@ -49,6 +49,11 @@
                 <input type="search" id="search" data-search>
                 <button id="orange" class="button is-light fontQuicksand" for="">Search</button>
                 <!--added this button to the search bar so the search triggers when search is clicked.-->
+                <div id="deckbox">
+                    <!-- contains the search results for manipulation -->
+                    <h3 class="subtitle webpDogQ is-5 hidden fw500 fontLora" id="dogQ">Is this your dog?</h3>
+                    <div class="user-cards" data-user-cards-container></div>
+                </div>
             </div>
 
             <template data-user-template>
@@ -56,6 +61,8 @@
                     <div class="body" data-body></div>
                 </div>
             </template>
+
+
         </header>
 
         <div></div> <!-- Some divs are added to reserve areas on the webpage separated in a grid. They DO matter! -->
@@ -97,11 +104,6 @@
 
         <!-- Start section for breed buttons and breed images appendChild -->
         <article id="stats-container" class="center fontLora">
-            <div id="deckbox">
-                <!-- contains the search results for manipulation -->
-                <h3 class="subtitle webpDogQ is-5 hidden fw500 fontLora" id="dogQ">Is this your dog?</h3>
-                <div class="user-cards" data-user-cards-container></div>
-            </div>
             <div id="sub-button"></div>
             <div id="sub-images"></div>
             <!--THIS IS where the dog facts are appended to (the <ul> with id=statistics)-->

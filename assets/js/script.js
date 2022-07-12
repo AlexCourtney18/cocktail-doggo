@@ -33,7 +33,7 @@ $(historyListEl).on("click", "button", function (event) {
     document.querySelector("#webpage-title").classList.add('titleLefted');
     document.querySelector("#webpage-subtitle").classList.add('subtitleLefted');
     document.querySelector("#search-container").classList.add('searchRighted');
-    document.querySelector("#deckbox").classList.add('resultsRighted');
+    document.querySelector("#deckbox").classList.add('deckboxRighted');
     document.querySelector("#title-box").classList.add('boxSquished');
     document.querySelector("#instructions").classList.add('hidden');
     getBreed(resultChopped);
@@ -51,7 +51,7 @@ function openPage() {
     document.querySelector("#webpage-title").classList.add('titleLefted');
     document.querySelector("#webpage-subtitle").classList.add('subtitleLefted');
     document.querySelector("#search-container").classList.add('searchRighted');
-    document.querySelector("#deckbox").classList.add('resultsRighted');
+    document.querySelector("#deckbox").classList.add('deckboxRighted');
     document.querySelector("#title-box").classList.add('boxSquished');
     document.querySelector("#instructions").classList.add('hidden');
 
@@ -111,7 +111,7 @@ const handleSearchInput = (event) => {
             document.querySelector("#webpage-title").classList.add('titleLefted');
             document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
             document.querySelector("#search-container").classList.add('searchRighted')
-            document.querySelector("#deckbox").classList.add('resultsRighted')
+            document.querySelector("#deckbox").classList.add('deckboxRighted')
             document.querySelector("#title-box").classList.add('boxSquished');
             document.querySelector("#instructions").classList.add('hidden');
             getDogInfo();

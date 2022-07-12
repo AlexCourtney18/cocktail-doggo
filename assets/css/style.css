@@ -140,6 +140,11 @@
     right: 30px;
 }
 
+.deckboxRighted {
+    position: relative;
+    right: 50px;
+}
+
 .boxSquished {
     height: 1px;
 }
