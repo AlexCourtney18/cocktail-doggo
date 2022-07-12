@@ -40,7 +40,7 @@
                 <!--added this button to the search bar so the search triggers when search is clicked.-->
             </div>
 
-            <div id="deckbox">
+            <div id="deckbox">  <!-- contains the search results for manipulation -->
                 <h3 class="subtitle webpDogQ is-5 hidden" id="dogQ">Is this your dog?</h3>
                 <div class="user-cards" data-user-cards-container></div>
             </div>
@@ -50,11 +50,6 @@
                     <div class="body" data-body></div>
                 </div>
             </template>
-
-            <div id="historyLine1"></div>
-            <div id="historyLine2"></div>
-            <div id="historyLine3"></div>
-
         </header>
 
         <div></div> <!-- Some divs are added to reserve areas on the webpage separated in a grid. They DO matter! -->
@@ -90,13 +85,16 @@
 
         <!-- Start section for breed buttons and breed images appendChild -->
         <article id="stats-container">
-            <div id="sub-button">
-            </div>
-            <div id="history-list">
+            <div id="sub-button"></div>
+
+            <div id="historyListHeader"> <!-- Kit added a Clear History button here -->
                 <h2>
                     History List
                 </h2>
+                <button id="clear-history-button">Clear History</button>
             </div>
+
+            <div id="history-list"></div>
             <div id="sub-images"></div>
             <!--THIS IS where the dog facts are appended to (the <ul> with id=statistics)-->
             <div class="content is-medium">

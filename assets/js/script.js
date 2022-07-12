@@ -3,6 +3,7 @@ var subImagesEl = document.querySelector("#sub-images");
 var errorBoxEl = document.querySelector("#error-page-box");
 var errorContentEl = document.querySelector("#error-page-content");
 var historyListEl = document.querySelector("#history-list");
+var clearHistoryButton = document.querySelector("#clear-history-button");
 var wikipedia = document.getElementById("wikipedia"); //This is the element with the random dog facts inside. Should change the name to be something other than wikipedia later.
 var statistics = document.getElementById("statistics");
 var resultChopped;
@@ -12,6 +13,14 @@ var doggieButtonClick;
 
 searchButtonOriginal.addEventListener("click", openPage);
 searchButtonOriginal.addEventListener("click", clearSearch);
+
+// This function should remove all elements within historyListEl (the Div that contains buttons with the class history-button), but it doesn't.
+
+$(clearHistoryButton).on("click", "button", function(){
+    $(historyListEl).find(".history-button").remove();
+})
+
+
 
 $(historyListEl).on("click", "button", function (event) {
     var melon = event.target.textContent;
@@ -281,6 +290,7 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
 function createHistoryButton(breedName) {
     var historyEl = document.createElement("button");
     historyEl.textContent = breedName;
+    historyEl.classList.add("history-button");
     historyListEl.appendChild(historyEl);
 }
 
