@@ -24,21 +24,18 @@ function leavingHome() { //I put all of these in a function so I can just call t
 }
 
 function pictureChange() {
-    document.getElementById("randog").src="./assets/images/confused_dog_clicked.jpg";
+    document.getElementById("randogImg").src="./assets/images/dog_out.jpg";
 }
 
-/////////////////////////////////////////////////////////////////////
-// This should change the dog button but it doesn't right now help //
-
-$(randomDogBtn).on("click", "button", function () {
-    pictureChange();
-})
+function changeBack() {
+    document.getElementById("randogImg").src="./assets/images/dog_in.jpg";
+}
 
 // This function should remove all elements within historyListEl (the Div that contains buttons with the class history-button), but it doesn't.
 
-$(clearHistoryButton).on("click", "button", function(){
-    $(historyListEl).find(".history-button").remove();
-})
+// $(clearHistoryButton).on("click", "button", function(){
+//     $(historyListEl).find(".history-button").remove();
+// })
 
 //                this stuff doesn't work                          //
 /////////////////////////////////////////////////////////////////////

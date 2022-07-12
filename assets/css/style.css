@@ -84,6 +84,10 @@
     margin: auto 5px;
 }
 
+#randog:active #randogImg{
+    src: "./assets/images/dog_out.jpg" 
+}
+
 .searchBox {
     position: relative;
     min-width: 100px;
