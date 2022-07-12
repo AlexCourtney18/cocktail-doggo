@@ -151,6 +151,10 @@
     font-weight: 500;
 }
 
+.factSpace {
+    margin: 12px 0;
+}
+
 /* End Fonts & Font Weights */
 
 .user-cards {
@@ -205,7 +209,8 @@
 }
 
 #error-page-box {
-    max-width: 80%;
+    max-width: 60%;
+    margin: auto;
 }
 
 #error-title {
@@ -217,10 +222,6 @@
 #error-text {
     font-family: 'Lora', serif;
     font-weight: 500;
-}
-
-#stats-container {
-    margin-bottom: 20px;
 }
 
 #sub-images {
@@ -238,6 +239,11 @@
 
 #statistics { 
     list-style-type: none;
+}
+
+#breed-wrapper {
+    max-width: 60%;
+    margin: 0 auto;
 }
 
 .history-button {

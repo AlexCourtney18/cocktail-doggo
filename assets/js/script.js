@@ -52,6 +52,7 @@ $(historyListEl).on("click", "button", function (event) {
         createHistoryButton();
     }
     leavingHome();
+    document.querySelector("#stats-wrapper").classList.remove('hidden');
     getBreed(resultChopped);
 })
 
@@ -120,6 +121,7 @@ const handleSearchInput = (event) => {
         $(card).on("click", function () {
             resultChopped = body.textContent;
             leavingHome();
+            document.querySelector("#stats-wrapper").classList.remove('hidden');
             getDogInfo();
             searchHistory(resultChopped);
             getBreed(resultChopped);
@@ -335,7 +337,7 @@ function getDogInfo() {
                 dataArr = data.facts;
                 for (var i = 0; i < dataArr.length; i++) {
                     var randomFact = document.createElement("li");
-                    randomFact.classList.add("randomfact");
+                    randomFact.classList.add("factSpace");
                     randomFact.innerText = dataArr[i];
                     wikipedia.appendChild(randomFact);
                 }
@@ -393,7 +395,7 @@ function printDoggieFacts() {
         statistics.removeChild(statistics.firstChild);
     }
     var statHeader = document.createElement("h2");
-    statHeader.innerText = doggieButtonClick + " Information" 
+    statHeader.innerText = doggieButtonClick + " Information";
     statistics.appendChild(statHeader);
 
     var life = document.createElement("li");
@@ -439,8 +441,14 @@ function printDoggieFacts() {
 //if there are no statistics for the given (searched for) dog, then fun dog facts are printed in thier place
 function insteadFacts() {
 
+    doggieButtonClick = doggieButtonClick.charAt(0).toUpperCase() + doggieButtonClick.substring(1, doggieButtonClick.length);
+    var statHeader = document.createElement("h2");
+    statHeader.innerText = doggieButtonClick + " Dog Breed";
+    statistics.appendChild(statHeader);
+
     statError = document.createElement("p")
     statError.innerText = "We're sorry, our database does not have any statistics for this amazing friend just yet. Here are some fun dog facts in their place!"
+    statError.classList.add("fw500");
     statistics.appendChild(statError);
 
     var secondDogInfo = "https://www.dogfactsapi.ducnguyen.dev/api/v1/facts/?number=5"
@@ -454,6 +462,7 @@ function insteadFacts() {
                 secondRandomFact.classList.add("randomfact");
                 secondRandomFact.innerText = secondDataArr[i];
                 statistics.appendChild(secondRandomFact);
+                secondRandomFact.classList.add("factSpace");
                 }
             })
         }
