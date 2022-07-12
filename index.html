@@ -14,9 +14,8 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,500;1,700&family=Work+Sans&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Lora:ital,wght@0,400;0,500;1,400&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+        
     <!-- Bulma suggests Font Awesome for icons -->
     <title>Doggypedia</title>
     <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
@@ -29,28 +28,27 @@
         <div id="left-box">
             <div class="historyListButton">
                 <!-- Kit added a Clear History button here -->
-                <button id="clear-history-button">Clear History (Fix me!)</button>
+                <button id="clear-history-button" class="button is-warning fontQuicksand">Clear History (Fix me!)</button>
             </div>
         </div>
         <!-- Adaptive Header -->
         <header class="block center" id="title-box">
             <h2 class="webpTitle" id="webpage-title"><a href="./index.html">Doggypedia</a></h2>
-            <h3 class="subtitle webpSubtitle is-4" id="webpage-subtitle">Where your newest best friend is only a click
+            <h3 class="subtitle is-4 fontLora fw500" id="webpage-subtitle">Where your newest best friend is only a click
                 away</h3>
             <!-- <h3>Please search for your breed by "family" eg "hound", "terrier", "spaniel"</br>If the breed family has sub-breeds, buttons will populate for you to select!</h3> -->
             <!-- Search Bar Goes Here -->
             <div class="search-wrapper" id="search-container">
+                <span id="instructions" class="fontQuicksand">Search for breeds by their family.
+                    <br> 
+                    If the breed family has sub-breeds, options will present themselves upon selecting an option.
+                    <br>
+                    Examples: "hound", "terrier", "spaniel"
+                </span>
                 <label class=label for="search"></label>
                 <input type="search" id="search" data-search>
-                <button id="orange" for="">Search</button>
+                <button id="orange" class="button is-light fontQuicksand" for="">Search</button>
                 <!--added this button to the search bar so the search triggers when search is clicked.-->
-            </div>
-            <div class="beholder block center">
-                <div id="deckbox">
-                    <!-- contains the search results for manipulation -->
-                    <h3 class="subtitle webpDogQ is-5 hidden" id="dogQ">Is this your dog?</h3>
-                    <div class="user-cards" data-user-cards-container></div>
-                </div>
             </div>
 
             <template data-user-template>
@@ -63,7 +61,7 @@
         <div></div> <!-- Some divs are added to reserve areas on the webpage separated in a grid. They DO matter! -->
 
         <div>
-            <h2 class="subtitle history-list">
+            <h2 class="title is-4 history-list">
                 History List
             </h2>
             <div id="history-list"></div>
@@ -81,7 +79,7 @@
                 <span id="error-text" class="content is-medium">The dog breed you specified could not be found in our
                     database. For your troubles, here's some random dog facts!</span>
                 <br>
-                <span class="content is-medium" id="dog-facts">
+                <span class="content is-medium fontLora" id="dog-facts">
                     <!--This section has all the quick facts/ stats in it. The facts are in one container (id=wikipedia) and the facts are in the other (id=statistics)-->
                     <section>
                         <!--THIS IS where the quick dog facts is appended to (the <ul> with id=wikipedia)-->
@@ -98,7 +96,12 @@
 
 
         <!-- Start section for breed buttons and breed images appendChild -->
-        <article id="stats-container" class="center">
+        <article id="stats-container" class="center fontLora">
+            <div id="deckbox">
+                <!-- contains the search results for manipulation -->
+                <h3 class="subtitle webpDogQ is-5 hidden fw500 fontLora" id="dogQ">Is this your dog?</h3>
+                <div class="user-cards" data-user-cards-container></div>
+            </div>
             <div id="sub-button"></div>
             <div id="sub-images"></div>
             <!--THIS IS where the dog facts are appended to (the <ul> with id=statistics)-->

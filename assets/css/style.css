@@ -22,6 +22,27 @@
     padding-top: 33vh;
 }
 
+.fontLora {
+    font-family: 'Lora', serif;
+}
+
+.fontCinzel {
+    font-family: 'Cinzel', serif;
+}
+
+.fontQuicksand {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+}
+
+.fw400 {
+    font-weight: 400;
+}
+
+.fw500 {
+    font-weight: 500;
+}
+
 .vh25 {
     padding-top: 25vh;
 }
@@ -32,7 +53,7 @@
 
 .search-wrapper {
     text-align: center;
-    margin: 35px auto;
+    margin: 20px auto 5px;
 }
 
 .user-cards {
@@ -47,7 +68,8 @@
     margin: 2px auto;
     padding: 4px 5px 2px 5px;
     background-color: #f5f5f5;
-    font-family: 'Work Sans', sans-serif;   
+    font-family: 'Lora', serif;   
+    cursor: pointer;
 }
 
 .card:hover {
@@ -67,39 +89,20 @@
     min-width: 100px;
 }
 
-.clear-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 10px;
-    cursor: pointer;
-    visibility: hidden;
-}
-
 #search {
     border: 1px solid grey;
-    border-radius: 15px;
+    border-radius: 10px;
     height: 32px;
-    width: 400px;
-    padding: 2px 23px 2px 30px;
-    outline: 0;
+    width: 30vw;
+    max-width: 500px;
+    min-width: 200px;
+    margin: 4px 0;
+    padding: 2px 12px;
     background-color: #f5f5f5;
-}
-
-#orange {
-    border: 1px solid grey;
-    border-radius: 15px;
-    height: 32px;
-    width: 75px;
-    padding-right: 2px;
-    outline: 0;
-    background-color: #f5f5f5;
-    font-family: 'Work Sans', sans-serif;   
-    text-align: center;
 }
 
 #orange:hover {
-    background-color: white;
+    background-color: rgb(181, 255, 243);
 }
 
 #search:hover, #search:focus {
@@ -115,6 +118,10 @@
     position: absolute;
     top: 6px;
     left: 18px;
+}
+
+#title-box {
+    margin-bottom: 0;
 }
 
 #left-box {
@@ -138,14 +145,12 @@
 }
 
 #deckbox { /* container for the search results */
-    position: absolute;
+    position: relative;
     float: none;
     display: flex;
     margin: auto;
     z-index: 1;
-    flex-direction: column;
-    right: 50vw;
-    top: -50px;
+    flex-flow: column wrap;
 }
 
 .resultsRighted {
@@ -160,16 +165,8 @@
     font-weight: 900;
 }
 
-.webpSubtitle {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 500;
-}
-
 .webpDogQ {
-    font-family: 'Playfair Display', serif;
     font-size: 20px;
-    font-weight: 500;
     padding-top: 10px;
 }
 .webpText {
@@ -184,17 +181,11 @@
 }
 
 #error-text {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Lora', serif;
     font-weight: 500;
 }
 
-#dog-facts {
-    font-family: 'Playfair Display', sans-serif;
-    font-weight: 400;
-}
-
 #stats-container {
-    font-family: 'Playfair Display', sans-serif;
     margin-bottom: 20px;
 }
 
@@ -223,20 +214,19 @@
 }
 
 .history-list {
-    font-family: 'Cinzel', serif;
+    font-family: 'Lora', serif;
     font-weight: 500;
     margin: 0 auto;
     text-align: center;
 }
 
 .history-button {
-    width: fit-content;
     margin: 2px auto;
 }
 
 #clear-history-button {
     position: relative;
-    max-width: 100px;
+    max-width: fit-content;
     margin: 3px auto 10px;
 }
 

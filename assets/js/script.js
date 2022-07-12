@@ -35,6 +35,7 @@ $(historyListEl).on("click", "button", function (event) {
     document.querySelector("#search-container").classList.add('searchRighted');
     document.querySelector("#deckbox").classList.add('resultsRighted');
     document.querySelector("#title-box").classList.add('boxSquished');
+    document.querySelector("#instructions").classList.add('hidden');
     getBreed(resultChopped);
 })
 
@@ -51,6 +52,8 @@ function openPage() {
     document.querySelector("#webpage-subtitle").classList.add('subtitleLefted');
     document.querySelector("#search-container").classList.add('searchRighted');
     document.querySelector("#deckbox").classList.add('resultsRighted');
+    document.querySelector("#title-box").classList.add('boxSquished');
+    document.querySelector("#instructions").classList.add('hidden');
 
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
@@ -109,6 +112,8 @@ const handleSearchInput = (event) => {
             document.querySelector("#webpage-subtitle").classList.add('subtitleLefted')
             document.querySelector("#search-container").classList.add('searchRighted')
             document.querySelector("#deckbox").classList.add('resultsRighted')
+            document.querySelector("#title-box").classList.add('boxSquished');
+            document.querySelector("#instructions").classList.add('hidden');
             getDogInfo();
             searchHistory(resultChopped);
             getBreed(resultChopped);
@@ -256,15 +261,7 @@ function getBreedImage(resultChopped) {
                         var imageEl = document.createElement("img");
                         imageEl.setAttribute("src", subImage);
                         subParentEl.appendChild(imageEl);
-                        if (imageEl.height >= imageEl.width) {
-                            imageEl.setAttribute("height", imageEl.width);
-                            imageEl.setAttribute("class", "maxW");
-                            imageEl.setAttribute("class", "theH");
-                        } else {
-                            imageEl.setAttribute("width", imageEl.height);
-                            imageEl.setAttribute("class", "theH");
-                            imageEl.setAttribute("class", "maxW");
-                        }
+                        imageEl.setAttribute("class", "dog-pic");
                     }
                 }
             });
@@ -286,7 +283,7 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
 function createHistoryButton(breedName) {
     var historyEl = document.createElement("button");
     historyEl.textContent = breedName;
-    historyEl.classList.add("history-button");
+    historyEl.classList.add("history-button", "is-light", "button", "fontQuicksand");
     historyListEl.appendChild(historyEl);
 }
 
