@@ -451,5 +451,4 @@ function insteadFacts() {
     })
 
 };
-
 loadHistory();
