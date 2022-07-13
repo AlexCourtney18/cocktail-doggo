@@ -10,6 +10,10 @@ var resultChopped;
 var dogFamily;
 var searchButtonOriginal = document.getElementById("orange");
 var doggieButtonClick;
+var subBreedText;
+var titleBox = document.querySelector("#webpage-title");
+var searchContainer = document.querySelector("#search-container");
+var mainPageFlag = true;
 
 searchButtonOriginal.addEventListener("click", openPage);
 searchButtonOriginal.addEventListener("click", clearSearch);
@@ -17,11 +21,31 @@ searchButtonOriginal.addEventListener("click", clearSearch);
 function leavingHome() { //I put all of these in a function so I can just call the function a few times instead of spanning 20 lines
     document.querySelector("#title-box").classList.remove('centered');
     document.querySelector("#webpage-title").classList.add('headered');
-    document.querySelector("#search-container").classList.add('searchHeadered');
     document.querySelector("#webpage-subtitle").classList.add('hidden');
     document.querySelector("#instructions").classList.add('hidden');
-    document.querySelector("#search-container").classList.add('search-container-translate')
+    searchContainer.classList.add('searchHeadered');
+    searchContainer.classList.add('search-container-translate')
+    mainPageFlag = false;
+    console.log("On main page? "+mainPageFlag);
 }
+
+const nav = document.querySelector("#header");
+let lastScrollY = window.scrollY;
+/* this code is for the header animation */
+window.addEventListener("scroll", () => {
+    if ((lastScrollY < window.scrollY) && (mainPageFlag === false)) {
+        /* going down */
+        nav.classList.add("nav-hidden");
+        titleBox.classList.add("nav-hidden");
+        searchContainer.classList.add("nav-hidden");
+    } else if (mainPageFlag === false) {
+        /* going up */
+        nav.classList.remove("nav-hidden");
+        titleBox.classList.remove("nav-hidden");
+        searchContainer.classList.remove("nav-hidden");
+    }
+    lastScrollY = window.scrollY;
+});
 
 $("input").on("keydown", function search(e) {
     if(e.keyCode == 13) {
@@ -78,7 +102,6 @@ function openPage() {
     getDogInfo(resultChopped);
     getBreed(resultChopped);
     leavingHome();
-    document.getElementById("stats-wrapper").classList.remove("hidden");
 }
 
 // Reference to Card Template
@@ -167,6 +190,7 @@ function getBreed(resultChopped) {
                 function createButton(data) {
                     // clear any existing buttons
                     subBreedButtonEl.textContent = "";
+
                     for (var i = 0; i < data.message.length; i++) {
                         if (data.message[i]) {
                             subBreed = data.message[i];
@@ -301,7 +325,7 @@ function searchHistory() { //rudimentary way of grabbing the recent search so we
 function createHistoryButton(breedName) {
     var historyEl = document.createElement("button");
     historyEl.textContent = breedName;
-    historyEl.classList.add("history-button", "is-light", "button", "fontQuicksand");
+    historyEl.classList.add("fontQuicksand", "history-button");
     historyListEl.appendChild(historyEl);
 }
 
@@ -482,4 +506,5 @@ function insteadFacts() {
     })
 
 };
+
 loadHistory();

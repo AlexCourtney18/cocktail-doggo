@@ -19,21 +19,28 @@
     <!-- Bulma suggests Font Awesome for icons -->
     <title>Doggypedia</title>
     <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
+    <script src="https://kit.fontawesome.com/aacb1e6eb5.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header id="header">
-        <div class="clrHistoryBtn">
-            <!-- Kit added a Clear History button here -->
-            <button id="clear-history-button" class="button is-warning fontQuicksand">Clear History</button>
-        </div>
+        <section id="right-side">
+            <div class="clrHistoryBtn">
+                <!-- Kit added a Clear History button here -->
+                <button id="clear-history-button" class="button is-warning fontQuicksand"><i class="fa-solid fa-trash-can"></i></button>
+            </div>
+            <div class="history-list">
+                <h4 class="recent fw500">
 
-        <div class="history-list">
-            <h4 class="recent fw500">
-                Recent History
-            </h4>
-            <div id="history-list" class="histories"></div>
-        </div>
+                    <div class="history-highlight">
+                        <i class="fa-solid space15 fa-clock-rotate-left"></i>                
+                        <p id="histTitle">History</p>
+                        <i class="space15 fa-solid fa-angle-down"></i>
+                    </div>
+                </h4>
+                <div id="history-list" class="histories"></div>
+            </div>
+        </section>
     </header>
 
     <section class="block center centered" id="title-box">
@@ -52,7 +59,7 @@
             <section class="search-section" id="search-section">
                 <div class="search-container" id="search-container">
                     <!-- Search Bar -->
-                    <input type="search" id="search" class="search-bar space" data-search>
+                    <input type="search" id="search" class="search-bar space5" data-search>
                     <div id="search-results" class="searchResultsPos hidden">
                         <!-- contains the search results for manipulation -->
                         <h3 class="subtitle webpDogQ is-5 hidden fw500 fontLora" id="dogQ">Is this your dog?</h3>
@@ -61,7 +68,7 @@
                     </div>
                 </div>
                 <div class="upup">
-                    <button id="orange" class="button is-light fontQuicksand space" for="">Search</button>
+                    <button id="orange" class="button is-light fontQuicksand space5" for="">Search</button>
                 </div>
             </section>
         </div>

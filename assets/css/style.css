@@ -1,7 +1,43 @@
 body {
     width: 100vw;
-    height: 100vh;
-    background: #93b7e7;
+    min-height: 105vh;
+    background: #82b8ff;
+    --nav-height: 75px;
+    padding-top: var(--nav-height);
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: rgb(174, 250, 255);
+    transition: transform 2.8s;
+}
+
+#header {
+    background-color: rgb(21, 0, 95);
+    height: var(--nav-height);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+#title-box {
+    width: 80%;
+}
+
+#webpage-title {
+    margin-top: 5px;
+    transition: transform 0.2s;
+}
+
+.nav-hidden {
+    transform: translateY(calc(-1 * var(--nav-height)));
 }
 
 .fixedPos {
@@ -17,13 +53,6 @@ body {
     color: black;
 }
 
-#header {
-    background-color: black;
-    display: flex;
-    flex-flow: row-reverse nowrap;
-    height: 66px;
-}
-
 .clrHistoryBtn {
     text-align: center;
     display: flex;
@@ -31,17 +60,16 @@ body {
     margin-bottom: 2px;
 }
 
-.history-list {
-    font-family: 'Lora', serif;
-    font-weight: 400;
-    text-align: center;
-    margin-right: 30px;
-}
-
 .recent {
     color: white;
     font-size: 1.5em;
-    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    height: 66px;
+}
+
+.history-highlight {
+    display: flex;
 }
 
 .histories {
@@ -49,11 +77,58 @@ body {
     flex-flow: column wrap;
 }
 
+.history-list {
+    width: auto;
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    text-align: center;
+    padding: 13px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 66px;
+}
+
+.history-list:hover .recent{
+    color: black;
+    background-color: white;
+    border-radius: 6px;
+}
+
+.history-list:hover .history-list {
+    background-color: none;
+}
+
 .history-list:hover .histories {
     display: flex;
     position: absolute;
-    flex-flow: column;
+    flex-direction: column;
+    align-items: flex-end;
     top: 66px;
+}
+
+.history-button {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 22px;
+    border: none;
+    background-color: none;
+    border-radius: 8px;
+    margin: 2px;
+}
+
+.history-button:hover {
+    background-color: #a1d2ff;
+    color: white;
+    cursor: pointer;
+}
+
+#clear-history-button {
+    max-width: fit-content;
+    margin: auto;
 }
 
 .webpTitle {
@@ -65,7 +140,7 @@ body {
 }
 
 .headered {
-    position: absolute;
+    position: fixed;
     top: -1px;
     left: 5px;
     font-size: 48px;
@@ -75,7 +150,6 @@ body {
     position: absolute;
     top: -20px;
     left: 350px;
-    z-index: 2;
 }
 
 .centered {
@@ -85,8 +159,12 @@ body {
     transform: translate(-50%, -50%)
 }
 
-.space {
+.space5 {
     margin: auto 5px;
+}
+
+.space15 {
+    margin: auto 15px;
 }
 
 .search-wrapper {
@@ -95,11 +173,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: transform 0.2s;
 }
 
 .search-section {
     padding: 0;
-    margin: 0 20px;
+    margin: 20px 30px 0 10px;
     max-width: 20vw;
     display: flex;
     flex-direction: row;
@@ -118,12 +197,13 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 4px 20px 0px;
+    margin: 6px 10px 0px;
     align-items: center;
+    transition: transform 0.2s;
 }
 
 .search-container-translate {
-    top: 9px;
+    top: 11px;
     left: 365px;
     position: fixed;
 }
@@ -135,7 +215,7 @@ body {
 
 #search {
     border: 1px solid grey;
-    border-radius: 10px;
+    border-radius: 14px;
     height: 32px;
     width: 20vw;
     max-width: 500px;
@@ -221,10 +301,6 @@ body {
     left: 18px;
 }
 
-#title-box {
-    width: 80%;
-}
-
 #left-box {
     margin: auto;
 }
@@ -254,36 +330,64 @@ body {
     font-weight: 500;
 }
 
+#sub-button {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#sub-button button {
+    max-width: max-content;
+    font-size: 22px;
+    border: none;
+    border-radius: 8px;
+    margin: 6px;
+    padding: 8px;
+}
+
+#sub-button button:hover {
+    background-color: #a1d2ff;
+    color: white;
+    cursor: pointer;
+}
+
 #sub-images {
     display: flex;
     margin: auto;
     justify-content: space-around;
     max-width: 50vw;
+    align-items: center;
 }
 
 .dog-pic {
-    height: 250px;
+    height: auto;
+    width: 20vw;
     margin: 3px;
     padding: 3px;
+    border-radius: 16px;
 }
 
 #statistics { 
     list-style-type: none;
 }
 
+#stats-wrapper {
+    margin: 20px;
+}
+
 #breed-wrapper {
-    max-width: 60%;
+    max-width: 80%;
     margin: 0 auto;
 }
 
-.history-button {
-    margin: 2px auto;
+#histTitle {
+    font-family: 'Lora', serif;
+    font-weight: 500;
 }
 
-#clear-history-button {
-    right: 10px;
-    max-width: fit-content;
-    margin: auto;
+#right-side {
+    position: fixed;
+    right: 1px;
+    display: flex;
 }
 
 /* Add Media Queries for browser sizes/mobile */
