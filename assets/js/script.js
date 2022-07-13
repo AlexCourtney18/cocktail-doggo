@@ -21,8 +21,6 @@ function leavingHome() { //I put all of these in a function so I can just call t
     document.querySelector("#search-container").classList.add('searchHeadered');
     document.querySelector("#webpage-subtitle").classList.add('hidden');
     document.querySelector("#instructions").classList.add('hidden');
-    document.querySelector("#search-results").classList.remove('searchResultsPos');
-    document.querySelector("#search-results").classList.add('searchResultsPos2');
 }
 
 $("input").on("keydown", function search(e) {
@@ -33,12 +31,12 @@ $("input").on("keydown", function search(e) {
 });
 
 function pictureChange() {
-
-    document.getElementById("randogImg").src = "./assets/images/dog_out.jpg";
+    
+    document.getElementById("randogImg").src="./assets/images/dog_out.jpg";
 }
 
 function changeBack() {
-    document.getElementById("randogImg").src = "./assets/images/dog_in.jpg";
+    document.getElementById("randogImg").src="./assets/images/dog_in.jpg";
 }
 
 // This function removes the old history list
@@ -75,7 +73,8 @@ function clearSearch() {
     document.getElementById('search').value = "";
 }
 
-function openPage() {
+function openPage(event) {
+    event.preventDefault();
     while (userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
     }
@@ -229,7 +228,7 @@ function getBreed(resultChopped) {
                                         }
                                     }
                                 });
-                            }
+                            } 
                         });
                     }
                 }
@@ -294,7 +293,7 @@ function getBreedImage(resultChopped) {
                     }
                 }
             });
-        }
+        } 
     });
 }
 
@@ -481,11 +480,11 @@ function insteadFacts() {
             response.json().then(function (data) {
                 secondDataArr = data.facts;
                 for (var i = 0; i < secondDataArr.length; i++) {
-                    var secondRandomFact = document.createElement("li");
-                    secondRandomFact.classList.add("randomfact");
-                    secondRandomFact.innerText = secondDataArr[i];
-                    statistics.appendChild(secondRandomFact);
-                    secondRandomFact.classList.add("factSpace");
+                var secondRandomFact = document.createElement("li");
+                secondRandomFact.classList.add("randomfact");
+                secondRandomFact.innerText = secondDataArr[i];
+                statistics.appendChild(secondRandomFact);
+                secondRandomFact.classList.add("factSpace");
                 }
             })
         }
