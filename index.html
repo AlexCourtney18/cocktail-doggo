@@ -14,8 +14,10 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Lora:ital,wght@0,400;0,500;1,400&family=Quicksand:wght@500&display=swap" rel="stylesheet">
-        
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Lora:ital,wght@0,400;0,500;1,400&family=Quicksand:wght@500&display=swap"
+        rel="stylesheet">
+
     <!-- Bulma suggests Font Awesome for icons -->
     <title>Doggypedia</title>
     <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
@@ -34,78 +36,80 @@
             </h4>
             <div id="history-list" class="histories"></div>
         </div>
-    </header>    
-    
+    </header>
 
-        <section class="block center centered" id="title-box">
-            <h2 class="webpTitle" id="webpage-title"><a href="./index.html">Doggypedia</a></h2>
-            <h3 class="subtitle is-4 fontLora fw500" id="webpage-subtitle">Where your newest best friend is only a click
-                away</h3>
-            <!-- <h3>Please search for your breed by "family" eg "hound", "terrier", "spaniel"</br>If the breed family has sub-breeds, buttons will populate for you to select!</h3> -->
-            <!-- Search Bar Goes Here -->
-            <div class="search-wrapper" id="search-container">
-                <span id="instructions" class="fontQuicksand">Search for breeds by their family.
-                    <br> 
-                    If the breed family has sub-breeds, options will present themselves upon selecting an option.
-                    <br>
-                    Examples: "hound", "terrier", "spaniel"
-                </span>
-                <div class="search-container">
-                    <!-- Random Dog Button! (does not work right now) -->
-                    <button id="randog" onmousedown="pictureChange(), audio.play()" onmouseup="changeBack()"> <img src=./assets/images/dog_in.jpg class="randog space" id="randogImg"> </button>
+    <section class="block center centered" id="title-box">
+        <h2 class="webpTitle" id="webpage-title"><a href="./index.html">Doggypedia</a></h2>
+        <h3 class="subtitle is-4 fontLora fw500" id="webpage-subtitle">Where your newest best friend is only a click
+            away</h3>
+        <!-- <h3>Please search for your breed by "family" eg "hound", "terrier", "spaniel"</br>If the breed family has sub-breeds, buttons will populate for you to select!</h3> -->
+        <!-- Search Bar Goes Here -->
+        <div class="search-wrapper" id="search-container">
+            <span id="instructions" class="fontQuicksand">Search for breeds by their family.
+                <br>
+                If the breed family has sub-breeds, options will present themselves upon selecting an option.
+                <br>
+                Examples: "hound", "terrier", "spaniel"
+            </span>
+            <section class="search-section" id="search-section">
+                <div class="search-container" id="search-container">
                     <!-- Search Bar -->
                     <input type="search" id="search" class="search-bar space" onkeydown="search(this)" data-search>
-                    <!-- Search button -->
+                    <div id="search-results" class="searchResultsPos hidden">
+                        <!-- contains the search results for manipulation -->
+                        <h3 class="subtitle webpDogQ is-5 hidden fw500 fontLora" id="dogQ">Is this your dog?</h3>
+                        <div class="user-cards" data-user-cards-container></div>
+                        <!-- Search button -->
+                    </div>
+                </div>
+                <div class="upup">
                     <button id="orange" class="button is-light fontQuicksand space" for="">Search</button>
                 </div>
-                <div id="search-results" class="searchResultsPos">
-                    <!-- contains the search results for manipulation -->
-                    <h3 class="subtitle webpDogQ is-5 hidden fw500 fontLora" id="dogQ">Is this your dog?</h3>
-                    <div class="user-cards" data-user-cards-container></div>
-                </div>
+            </section>
+        </div>
+        </div>
+
+        <template data-user-template>
+            <div class="card">
+                <div class="body" data-body></div>
             </div>
+        </template>
+    </section>
 
-            <template data-user-template>
-                <div class="card">
-                    <div class="body" data-body></div>
-                </div>
-            </template>
-        </section>
+    <!-- WIP: Error message, hidden by default, shown when search fails -->
+    <article id=error-page-box class="box hidden">
+        <div id="error-page-content" class="hidden">
+            <span id="error-title" class="content is-medium">Oops!</span>
+            <br>
+            <span id="error-text" class="content is-medium">The dog breed you specified could not be found in our
+                database. For your troubles, here's some random dog facts!</span>
+            <br>
+            <span class="content is-medium fontLora" id="dog-facts">
+                <!--This section has all the quick facts/ stats in it. The facts are in one container (id=wikipedia) and the facts are in the other (id=statistics)-->
+                <section>
+                    <!--THIS IS where the quick dog facts is appended to (the <ul> with id=wikipedia)-->
+                    <div>
+                        <ul id="wikipedia">
 
-        <!-- WIP: Error message, hidden by default, shown when search fails -->
-        <article id=error-page-box class="box hidden">
-            <div id="error-page-content" class="hidden">
-                <span id="error-title" class="content is-medium">Oops!</span>
-                <br>
-                <span id="error-text" class="content is-medium">The dog breed you specified could not be found in our
-                    database. For your troubles, here's some random dog facts!</span>
-                <br>
-                <span class="content is-medium fontLora" id="dog-facts">
-                    <!--This section has all the quick facts/ stats in it. The facts are in one container (id=wikipedia) and the facts are in the other (id=statistics)-->
-                    <section>
-                        <!--THIS IS where the quick dog facts is appended to (the <ul> with id=wikipedia)-->
-                        <div>
-                            <ul id="wikipedia">
-
-                            </ul>
-                        </div>
-                    </section>
-                </span>
-                <!-- Random Dog Fact API -->
-            </div>
-        </article>
+                        </ul>
+                    </div>
+                </section>
+            </span>
+            <!-- Random Dog Fact API -->
+        </div>
+    </article>
 
 
-        <!-- Start section for breed buttons and breed images appendChild -->
-        <article class="center fontLora" id="breed-wrapper">
-            <div id="sub-button"></div>
-            <div id="sub-images"></div>
-            <!--THIS IS where the dog facts are appended to (the <ul> with id=statistics)-->
-            <div class="content hidden box is-medium" id="stats-wrapper">
-                <ul id="statistics">
-                </ul>
-            </div>
-        </article>
+    <!-- Start section for breed buttons and breed images appendChild -->
+    <article class="center fontLora" id="breed-wrapper">
+        <div id="sub-button"></div>
+        <div id="sub-images"></div>
+        <!--THIS IS where the dog facts are appended to (the <ul> with id=statistics)-->
+        <div class="content hidden box is-medium" id="stats-wrapper">
+            <ul id="statistics">
+            </ul>
+        </div>
+    </article>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
