@@ -425,7 +425,7 @@ function dogBreedFacts() {
 
                 drooling = "Drooling: " + data[0].drooling;
                 printDoggieFacts();
-                window.scrollTo(0, document.body.scrollHeight);
+                // window.scrollTo(0, document.body.scrollHeight);
             }
         }
     });
@@ -479,7 +479,7 @@ function printDoggieFacts() {
     drool.innerText = drooling;
     statistics.appendChild(drool);
 
-    window.scrollTo(0, document.body.scrollHeight);
+    // window.scrollTo(0, document.body.scrollHeight);
 };
 
 //if there are no statistics for the given (searched for) dog, then fun dog facts are printed in thier place
