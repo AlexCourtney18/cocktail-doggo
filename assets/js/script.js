@@ -33,14 +33,14 @@ function changeBack() {
 }
 
 // This function removes the old history list
-$(clearHistoryButton).on("click", function() {
+$(clearHistoryButton).on("click", function () {
 
-    while(historyListEl.firstChild) {
+    while (historyListEl.firstChild) {
         historyListEl.removeChild(historyListEl.firstChild);
     }
     var recentHistoryStorage = localStorage.getItem("breeds");
 
-    if(recentHistoryStorage) {
+    if (recentHistoryStorage) {
         localStorage.clear("breeds");
     }
 })
@@ -70,16 +70,16 @@ function openPage() {
     while (userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
     }
-    leavingHome();
-
+    console.log(document.getElementById("search").value);
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
+    console.log(resultChopped);
 
     searchHistory(resultChopped);
-
-    //THIS IS the call to the dog facts API
     getDogInfo(resultChopped);
     getBreed(resultChopped);
+    leavingHome();
+    document.getElementById("stats-wrapper").classList.remove("hidden");
 }
 
 // Reference to Card Template
@@ -110,8 +110,8 @@ const handleSearchInput = (event) => {
         return breed.includes(searchTerm);
     });
 
-    // Add Cards of Filtered Breeds
-    filterBreeds.forEach(breed => {
+    for (let i = 0; i < 5; i++) {
+        breed = filterBreeds[i];
         // Clone Card Template
         const card = userCardTemplate.content.cloneNode(true).children[0];
         const body = card.querySelector("[data-body]");
@@ -120,7 +120,13 @@ const handleSearchInput = (event) => {
         body.textContent = breed;
 
         // Append Card to Container
-        userCardContainer.append(card); 
+        if (body.textContent !== "") {
+            userCardContainer.append(card);
+        }
+        if (document.querySelector(".user-cards").children.length > 5) {
+            console.log(document.querySelector(".user-cards"));
+            return;
+        }
 
         //event listener for the card, so that when you click something in the dropdown from the search bar, you get the results from the clicked option
         $(card).on("click", function () {
@@ -133,9 +139,13 @@ const handleSearchInput = (event) => {
             while (userCardContainer.firstChild) {
                 userCardContainer.removeChild(userCardContainer.firstChild);
             }
-        })
-    });
-};
+        }
+        )
+    }
+
+
+}
+
 
 // Search Input Event Listener
 searchInput.addEventListener("input", handleSearchInput);
