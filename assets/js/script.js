@@ -162,6 +162,7 @@ const handleSearchInput = (event) => {
             leavingHome();
             statsWrapper.classList.remove('hidden');
 
+            
             getDogInfo();
             searchHistory(resultChopped);
             getBreed(resultChopped);
