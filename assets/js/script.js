@@ -59,6 +59,7 @@ $(historyListEl).on("click", "button", function (event) {
 function clearSearch() {
     document.querySelector("#dogQ").classList.add('hidden');
     document.getElementById('search').value = "";
+   
 }
 
 function openPage() {
@@ -82,6 +83,7 @@ const userCardTemplate = document.querySelector("[data-user-template]");
 const userCardContainer = document.querySelector("[data-user-cards-container]");
 const searchInput = document.querySelector("[data-search]");
 const url = "https://dog.ceo/api/breeds/list/all";
+var counter = 0;
 
 let breeds = [];
 
@@ -90,7 +92,7 @@ const handleSearchInput = (event) => {
     userCardContainer.innerHTML = "";
 
     // Get Search Textbox Value
-    const searchTerm = event.target.value.toLowerCase();
+    var searchTerm = event.target.value.toLowerCase();
 
     // Don't Add Cards if Search Input is Empty
     if (searchTerm === "") {
@@ -99,7 +101,7 @@ const handleSearchInput = (event) => {
     };
 
     document.querySelector("#dogQ").classList.remove('hidden')
-
+   
     // Filter Breeds by Search Term 
     const filterBreeds = breeds.filter(breed => {
         return breed.includes(searchTerm);
@@ -107,30 +109,32 @@ const handleSearchInput = (event) => {
 
     // Add Cards of Filtered Breeds
     filterBreeds.forEach(breed => {
-        // Clone Card Template
-        const card = userCardTemplate.content.cloneNode(true).children[0];
-        const body = card.querySelector("[data-body]");
+            // Clone Card Template
+            const card = userCardTemplate.content.cloneNode(true).children[0];
+            const body = card.querySelector("[data-body]");
+            
+            // Set Cloned Card Text to Breed Name
+            body.textContent = breed;
 
-        // Set Cloned Card Text to Breed Name
-        body.textContent = breed;
-
-        // Append Card to Container
-        userCardContainer.append(card);
-
-        //event listener for the card, so that when you click something in the dropdown from the search bar, you get the results from the clicked option
-        $(card).on("click", function () {
-            resultChopped = body.textContent;
-            leavingHome();
-            document.querySelector("#stats-wrapper").classList.remove('hidden');
-            getDogInfo();
-            searchHistory(resultChopped);
-            getBreed(resultChopped);
-            while (userCardContainer.firstChild) {
-                userCardContainer.removeChild(userCardContainer.firstChild);
-            }
-        })
+            // Append Card to Container
+            userCardContainer.append(card);
+    
     });
+   
 };
+
+    // //event listener for the card, so that when you click something in the dropdown from the search bar, you get the results from the clicked option
+            // $(card).on("click", function () {
+            //     resultChopped = body.textContent;
+            //     leavingHome();
+            //     document.querySelector("#stats-wrapper").classList.remove('hidden');
+            //     getDogInfo();
+            //     searchHistory(resultChopped);
+            //     getBreed(resultChopped);
+            //     while (userCardContainer.firstChild) {
+            //         userCardContainer.removeChild(userCardContainer.firstChild);
+            //     }
+            // })
 
 // Search Input Event Listener
 searchInput.addEventListener("input", handleSearchInput);
