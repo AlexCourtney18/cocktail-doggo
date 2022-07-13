@@ -1,49 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css"
+        integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Lora:ital,wght@0,400;0,500;1,400&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+
+    <!-- Bulma suggests Font Awesome for icons -->
+    <title>Doggypedia</title>
+    <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
+    <script src="https://kit.fontawesome.com/aacb1e6eb5.js" crossorigin="anonymous"></script>
 </head>
-    <body>
 
-        <div class="">
-            <h2 class="text-center">Project Theme</h2>
-        </div>
-
-        <div class="">
-            <div class="">
-
-                <div class="">
-                    <div class="" id="">
-                        <div class="">
-                            <h6>Search for a item</h6>
-                            <form class="">
-                                <input type="text" class="" id="">
-                                <button type="submit" class="" id="">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </form>
-                    
-                            <div class="" id="">
-                                <ul class="" id=""></ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="">
-                    <div class="" id=""></div>
-            
-                    <div class="" id="">
-                        <div class=""></div>
-                    </div>
-                </div>
+<body>
+    <header id="header">
+        <section id="right-side">
+            <div class="clrHistoryBtn">
+                <!-- Kit added a Clear History button here -->
+                <button id="clear-history-button" class="button is-warning fontQuicksand"><i class="fa-solid fa-trash-can"></i></button>
             </div>
+            <div class="history-list">
+                <h4 class="recent fw500">
+
+                    <div class="history-highlight">
+                        <i class="fa-solid space15 fa-clock-rotate-left"></i>                
+                        <p id="histTitle">History</p>
+                        <i class="space15 fa-solid fa-angle-down"></i>
+                    </div>
+                </h4>
+                <div id="history-list" class="histories"></div>
+            </div>
+        </section>
+    </header>
+
+    <section class="block center centered" id="title-box">
+        <h2 class="webpTitle" id="webpage-title"><a href="./index.html" class="title-card">Doggypedia</a></h2>
+        <h3 class="subtitle is-4 fontLora fw500 blackText" id="webpage-subtitle">Where your newest best friend is only a click
+            away</h3>
+        <!-- <h3>Please search for your breed by "family" eg "hound", "terrier", "spaniel"</br>If the breed family has sub-breeds, buttons will populate for you to select!</h3> -->
+        <!-- Search Bar Goes Here -->
+        <div class="search-wrapper" id="search-container">
+            <span id="instructions" class="fontQuicksand blackText">Search for breeds by their family.
+                <br>
+                If the breed family has sub-breeds, options will present themselves upon selecting an option.
+                <br>
+                Examples: "hound", "terrier", "spaniel"
+            </span>
+            <section class="search-section" id="search-section">
+                <div class="search-container" id="search-container">
+                    <!-- Search Bar -->
+                    <input type="search" id="search" class="search-bar space5" data-search>
+                    <div id="search-results" class="searchResultsPos hidden">
+                        <!-- contains the search results for manipulation -->
+                        <h3 class="subtitle webpDogQ is-5 hidden fw500 fontLora" id="dogQ">Is this your dog?</h3>
+                        <div class="user-cards" data-user-cards-container></div>
+                        <!-- Search button -->
+                    </div>
+                </div>
+                <div class="upup">
+                    <button id="orange" class="button is-light fontQuicksand space5" for=""><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </section>
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="./assets/js/script.js"></script>
-    </body>
+        </div>
+
+        <template data-user-template>
+            <div class="card">
+                <div class="body" data-body></div>
+            </div>
+        </template>
+    </section>
+
+    <!-- WIP: Error message, hidden by default, shown when search fails -->
+    <article id=error-page-box class="box hidden">
+        <div id="error-page-content" class="hidden">
+            <span id="error-title" class="content is-medium">Oops!</span>
+            <br>
+            <span id="error-text" class="content is-medium">The dog breed you specified could not be found in our
+                database. For your troubles, here's some random dog facts!</span>
+            <br>
+            <span class="content is-medium fontLora" id="dog-facts">
+                <!--This section has all the quick facts/ stats in it. The facts are in one container (id=wikipedia) and the facts are in the other (id=statistics)-->
+                <section>
+                    <!--THIS IS where the quick dog facts is appended to (the <ul> with id=wikipedia)-->
+                    <div>
+                        <ul id="wikipedia">
+
+                        </ul>
+                    </div>
+                </section>
+            </span>
+            <!-- Random Dog Fact API -->
+        </div>
+    </article>
+
+    <!-- Start section for breed buttons and breed images appendChild -->
+    <article class="center fontLora" id="breed-wrapper">
+        <h2 class="blackText hidden" id="sub-breed-text">Select a sub-breed: </h2>
+        <div id="sub-button"></div>
+        <div id="sub-images"></div>
+        <!--THIS IS where the dog facts are appended to (the <ul> with id=statistics)-->
+        <div class="content hidden box is-medium" id="stats-wrapper">
+            <ul id="statistics">
+            </ul>
+        </div>
+    </article>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+
 </html>
