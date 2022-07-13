@@ -1,6 +1,20 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    background: #93b7e7;
+}
+
 .fixedPos {
     position: fixed;
     justify-content: space-between;
+}
+
+#instructions {
+    color: black;
+}
+
+#webpage-subtitle {
+    color: black;
 }
 
 #header {
@@ -47,6 +61,7 @@
     font-size: 72px;
     font-weight: 900;
     margin: 0;
+    justify-content: center;
 }
 
 .headered {
@@ -70,6 +85,30 @@
     transform: translate(-50%, -50%)
 }
 
+.space {
+    margin: auto 5px;
+}
+
+#randog {
+    background: url(./assets/images/dog_in.jpg) no-repeat;
+    cursor: help;
+    border: none;
+    width: 60px;
+    height: 60px;
+}
+
+.randog {
+    border-radius: 25%;
+}
+
+#randog:active #randogImg{
+    src: "./assets/images/dog_out.jpg" 
+}
+
+#orange:hover {
+    background-color: rgb(181, 255, 243);
+}
+
 .search-wrapper {
     text-align: center;
     margin: 20px auto 5px;
@@ -79,14 +118,6 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-}
-
-.space {
-    margin: auto 5px;
-}
-
-#randog:active #randogImg{
-    src: "./assets/images/dog_out.jpg" 
 }
 
 .searchBox {
@@ -105,23 +136,9 @@
     background-color: #f5f5f5;
 }
 
-.randog {
-    border-radius: 25%;
-    height: 60px;
-    width: 60px;
-}
-
-.randog:hover {
-    cursor: help;
-}
-
 #search:hover, #search:focus {
     border: 1.5px solid #009688;
     background-color: white;
-}
-
-#orange:hover {
-    background-color: rgb(181, 255, 243);
 }
 
 #search-results { /* container for the search results */
@@ -203,6 +220,10 @@
     position: absolute;
     top: 6px;
     left: 18px;
+}
+
+#title-box {
+    width: 80%;
 }
 
 #left-box {
