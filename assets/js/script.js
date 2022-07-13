@@ -3,7 +3,7 @@ var subImagesEl = document.querySelector("#sub-images");
 var errorBoxEl = document.querySelector("#error-page-box");
 var errorContentEl = document.querySelector("#error-page-content");
 var historyListEl = document.querySelector("#history-list");
-var clearHistoryButton = document.querySelector("#clear-history-button");
+var clearHistoryButton = document.getElementById("clear-history-button");
 var wikipedia = document.getElementById("wikipedia"); //This is the element with the random dog facts inside. Should change the name to be something other than wikipedia later.
 var statistics = document.getElementById("statistics");
 var randomDogBtn = document.getElementById("randog");
@@ -34,15 +34,20 @@ function changeBack() {
     document.getElementById("randogImg").src = "./assets/images/dog_in.jpg";
 }
 
-// This function should remove all elements within historyListEl (the Div that contains buttons with the class history-button), but it doesn't.
+// This function removes the old history list
+$(clearHistoryButton).on("click", function() {
 
-// $(clearHistoryButton).on("click", "button", function(){
-//     $(historyListEl).find(".history-button").remove();
-//     localStorage.setItem("breeds", "[]");
-// })
+    while(historyListEl.firstChild) {
+        historyListEl.removeChild(historyListEl.firstChild);
+    }
+    var recentHistoryStorage = localStorage.getItem("breeds");
 
+    if(recentHistoryStorage) {
+        localStorage.clear("breeds");
+    }
+})
 
-
+//this funtion listens for clicks on the history button list
 $(historyListEl).on("click", "button", function (event) {
     var melon = event.target.textContent;
     resultChopped = melon;
@@ -127,6 +132,7 @@ const handleSearchInput = (event) => {
             console.log(document.querySelector(".user-cards"));
             return;
         }
+      
         //event listener for the card, so that when you click something in the dropdown from the search bar, you get the results from the clicked option
         $(card).on("click", function () {
             resultChopped = body.textContent;
