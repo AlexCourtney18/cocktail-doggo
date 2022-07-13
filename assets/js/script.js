@@ -25,7 +25,7 @@ function leavingHome() { //I put all of these in a function so I can just call t
     document.querySelector("#webpage-subtitle").classList.add('hidden');
     document.querySelector("#instructions").classList.add('hidden');
     searchContainer.classList.add('searchHeadered');
-    searchContainer.classList.add('search-container-translate');
+    searchContainer.classList.add('search-container-translate')
     mainPageFlag = false;
 }
 
@@ -168,19 +168,6 @@ const handleSearchInput = (event) => {
         })
     }
 }
-
-    // //event listener for the card, so that when you click something in the dropdown from the search bar, you get the results from the clicked option
-            // $(card).on("click", function () {
-            //     resultChopped = body.textContent;
-            //     leavingHome();
-            //     document.querySelector("#stats-wrapper").classList.remove('hidden');
-            //     getDogInfo();
-            //     searchHistory(resultChopped);
-            //     getBreed(resultChopped);
-            //     while (userCardContainer.firstChild) {
-            //         userCardContainer.removeChild(userCardContainer.firstChild);
-            //     }
-            // })
 
 // Search Input Event Listener
 searchInput.addEventListener("input", handleSearchInput);
@@ -492,7 +479,6 @@ function printDoggieFacts() {
     var drool = document.createElement("li");
     drool.innerText = drooling;
     statistics.appendChild(drool);
-
 };
 
 //if there are no statistics for the given (searched for) dog, then fun dog facts are printed in thier place
