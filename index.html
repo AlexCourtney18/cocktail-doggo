@@ -36,7 +36,6 @@
         </div>
     </header>
 
-
     <section class="block center centered" id="title-box">
         <h2 class="webpTitle" id="webpage-title"><a href="./index.html">Doggypedia</a></h2>
         <h3 class="subtitle is-4 fontLora fw500" id="webpage-subtitle">Where your newest best friend is only a click
@@ -50,20 +49,22 @@
                 <br>
                 Examples: "hound", "terrier", "spaniel"
             </span>
-            <div class="search-container">
-                <!-- Random Dog Button! (does not work right now) -->
-                <button id="randog" onmousedown="pictureChange(), audio.play()" onmouseup="changeBack()"> <img
-                        src=./assets/images/dog_in.jpg class="randog space" id="randogImg"> </button>
-                <!-- Search Bar -->
-                <input type="search" id="search" class="search-bar space" data-search>
-                <!-- Search button -->
-                <button id="orange" class="button is-light fontQuicksand space" for="">Search</button>
-            </div>
-            <div id="search-results" class="searchResultsPos">
-                <!-- contains the search results for manipulation -->
-                <h3 class="subtitle webpDogQ is-5 hidden fw500 fontLora" id="dogQ">Is this your dog?</h3>
-                <div class="user-cards" data-user-cards-container></div>
-            </div>
+            <section class="search-section" id="search-section">
+                <div class="search-container" id="search-container">
+                    <!-- Search Bar -->
+                    <input type="search" id="search" class="search-bar space" data-search>
+                    <div id="search-results" class="searchResultsPos hidden">
+                        <!-- contains the search results for manipulation -->
+                        <h3 class="subtitle webpDogQ is-5 hidden fw500 fontLora" id="dogQ">Is this your dog?</h3>
+                        <div class="user-cards" data-user-cards-container></div>
+                        <!-- Search button -->
+                    </div>
+                </div>
+                <div class="upup">
+                    <button id="orange" class="button is-light fontQuicksand space" for="">Search</button>
+                </div>
+            </section>
+        </div>
         </div>
 
         <template data-user-template>
@@ -95,7 +96,6 @@
             <!-- Random Dog Fact API -->
         </div>
     </article>
-
 
     <!-- Start section for breed buttons and breed images appendChild -->
     <article class="center fontLora" id="breed-wrapper">
