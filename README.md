@@ -11,14 +11,18 @@ Once a breed is clicked or searched, if the breed includes sub-breeds, the user 
 After a dog is searched, the search bar moves to the header and continues to function as before. Users can click the Doggypedia logo to return to the homepage.
 All breed families searched will populate into the "Recent History" section found in the upper right-hand corner of the website. Users can hover their mouse over the Recent History to display previous searches. If the Recent History becomes too full for the user's preference, they can clear the history with the yellow button next to the history.
 
-** Screenshot 1 **
-** Screenshot 2 **
+Website is deployed at [Doggypedia](https://alexcourtney18.github.io/cocktail-doggo/)
+
+![homepage screenshot](./assets/images/Homepage%20Screenshot.png)
+![breed search page](./assets/images/Breed%20Search%20Screenshot.png)
+![random dog facts](./assets/images/Random%20Facts%20Screenshot.PNG)
 
 ## Credits
-This was a group project. Our team members include Kit Sterling, Alex Courtney, Kelsie Kidd, Jonny Thompson, and Sam Varney. Our project featured the use of three APIs:
+This was a group project. Our team members include Kit Banker, Alex Courtney, Kelsie Kidd, Jonny Thompson, and Sam Varney. Our project featured the use of three APIs:
 * https://api-ninjas.com/api/dogs : This API contains the dog stats
 * https://dog.ceo/dog-api/ : This API contains the dog images
 * https://github.com/DucNgn/Dog-Facts-API-v2 : This API contains random dog facts
+
 
 ## Features
 * Predictive search-results which allow the user to see and select available breeds that match their inputs before commiting to a search.
