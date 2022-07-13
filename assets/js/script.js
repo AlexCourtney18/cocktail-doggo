@@ -72,16 +72,16 @@ function openPage() {
     while (userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
     }
-
+    console.log(document.getElementById("search").value);
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
+    console.log(resultChopped);
 
     searchHistory(resultChopped);
-
-    //THIS IS the call to the dog facts API
     getDogInfo(resultChopped);
     getBreed(resultChopped);
     leavingHome();
+    document.getElementById("stats-wrapper").classList.remove("hidden");
 }
 
 // Reference to Card Template
@@ -141,7 +141,8 @@ const handleSearchInput = (event) => {
             while (userCardContainer.firstChild) {
                 userCardContainer.removeChild(userCardContainer.firstChild);
             }
-        })
+        }
+        )
     }
 }
 
