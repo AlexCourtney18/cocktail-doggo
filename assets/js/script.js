@@ -77,8 +77,7 @@ function clearSearch() {
     document.getElementById('search').value = "";
 }
 
-function openPage(event) {
-    event.preventDefault();
+function openPage() {
     while (userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
     }
@@ -258,7 +257,7 @@ function getBreed(resultChopped) {
             }
         }
     });
-}
+};
 
 // button click function for sub-breed buttons to pass through breed family + btnClick sub breed to breed images function
 function buttonClick(event) {
@@ -367,6 +366,7 @@ function getDogInfo() {
             })
         }
     })
+    console.log("RANDOM FACTS API!!!");
 };
 
 //This function fetches the dog statistics for the given (searched for) dog
@@ -407,6 +407,7 @@ function dogBreedFacts() {
             }
         }
     });
+    console.log("DOG STATS !!!!!!!!!");
 };
 
 //this function prints the dog statistics to the screen for the given (searched for) dog
