@@ -106,10 +106,9 @@ const handleSearchInput = (event) => {
     const filterBreeds = breeds.filter(breed => {
         return breed.includes(searchTerm);
     });
-    
-    for(let i = 0; i < 5; i++)
-    {   
-        breed = filterBreeds[i]; 
+
+    for (let i = 0; i < 5; i++) {
+        breed = filterBreeds[i];
         // Clone Card Template
         const card = userCardTemplate.content.cloneNode(true).children[0];
         const body = card.querySelector("[data-body]");
@@ -118,12 +117,10 @@ const handleSearchInput = (event) => {
         body.textContent = breed;
 
         // Append Card to Container
-        if(body.textContent !== "")
-        {
+        if (body.textContent !== "") {
             userCardContainer.append(card);
         }
-        if(document.querySelector(".user-cards").children.length > 5)
-        {
+        if (document.querySelector(".user-cards").children.length > 5) {
             console.log(document.querySelector(".user-cards"));
             return;
         }
@@ -139,9 +136,8 @@ const handleSearchInput = (event) => {
                 userCardContainer.removeChild(userCardContainer.firstChild);
             }
         }
-        )}
-
-    
+        )
+    }
 }
 
 
