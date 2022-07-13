@@ -66,7 +66,8 @@ function clearSearch() {
     document.getElementById('search').value = "";
 }
 
-function openPage() {
+function openPage(event) {
+    event.preventDefault();
     while (userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
     }
