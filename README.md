@@ -16,9 +16,9 @@ All breed families searched will populate into the "Recent History" section foun
 
 ## Credits
 This was a group project. Our team members include Kit Banker, Alex Courtney, Kelsie Kidd, Jonny Thompson, and Sam Varney. Our project featured the use of three APIs:
-https://api-ninjas.com/api/dogs : This API contains the dog stats
-https://dog.ceo/dog-api/ : This API contains the dog images
-https://github.com/DucNgn/Dog-Facts-API-v2 : This API contains random dog facts
+* https://api-ninjas.com/api/dogs : This API contains the dog stats
+* https://dog.ceo/dog-api/ : This API contains the dog images
+* https://github.com/DucNgn/Dog-Facts-API-v2 : This API contains random dog facts
 
 
 ## Features

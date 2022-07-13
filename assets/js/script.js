@@ -10,8 +10,6 @@ var resultChopped;
 var dogFamily;
 var searchButtonOriginal = document.getElementById("orange");
 var doggieButtonClick;
-const audio = new Audio();
-audio.src = "./assets/sounds/filename.mp3"; // NEED TO GET THE SFX BUT CODE SHOULD BE DONE
 
 searchButtonOriginal.addEventListener("click", openPage);
 searchButtonOriginal.addEventListener("click", clearSearch);
