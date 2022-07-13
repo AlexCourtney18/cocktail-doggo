@@ -1,7 +1,10 @@
 body {
-    width: 100vw;
-    min-height: 105vh;
     background: #82b8ff;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    height: 100% + var(--nav-height);
+    width: 100vw;
     --nav-height: 75px;
     padding-top: var(--nav-height);
 }
@@ -32,7 +35,6 @@ a:hover {
 }
 
 #webpage-title a {
-    margin-top: 5px;
     transition: 0.2s;
     box-shadow:none;
     text-shadow: 0 0 50px rgba(28, 37, 165, 0.5);
@@ -164,6 +166,7 @@ a:hover {
     font-size: 72px;
     font-weight: 900;
     margin: 0;
+    display: flex;
     justify-content: center;
 }
 
@@ -423,7 +426,8 @@ a:hover {
 
 .dog-pic {
     height: auto;
-    width: 20vw;
+    width: auto;
+    max-height: 300px;
     margin: 3px;
     padding: 3px;
     border-radius: 16px;
@@ -437,7 +441,7 @@ a:hover {
     margin: 20px auto;
     width: 60vw;
     animation: fadeIn 1.5s;
-    transition: 5s;
+    transition: 0.75s;
 }
 
 #breed-wrapper {
@@ -462,8 +466,60 @@ a:hover {
 
 /* Add Media Queries for browser sizes/mobile */
 
-@media only screen and (max-width: 720px) {
+@media screen and (max-width: 970px) {
     body {
-    max-width: 100%;
+        height: 100%;
+        --nav-height: 126px;
+    }
+    #right-side {
+        top: 65px;
+    }
+    #error-page-box {
+        margin: 63px auto;
+    }
+    #breed-wrapper {
+        margin: 60px auto 0;
+    }
+    #sub-images {
+        max-width: 100vw;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #sub-images {
+        flex-direction: column;
+    }
+    #error-page-box {
+        max-width: 80%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .search-container-translate {
+        top: 49px;
+        left: 70px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .search-container-translate {
+        left: 85px;
+        top: 31px;
+    }
+    body {
+        --nav-height: 159px;
+    }
+    .webpTitle {
+        font-size: 48px;
+        height: auto;
+    }
+    #stats-wrapper {
+        width: 80vw;
+    }
+    #right-side {
+        top: 94px;
+    }
+    #webpage-title a {
+        margin-top: -5px;
     }
 }
