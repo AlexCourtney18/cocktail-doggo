@@ -11,6 +11,8 @@ var resultChopped;
 var dogFamily;
 var searchButtonOriginal = document.getElementById("orange");
 var doggieButtonClick;
+const audio = new Audio();
+audio.src = "./assets/sounds/filename.mp3"; // NEED TO GET THE SFX BUT CODE SHOULD BE DONE
 
 searchButtonOriginal.addEventListener("click", openPage);
 searchButtonOriginal.addEventListener("click", clearSearch);
@@ -400,7 +402,6 @@ function dogBreedFacts() {
                 energy = "Energy: " + data[0].energy;
 
                 drooling = "Drooling: " + data[0].drooling;
-
                 printDoggieFacts();
                 window.scrollTo(0, document.body.scrollHeight);
             }
