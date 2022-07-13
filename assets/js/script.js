@@ -3,7 +3,7 @@ var subImagesEl = document.querySelector("#sub-images");
 var errorBoxEl = document.querySelector("#error-page-box");
 var errorContentEl = document.querySelector("#error-page-content");
 var historyListEl = document.querySelector("#history-list");
-var clearHistoryButton = document.querySelector("#clear-history-button");
+var clearHistoryButton = document.getElementById("clear-history-button");
 var wikipedia = document.getElementById("wikipedia"); //This is the element with the random dog facts inside. Should change the name to be something other than wikipedia later.
 var statistics = document.getElementById("statistics");
 var randomDogBtn = document.getElementById("randog");
@@ -21,26 +21,33 @@ function leavingHome() { //I put all of these in a function so I can just call t
     document.querySelector("#search-container").classList.add('searchHeadered');
     document.querySelector("#webpage-subtitle").classList.add('hidden');
     document.querySelector("#instructions").classList.add('hidden');
+    document.querySelector("#search-results").classList.remove('searchResultsPos');
+    document.querySelector("#search-results").classList.add('searchResultsPos2');
 }
 
 function pictureChange() {
-    
-    document.getElementById("randogImg").src="./assets/images/dog_out.jpg";
+
+    document.getElementById("randogImg").src = "./assets/images/dog_out.jpg";
 }
 
 function changeBack() {
-    document.getElementById("randogImg").src="./assets/images/dog_in.jpg";
+    document.getElementById("randogImg").src = "./assets/images/dog_in.jpg";
 }
 
-// This function should remove all elements within historyListEl (the Div that contains buttons with the class history-button), but it doesn't.
+// This function removes the old history list
+$(clearHistoryButton).on("click", function() {
 
-// $(clearHistoryButton).on("click", "button", function(){
-//     $(historyListEl).find(".history-button").remove();
-// })
+    while(historyListEl.firstChild) {
+        historyListEl.removeChild(historyListEl.firstChild);
+    }
+    var recentHistoryStorage = localStorage.getItem("breeds");
 
-//                this stuff doesn't work                          //
-/////////////////////////////////////////////////////////////////////
+    if(recentHistoryStorage) {
+        localStorage.clear("breeds");
+    }
+})
 
+//this funtion listens for clicks on the history button list
 $(historyListEl).on("click", "button", function (event) {
     var melon = event.target.textContent;
     resultChopped = melon;
@@ -65,7 +72,6 @@ function openPage() {
     while (userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
     }
-    leavingHome();
 
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
@@ -74,6 +80,7 @@ function openPage() {
     //THIS IS the call to the dog facts API
     getDogInfo(resultChopped);
     getBreed(resultChopped);
+    leavingHome();
 }
 
 // Reference to Card Template
@@ -103,9 +110,10 @@ const handleSearchInput = (event) => {
     const filterBreeds = breeds.filter(breed => {
         return breed.includes(searchTerm);
     });
-
-    // Add Cards of Filtered Breeds
-    filterBreeds.forEach(breed => {
+    
+    for(let i = 0; i < 5; i++)
+    {   
+        breed = filterBreeds[i]; 
         // Clone Card Template
         const card = userCardTemplate.content.cloneNode(true).children[0];
         const body = card.querySelector("[data-body]");
@@ -114,8 +122,16 @@ const handleSearchInput = (event) => {
         body.textContent = breed;
 
         // Append Card to Container
-        userCardContainer.append(card);
-
+        if(body.textContent !== "")
+        {
+            userCardContainer.append(card);
+        }
+        if(document.querySelector(".user-cards").children.length > 5)
+        {
+            console.log(document.querySelector(".user-cards"));
+            return;
+        }
+      
         //event listener for the card, so that when you click something in the dropdown from the search bar, you get the results from the clicked option
         $(card).on("click", function () {
             resultChopped = body.textContent;
@@ -127,9 +143,12 @@ const handleSearchInput = (event) => {
             while (userCardContainer.firstChild) {
                 userCardContainer.removeChild(userCardContainer.firstChild);
             }
-        })
-    });
-};
+        }
+        )}
+
+    
+}
+
 
 // Search Input Event Listener
 searchInput.addEventListener("input", handleSearchInput);
@@ -205,7 +224,7 @@ function getBreed(resultChopped) {
                                         }
                                     }
                                 });
-                            } 
+                            }
                         });
                     }
                 }
@@ -270,7 +289,7 @@ function getBreedImage(resultChopped) {
                     }
                 }
             });
-        } 
+        }
     });
 }
 
@@ -458,11 +477,11 @@ function insteadFacts() {
             response.json().then(function (data) {
                 secondDataArr = data.facts;
                 for (var i = 0; i < secondDataArr.length; i++) {
-                var secondRandomFact = document.createElement("li");
-                secondRandomFact.classList.add("randomfact");
-                secondRandomFact.innerText = secondDataArr[i];
-                statistics.appendChild(secondRandomFact);
-                secondRandomFact.classList.add("factSpace");
+                    var secondRandomFact = document.createElement("li");
+                    secondRandomFact.classList.add("randomfact");
+                    secondRandomFact.innerText = secondDataArr[i];
+                    statistics.appendChild(secondRandomFact);
+                    secondRandomFact.classList.add("factSpace");
                 }
             })
         }
