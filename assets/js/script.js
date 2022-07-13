@@ -27,14 +27,12 @@ function leavingHome() { //I put all of these in a function so I can just call t
     searchContainer.classList.add('searchHeadered');
     searchContainer.classList.add('search-container-translate')
     mainPageFlag = false;
-
-    console.log("On main page? " + mainPageFlag);
 }
 
 const nav = document.querySelector("#header");
 let lastScrollY = window.scrollY;
 /* this code is for the header animation */
-window.addEventListener("scroll", () => {
+window.addEventListener("scroll", () => { 
     if ((lastScrollY < window.scrollY) && (mainPageFlag === false)) {
         /* going down */
         nav.classList.add("nav-hidden");
@@ -51,7 +49,7 @@ window.addEventListener("scroll", () => {
 
 $("input").on("keydown", function search(e) {
     if (e.keyCode == 13) {
-        openPage($(this).val());
+        openPage(document.getElementById("search").value);
         clearSearch();
     } else { /* make it not error */ }
 });
@@ -96,15 +94,14 @@ function openPage() {
     while (userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
     }
-    console.log(document.getElementById("search").value);
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
-    console.log(resultChopped);
-
     searchHistory(resultChopped);
     getDogInfo(resultChopped);
     getBreed(resultChopped);
     leavingHome();
+    statsWrapper = document.querySelector("#stats-wrapper");
+    statsWrapper.classList.remove('hidden');
 }
 
 // Reference to Card Template
@@ -151,7 +148,6 @@ const handleSearchInput = (event) => {
             userCardContainer.append(card);
         }
         if (document.querySelector(".user-cards").children.length > 5) {
-            console.log(document.querySelector(".user-cards"));
             return;
         }
 
@@ -161,8 +157,6 @@ const handleSearchInput = (event) => {
             statsWrapper = document.querySelector("#stats-wrapper");
             leavingHome();
             statsWrapper.classList.remove('hidden');
-
-            
             getDogInfo();
             searchHistory(resultChopped);
             getBreed(resultChopped);
@@ -274,7 +268,6 @@ function getBreed(resultChopped) {
             // clear previous content even when breed is searched that returns "not found"
             subImagesEl.textContent = "";
             subBreedButtonEl.textContent = "";
-            console.log("dog breed not found");
             statsWrapper = document.querySelector("#stats-wrapper");
             statsWrapper.classList.add('hidden');
             document.querySelector("#error-page-box").classList.remove('hidden');
@@ -396,7 +389,6 @@ function getDogInfo() {
             })
         }
     })
-    console.log("RANDOM FACTS API!!!");
 };
 
 //This function fetches the dog statistics for the given (searched for) dog
@@ -437,7 +429,6 @@ function dogBreedFacts() {
             }
         }
     });
-    console.log("DOG STATS !!!!!!!!!");
 };
 
 //this function prints the dog statistics to the screen for the given (searched for) dog
