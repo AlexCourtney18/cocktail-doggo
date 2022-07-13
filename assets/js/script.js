@@ -73,8 +73,7 @@ function clearSearch() {
     document.getElementById('search').value = "";
 }
 
-function openPage(event) {
-    event.preventDefault();
+function openPage() {
     while (userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
     }
