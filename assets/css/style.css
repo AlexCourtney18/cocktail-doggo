@@ -89,35 +89,43 @@ body {
     margin: auto 5px;
 }
 
-#randog {
-    background: url(./assets/images/dog_in.jpg) no-repeat;
-    cursor: help;
-    border: none;
-    width: 60px;
-    height: 60px;
-}
-
-.randog {
-    border-radius: 25%;
-}
-
-#randog:active #randogImg{
-    src: "./assets/images/dog_out.jpg" 
-}
-
-#orange:hover {
-    background-color: rgb(181, 255, 243);
-}
-
 .search-wrapper {
     text-align: center;
-    margin: 20px auto 5px;
+    margin: 5px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-section {
+    padding: 0;
+    margin: 0 20px;
+    max-width: 20vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+}
+
+.upup {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .search-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    margin: 4px 20px 0px;
+    align-items: center;
+}
+
+.search-container-translate {
+    top: 9px;
+    left: 365px;
+    position: fixed;
 }
 
 .searchBox {
@@ -142,17 +150,8 @@ body {
 }
 
 #search-results { /* container for the search results */
-    position: fixed;
-}
-
-.searchResultsPos {
-    top: 285px;
-    left: 26%;
-}
-
-.searchResultsPos2 {
-    top: 65px;
-    left: 25%;
+    background: white;
+    padding: 0 2.5vw 19px;
 }
 
 /* Fonts & Font Weights */

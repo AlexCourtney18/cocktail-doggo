@@ -6,13 +6,10 @@ var historyListEl = document.querySelector("#history-list");
 var clearHistoryButton = document.getElementById("clear-history-button");
 var wikipedia = document.getElementById("wikipedia"); //This is the element with the random dog facts inside. Should change the name to be something other than wikipedia later.
 var statistics = document.getElementById("statistics");
-var randomDogBtn = document.getElementById("randog");
 var resultChopped;
 var dogFamily;
 var searchButtonOriginal = document.getElementById("orange");
 var doggieButtonClick;
-const audio = new Audio();
-audio.src = "./assets/sounds/filename.mp3"; // NEED TO GET THE SFX BUT CODE SHOULD BE DONE
 
 searchButtonOriginal.addEventListener("click", openPage);
 searchButtonOriginal.addEventListener("click", clearSearch);
@@ -23,25 +20,15 @@ function leavingHome() { //I put all of these in a function so I can just call t
     document.querySelector("#search-container").classList.add('searchHeadered');
     document.querySelector("#webpage-subtitle").classList.add('hidden');
     document.querySelector("#instructions").classList.add('hidden');
-    document.querySelector("#search-results").classList.remove('searchResultsPos');
-    document.querySelector("#search-results").classList.add('searchResultsPos2');
+    document.querySelector("#search-container").classList.add('search-container-translate')
 }
 
 $("input").on("keydown", function search(e) {
     if(e.keyCode == 13) {
         openPage($(this).val());
         clearSearch();
-    }
+    } else { /* make it not error */ }
 });
-
-function pictureChange() {
-    
-    document.getElementById("randogImg").src="./assets/images/dog_out.jpg";
-}
-
-function changeBack() {
-    document.getElementById("randogImg").src="./assets/images/dog_in.jpg";
-}
 
 // This function removes the old history list
 $(clearHistoryButton).on("click", function () {
@@ -74,11 +61,12 @@ $(historyListEl).on("click", "button", function (event) {
 
 function clearSearch() {
     document.querySelector("#dogQ").classList.add('hidden');
+    document.querySelector("#search-results").classList.add('hidden');
     document.getElementById('search').value = "";
 }
 
 function openPage(event) {
-    event.preventDefault();
+
     while (userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
     }
@@ -112,10 +100,12 @@ const handleSearchInput = (event) => {
     // Don't Add Cards if Search Input is Empty
     if (searchTerm === "") {
         document.querySelector("#dogQ").classList.add('hidden')
+        document.querySelector("#search-results").classList.add('hidden');
         return;
     };
 
     document.querySelector("#dogQ").classList.remove('hidden')
+    document.querySelector("#search-results").classList.remove('hidden');
 
     // Filter Breeds by Search Term 
     const filterBreeds = breeds.filter(breed => {
@@ -169,7 +159,7 @@ getDogBreeds();
 // fetch dog sub-breed list
 function getBreed(resultChopped) {
     var apiUrl = "https://dog.ceo/api/breed/" + resultChopped + "/list";
-
+    clearSearch();
     fetch(apiUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
