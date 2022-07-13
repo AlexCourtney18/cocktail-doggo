@@ -124,7 +124,7 @@ a:hover {
 .history-list:hover .histories {
     display: flex;
     position: absolute;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: flex-end;
     top: 66px;
     opacity: 100%;
