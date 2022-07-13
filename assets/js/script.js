@@ -12,10 +12,8 @@ var dogFamily;
 var searchButtonOriginal = document.getElementById("orange");
 var doggieButtonClick;
 
-$(searchButtonOriginal).on("click", function() {
-    openPage();
-    clearSearch();
-})
+searchButtonOriginal.addEventListener("click", openPage);
+searchButtonOriginal.addEventListener("click", clearSearch);
 
 function leavingHome() { //I put all of these in a function so I can just call the function a few times instead of spanning 20 lines
     document.querySelector("#title-box").classList.remove('centered');
@@ -23,17 +21,15 @@ function leavingHome() { //I put all of these in a function so I can just call t
     document.querySelector("#search-container").classList.add('searchHeadered');
     document.querySelector("#webpage-subtitle").classList.add('hidden');
     document.querySelector("#instructions").classList.add('hidden');
-    document.querySelector("#search-results").classList.remove('searchResultsPos');
-    document.querySelector("#search-results").classList.add('searchResultsPos2');
 }
 
 function pictureChange() {
-
-    document.getElementById("randogImg").src = "./assets/images/dog_out.jpg";
+    
+    document.getElementById("randogImg").src="./assets/images/dog_out.jpg";
 }
 
 function changeBack() {
-    document.getElementById("randogImg").src = "./assets/images/dog_in.jpg";
+    document.getElementById("randogImg").src="./assets/images/dog_in.jpg";
 }
 
 // This function removes the old history list
@@ -74,6 +70,7 @@ function openPage() {
     while (userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
     }
+    leavingHome();
 
     var searchResult = document.getElementById("search").value; // Grabs result
     resultChopped = searchResult.toLowerCase().replace(/\s/g, ''); // Cuts out spaces and makes all lowercase to search easier
@@ -81,11 +78,8 @@ function openPage() {
     searchHistory(resultChopped);
 
     //THIS IS the call to the dog facts API
-    //dogBreedFacts();
     getDogInfo(resultChopped);
     getBreed(resultChopped);
-    leavingHome();
-    //dogBreedFacts(resultChopped);
 }
 
 // Reference to Card Template
@@ -115,10 +109,9 @@ const handleSearchInput = (event) => {
     const filterBreeds = breeds.filter(breed => {
         return breed.includes(searchTerm);
     });
-    
-    for(let i = 0; i < 5; i++)
-    {   
-        breed = filterBreeds[i]; 
+
+    // Add Cards of Filtered Breeds
+    filterBreeds.forEach(breed => {
         // Clone Card Template
         const card = userCardTemplate.content.cloneNode(true).children[0];
         const body = card.querySelector("[data-body]");
@@ -127,16 +120,8 @@ const handleSearchInput = (event) => {
         body.textContent = breed;
 
         // Append Card to Container
-        if(body.textContent !== "")
-        {
-            userCardContainer.append(card);
-        }
-        if(document.querySelector(".user-cards").children.length > 5)
-        {
-            console.log(document.querySelector(".user-cards"));
-            return;
-        }
-      
+        userCardContainer.append(card); 
+
         //event listener for the card, so that when you click something in the dropdown from the search bar, you get the results from the clicked option
         $(card).on("click", function () {
             resultChopped = body.textContent;
@@ -148,12 +133,9 @@ const handleSearchInput = (event) => {
             while (userCardContainer.firstChild) {
                 userCardContainer.removeChild(userCardContainer.firstChild);
             }
-        }
-        )}
-
-    
-}
-
+        })
+    });
+};
 
 // Search Input Event Listener
 searchInput.addEventListener("input", handleSearchInput);
@@ -229,7 +211,7 @@ function getBreed(resultChopped) {
                                         }
                                     }
                                 });
-                            }
+                            } 
                         });
                     }
                 }
@@ -294,7 +276,7 @@ function getBreedImage(resultChopped) {
                     }
                 }
             });
-        }
+        } 
     });
 }
 
@@ -481,11 +463,11 @@ function insteadFacts() {
             response.json().then(function (data) {
                 secondDataArr = data.facts;
                 for (var i = 0; i < secondDataArr.length; i++) {
-                    var secondRandomFact = document.createElement("li");
-                    secondRandomFact.classList.add("randomfact");
-                    secondRandomFact.innerText = secondDataArr[i];
-                    statistics.appendChild(secondRandomFact);
-                    secondRandomFact.classList.add("factSpace");
+                var secondRandomFact = document.createElement("li");
+                secondRandomFact.classList.add("randomfact");
+                secondRandomFact.innerText = secondDataArr[i];
+                statistics.appendChild(secondRandomFact);
+                secondRandomFact.classList.add("factSpace");
                 }
             })
         }
