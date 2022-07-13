@@ -60,6 +60,11 @@
                     <!-- Random Dog Button! (does not work right now) -->
                     <button id="randog" onmousedown="pictureChange()" onmouseup="changeBack()"> <img src=./assets/images/dog_in.jpg class="randog space" id="randogImg"> </button>
                 </div>
+                <div id="search-results" class="searchResultsPos">
+                    <!-- contains the search results for manipulation -->
+                    <h3 class="subtitle webpDogQ is-5 hidden fw500 fontLora" id="dogQ">Is this your dog?</h3>
+                    <div class="user-cards" data-user-cards-container></div>
+                </div>
             </div>
 
             <template data-user-template>
@@ -68,12 +73,6 @@
                 </div>
             </template>
         </section>
-
-        <div id="search-results">
-            <!-- contains the search results for manipulation -->
-            <h3 class="subtitle webpDogQ is-5 hidden fw500 fontLora" id="dogQ">Is this your dog?</h3>
-            <div class="user-cards" data-user-cards-container></div>
-        </div>
 
         <!-- WIP: Error message, hidden by default, shown when search fails -->
         <article id=error-page-box class="box hidden">
