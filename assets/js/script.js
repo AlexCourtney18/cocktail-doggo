@@ -21,6 +21,8 @@ function leavingHome() { //I put all of these in a function so I can just call t
     document.querySelector("#search-container").classList.add('searchHeadered');
     document.querySelector("#webpage-subtitle").classList.add('hidden');
     document.querySelector("#instructions").classList.add('hidden');
+    document.querySelector("#search-results").classList.remove('searchResultsPos');
+    document.querySelector("#search-results").classList.add('searchResultsPos2');
 }
 
 $("input").on("keydown", function search(e) {
