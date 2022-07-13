@@ -15,99 +15,106 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700;900&family=Lora:ital,wght@0,400;0,500;1,400&family=Quicksand:wght@500&display=swap" rel="stylesheet">
-        
+
     <!-- Bulma suggests Font Awesome for icons -->
     <title>Doggypedia</title>
     <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
+    <script src="https://kit.fontawesome.com/aacb1e6eb5.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header id="header">
-        <div class="clrHistoryBtn">
-            <!-- Kit added a Clear History button here -->
-            <button id="clear-history-button" class="button is-warning fontQuicksand">Clear History</button>
-        </div>
-
-        <div class="history-list">
-            <h4 class="recent fw500">
-                Recent History
-            </h4>
-            <div id="history-list" class="histories"></div>
-        </div>
-    </header>    
-    
-
-        <section class="block center centered" id="title-box">
-            <h2 class="webpTitle" id="webpage-title"><a href="./index.html">Doggypedia</a></h2>
-            <h3 class="subtitle is-4 fontLora fw500" id="webpage-subtitle">Where your newest best friend is only a click
-                away</h3>
-            <!-- <h3>Please search for your breed by "family" eg "hound", "terrier", "spaniel"</br>If the breed family has sub-breeds, buttons will populate for you to select!</h3> -->
-            <!-- Search Bar Goes Here -->
-            <div class="search-wrapper" id="search-container">
-                <span id="instructions" class="fontQuicksand">Search for breeds by their family.
-                    <br> 
-                    If the breed family has sub-breeds, options will present themselves upon selecting an option.
-                    <br>
-                    Examples: "hound", "terrier", "spaniel"
-                </span>
-                <div class="search-container">
-                    <input type="search" id="search" class="search-bar space" onkeydown="search(this)" data-search>
-                    <div></div>
-                    <button id="orange" class="button is-light fontQuicksand space" for="">Search</button>
-                    <!--added this button to the search bar so the search triggers when search is clicked.-->
-
-                    <div></div>
-                    <!-- Random Dog Button! (does not work right now) -->
-                    <button id="randog" onmousedown="pictureChange()" onmouseup="changeBack()"> <img src=./assets/images/dog_in.jpg class="randog space" id="randogImg"> </button>
-                </div>
-                <div id="search-results" class="searchResultsPos">
-                    <!-- contains the search results for manipulation -->
-                    <h3 class="subtitle webpDogQ is-5 hidden fw500 fontLora" id="dogQ">Is this your dog?</h3>
-                    <div class="user-cards" data-user-cards-container></div>
-                </div>
+        <section id="right-side">
+            <div class="clrHistoryBtn">
+                <!-- Kit added a Clear History button here -->
+                <button id="clear-history-button" class="button is-warning fontQuicksand"><i class="fa-solid fa-trash-can"></i></button>
             </div>
+            <div class="history-list">
+                <h4 class="recent fw500">
 
-            <template data-user-template>
-                <div class="card">
-                    <div class="body" data-body></div>
-                </div>
-            </template>
+                    <div class="history-highlight">
+                        <i class="fa-solid space15 fa-clock-rotate-left"></i>                
+                        <p id="histTitle">History</p>
+                        <i class="space15 fa-solid fa-angle-down"></i>
+                    </div>
+                </h4>
+                <div id="history-list" class="histories"></div>
+            </div>
         </section>
+    </header>
 
-        <!-- WIP: Error message, hidden by default, shown when search fails -->
-        <article id=error-page-box class="box hidden">
-            <div id="error-page-content" class="hidden">
-                <span id="error-title" class="content is-medium">Oops!</span>
+    <section class="block center centered" id="title-box">
+        <h2 class="webpTitle" id="webpage-title"><a href="./index.html" class="title-card">Doggypedia</a></h2>
+        <h3 class="subtitle is-4 fontLora fw500 blackText" id="webpage-subtitle">Where your newest best friend is only a click
+            away</h3>
+        <!-- <h3>Please search for your breed by "family" eg "hound", "terrier", "spaniel"</br>If the breed family has sub-breeds, buttons will populate for you to select!</h3> -->
+        <!-- Search Bar Goes Here -->
+        <div class="search-wrapper" id="search-container">
+            <span id="instructions" class="fontQuicksand blackText">Search for breeds by their family.
                 <br>
-                <span id="error-text" class="content is-medium">The dog breed you specified could not be found in our
-                    database. For your troubles, here's some random dog facts!</span>
+                If the breed family has sub-breeds, options will present themselves upon selecting an option.
                 <br>
-                <span class="content is-medium fontLora" id="dog-facts">
-                    <!--This section has all the quick facts/ stats in it. The facts are in one container (id=wikipedia) and the facts are in the other (id=statistics)-->
-                    <section>
-                        <!--THIS IS where the quick dog facts is appended to (the <ul> with id=wikipedia)-->
-                        <div>
-                            <ul id="wikipedia">
+                Examples: "hound", "terrier", "spaniel"
+            </span>
+            <section class="search-section" id="search-section">
+                <div class="search-container" id="search-container">
+                    <!-- Search Bar -->
+                    <input type="search" id="search" class="search-bar space5" data-search>
+                    <div id="search-results" class="searchResultsPos hidden">
+                        <!-- contains the search results for manipulation -->
+                        <h3 class="subtitle webpDogQ is-5 hidden fw500 fontLora" id="dogQ">Is this your dog?</h3>
+                        <div class="user-cards" data-user-cards-container></div>
+                        <!-- Search button -->
+                    </div>
+                </div>
+                <div class="upup">
+                    <button id="orange" class="button is-light fontQuicksand space5" for=""><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </section>
+        </div>
+        </div>
 
-                            </ul>
-                        </div>
-                    </section>
-                </span>
-                <!-- Random Dog Fact API -->
+        <template data-user-template>
+            <div class="card">
+                <div class="body" data-body></div>
             </div>
-        </article>
+        </template>
+    </section>
 
+    <!-- WIP: Error message, hidden by default, shown when search fails -->
+    <article id=error-page-box class="box hidden">
+        <div id="error-page-content" class="hidden">
+            <span id="error-title" class="content is-medium">Oops!</span>
+            <br>
+            <span id="error-text" class="content is-medium">The dog breed you specified could not be found in our
+                database. For your troubles, here's some random dog facts!</span>
+            <br>
+            <span class="content is-medium fontLora" id="dog-facts">
+                <!--This section has all the quick facts/ stats in it. The facts are in one container (id=wikipedia) and the facts are in the other (id=statistics)-->
+                <section>
+                    <!--THIS IS where the quick dog facts is appended to (the <ul> with id=wikipedia)-->
+                    <div>
+                        <ul id="wikipedia">
 
-        <!-- Start section for breed buttons and breed images appendChild -->
-        <article class="center fontLora" id="breed-wrapper">
-            <div id="sub-button"></div>
-            <div id="sub-images"></div>
-            <!--THIS IS where the dog facts are appended to (the <ul> with id=statistics)-->
-            <div class="content hidden box is-medium" id="stats-wrapper">
-                <ul id="statistics">
-                </ul>
-            </div>
-        </article>
+                        </ul>
+                    </div>
+                </section>
+            </span>
+            <!-- Random Dog Fact API -->
+        </div>
+    </article>
+
+    <!-- Start section for breed buttons and breed images appendChild -->
+    <article class="center fontLora" id="breed-wrapper">
+        <h2 class="blackText hidden" id="sub-breed-text">Select a sub-breed: </h2>
+        <div id="sub-button"></div>
+        <div id="sub-images"></div>
+        <!--THIS IS where the dog facts are appended to (the <ul> with id=statistics)-->
+        <div class="content hidden box is-medium" id="stats-wrapper">
+            <ul id="statistics">
+            </ul>
+        </div>
+    </article>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

@@ -1,13 +1,72 @@
+body {
+    width: 100vw;
+    min-height: 105vh;
+    background: #82b8ff;
+    --nav-height: 75px;
+    padding-top: var(--nav-height);
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: rgb(174, 250, 255);
+    transition: transform 2.8s;
+}
+
+#header {
+    background-color: rgb(21, 0, 95);
+    height: var(--nav-height);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    transition: transform 0.15s;
+}
+
+#title-box {
+    width: 80%;
+}
+
+#webpage-title a {
+    margin-top: 5px;
+    transition: 0.2s;
+    box-shadow:none;
+    text-shadow: 0 0 50px rgba(28, 37, 165, 0.5);
+}
+
+#webpage-title a:hover {
+    transition: 0.45s;
+    text-shadow: 0 0 50px rgba(255, 212, 249, 0.863);
+}
+
+.nav-hidden {
+    transform: translateY(calc(-1 * var(--nav-height)));
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1;}
+}
+
 .fixedPos {
     position: fixed;
     justify-content: space-between;
 }
 
-#header {
-    background-color: black;
-    display: flex;
-    flex-flow: row-reverse nowrap;
-    height: 66px;
+.blackText {
+    color: black;
+}
+
+#webpage-title {
+    transition: 0.2s;
 }
 
 .clrHistoryBtn {
@@ -17,29 +76,87 @@
     margin-bottom: 2px;
 }
 
-.history-list {
-    font-family: 'Lora', serif;
-    font-weight: 400;
-    text-align: center;
-    margin-right: 30px;
-}
-
 .recent {
     color: white;
     font-size: 1.5em;
-    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    height: 66px;
+    transition: 0.6s;
+}
+
+.history-highlight {
+    display: flex;
 }
 
 .histories {
     display: none;
     flex-flow: column wrap;
+    transition: 0.6s;
+}
+
+.history-list {
+    width: auto;
+    font-family: 'Lora', serif;
+    font-weight: 400;
+    text-align: center;
+    padding: 13px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 66px;
+    transition: 0.6s;
+}
+
+.history-list:hover .recent{
+    color: black;
+    background-color: white;
+    border-radius: 6px;
+    transition: 0.6s;
+}
+
+.history-list:hover {
+    background-color: none;
+    opacity: 100%;
+    transition: 0.6s;
 }
 
 .history-list:hover .histories {
     display: flex;
     position: absolute;
-    flex-flow: column;
+    flex-direction: column;
+    align-items: flex-end;
     top: 66px;
+    opacity: 100%;
+    transition: 0.6s;
+    transition: opacity 2s ease-in;
+}
+
+.history-button {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 22px;
+    border: none;
+    background-color: none;
+    border-radius: 8px;
+    margin: 2px;
+    transition: 0.6s;
+}
+
+.history-button:hover {
+    background-color: #a1d2ff;
+    color: white;
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.6;
+}
+
+#clear-history-button {
+    max-width: fit-content;
+    margin: auto;
 }
 
 .webpTitle {
@@ -47,20 +164,20 @@
     font-size: 72px;
     font-weight: 900;
     margin: 0;
+    justify-content: center;
 }
 
 .headered {
-    position: absolute;
+    position: fixed;
     top: -1px;
     left: 5px;
-    font-size: 48px;
+    font-size: 54px;
 }
 
 .searchHeadered {
     position: absolute;
     top: -20px;
     left: 350px;
-    z-index: 2;
 }
 
 .centered {
@@ -70,23 +187,53 @@
     transform: translate(-50%, -50%)
 }
 
+.space5 {
+    margin: auto 5px;
+}
+
+.space15 {
+    margin: auto 15px;
+}
+
 .search-wrapper {
     text-align: center;
-    margin: 20px auto 5px;
+    margin: 5px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.15s;
+}
+
+.search-section {
+    padding: 0;
+    margin: 20px 30px 0 10px;
+    max-width: 20vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+}
+
+.upup {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .search-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    margin: 6px 10px 0px;
+    align-items: center;
+    transition: transform 0.15s;
 }
 
-.space {
-    margin: auto 5px;
-}
-
-#randog:active #randogImg{
-    src: "./assets/images/dog_out.jpg" 
+.search-container-translate {
+    top: -7px;
+    left: 414px;
+    position: fixed;
 }
 
 .searchBox {
@@ -96,7 +243,7 @@
 
 #search {
     border: 1px solid grey;
-    border-radius: 10px;
+    border-radius: 14px;
     height: 32px;
     width: 20vw;
     max-width: 500px;
@@ -105,37 +252,14 @@
     background-color: #f5f5f5;
 }
 
-.randog {
-    border-radius: 25%;
-    height: 60px;
-    width: 60px;
-}
-
-.randog:hover {
-    cursor: help;
-}
-
 #search:hover, #search:focus {
     border: 1.5px solid #009688;
     background-color: white;
 }
 
-#orange:hover {
-    background-color: rgb(181, 255, 243);
-}
-
 #search-results { /* container for the search results */
-    position: fixed;
-}
-
-.searchResultsPos {
-    top: 285px;
-    left: 26%;
-}
-
-.searchResultsPos2 {
-    top: 65px;
-    left: 25%;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0 2.5vw 19px;
 }
 
 /* Fonts & Font Weights */
@@ -170,21 +294,33 @@
 .user-cards {
     margin: auto;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .card {
-    border: 1px solid grey;
-    height: 32px;
     width: max-content;
-    margin: 1px auto;
-    padding: 4px 5px 2px 5px;
-    background-color: #f5f5f5;
-    font-family: 'Lora', serif;   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    border: none;
+    background-color: none;
+    border-radius: 8px;
+    margin: 2px;
+    padding: 4px;
+    transition: 0.6s;
     cursor: pointer;
 }
 
 .card:hover {
-    background-color: white;
+    background-color: #a1d2ff;
+    color: white;
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.6;
 }
 
 .center {
@@ -193,10 +329,6 @@
 
 .rounded {
     border-radius: 10px;
-}
-
-.hidden {
-    display: none;
 }
 
 .titleLefted {
@@ -221,17 +353,64 @@
 #error-page-box {
     max-width: 60%;
     margin: auto;
+    animation: fadeIn 1.5s;
 }
 
 #error-title {
     font-family: 'Cinzel', serif;
     font-weight: 700;
     font-size: 2rem;
+    animation: fadeIn 1.5s;
 }
 
 #error-text {
     font-family: 'Lora', serif;
     font-weight: 500;
+    animation: fadeIn 1.5s;
+}
+
+#orange {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    border: none;
+    background-color: none;
+    border-radius: 8px;
+    margin: 0 2px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+#orange:hover {
+    background-color: #a1d2ff;
+    color: white;
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.3;
+}
+
+#sub-button {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#sub-button button {
+    max-width: max-content;
+    font-size: 22px;
+    border: none;
+    border-radius: 8px;
+    margin: 6px;
+    padding: 8px;
+    animation: fadeIn 1.5s;
+}
+
+#sub-button button:hover {
+    background-color: #a1d2ff;
+    color: white;
+    cursor: pointer;
 }
 
 #sub-images {
@@ -239,31 +418,46 @@
     margin: auto;
     justify-content: space-around;
     max-width: 50vw;
+    align-items: center;
 }
 
 .dog-pic {
-    height: 250px;
+    height: auto;
+    width: 20vw;
     margin: 3px;
     padding: 3px;
+    border-radius: 16px;
 }
 
 #statistics { 
     list-style-type: none;
 }
 
+#stats-wrapper {
+    margin: 20px auto;
+    width: 60vw;
+    animation: fadeIn 1.5s;
+    transition: 5s;
+}
+
 #breed-wrapper {
-    max-width: 60%;
+    max-width: 80%;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.history-button {
-    margin: 2px auto;
+#histTitle {
+    font-family: 'Lora', serif;
+    font-weight: 500;
 }
 
-#clear-history-button {
-    right: 10px;
-    max-width: fit-content;
-    margin: auto;
+#right-side {
+    position: fixed;
+    right: 1px;
+    display: flex;
+    transition: 0.6s;
 }
 
 /* Add Media Queries for browser sizes/mobile */
