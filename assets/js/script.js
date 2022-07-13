@@ -12,8 +12,10 @@ var dogFamily;
 var searchButtonOriginal = document.getElementById("orange");
 var doggieButtonClick;
 
-searchButtonOriginal.addEventListener("click", openPage);
-searchButtonOriginal.addEventListener("click", clearSearch);
+$(searchButtonOriginal).on("click", function() {
+    openPage();
+    clearSearch();
+})
 
 function leavingHome() { //I put all of these in a function so I can just call the function a few times instead of spanning 20 lines
     document.querySelector("#title-box").classList.remove('centered');
@@ -79,9 +81,11 @@ function openPage() {
     searchHistory(resultChopped);
 
     //THIS IS the call to the dog facts API
+    //dogBreedFacts();
     getDogInfo(resultChopped);
     getBreed(resultChopped);
     leavingHome();
+    //dogBreedFacts(resultChopped);
 }
 
 // Reference to Card Template
