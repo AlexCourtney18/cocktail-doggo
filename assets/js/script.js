@@ -151,9 +151,7 @@ const handleSearchInput = (event) => {
         })
     }
 
-
 }
-
 
 // Search Input Event Listener
 searchInput.addEventListener("input", handleSearchInput);
