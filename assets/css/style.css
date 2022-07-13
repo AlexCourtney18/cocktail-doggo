@@ -128,6 +128,16 @@
     position: fixed;
 }
 
+.searchResultsPos {
+    top: 285px;
+    left: 26%;
+}
+
+.searchResultsPos2 {
+    top: 65px;
+    left: 25%;
+}
+
 /* Fonts & Font Weights */
 
 .fontLora {
