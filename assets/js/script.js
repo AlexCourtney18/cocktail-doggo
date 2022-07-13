@@ -25,7 +25,7 @@ function leavingHome() { //I put all of these in a function so I can just call t
     document.querySelector("#webpage-subtitle").classList.add('hidden');
     document.querySelector("#instructions").classList.add('hidden');
     searchContainer.classList.add('searchHeadered');
-    searchContainer.classList.add('search-container-translate');
+    searchContainer.classList.add('search-container-translate')
     mainPageFlag = false;
 }
 
@@ -477,7 +477,6 @@ function printDoggieFacts() {
     var drool = document.createElement("li");
     drool.innerText = drooling;
     statistics.appendChild(drool);
-
 };
 
 //if there are no statistics for the given (searched for) dog, then fun dog facts are printed in thier place
