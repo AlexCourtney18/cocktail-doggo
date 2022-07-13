@@ -23,6 +23,13 @@ function leavingHome() { //I put all of these in a function so I can just call t
     document.querySelector("#instructions").classList.add('hidden');
 }
 
+$("input").on("keydown", function search(e) {
+    if(e.keyCode == 13) {
+        openPage($(this).val());
+        clearSearch();
+    }
+});
+
 function pictureChange() {
     
     document.getElementById("randogImg").src="./assets/images/dog_out.jpg";
@@ -140,8 +147,7 @@ const handleSearchInput = (event) => {
             while (userCardContainer.firstChild) {
                 userCardContainer.removeChild(userCardContainer.firstChild);
             }
-        }
-        )
+        })
     }
 }
 
