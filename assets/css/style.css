@@ -150,7 +150,7 @@ body {
 }
 
 #search-results { /* container for the search results */
-    background: white;
+    background: rgba(255, 255, 255, 0.8);
     padding: 0 2.5vw 19px;
 }
 
