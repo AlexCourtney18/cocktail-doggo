@@ -10,6 +10,8 @@ var resultChopped;
 var dogFamily;
 var searchButtonOriginal = document.getElementById("orange");
 var doggieButtonClick;
+const audio = new Audio();
+audio.src = "./assets/sounds/filename.mp3"; // NEED TO GET THE SFX BUT CODE SHOULD BE DONE
 
 searchButtonOriginal.addEventListener("click", openPage);
 searchButtonOriginal.addEventListener("click", clearSearch);
@@ -65,8 +67,7 @@ function clearSearch() {
     document.getElementById('search').value = "";
 }
 
-function openPage(event) {
-
+function openPage() {
     while (userCardContainer.firstChild) {
         userCardContainer.removeChild(userCardContainer.firstChild);
     }
@@ -248,7 +249,7 @@ function getBreed(resultChopped) {
             }
         }
     });
-}
+};
 
 // button click function for sub-breed buttons to pass through breed family + btnClick sub breed to breed images function
 function buttonClick(event) {
@@ -357,6 +358,7 @@ function getDogInfo() {
             })
         }
     })
+    console.log("RANDOM FACTS API!!!");
 };
 
 //This function fetches the dog statistics for the given (searched for) dog
@@ -397,6 +399,7 @@ function dogBreedFacts() {
             }
         }
     });
+    console.log("DOG STATS !!!!!!!!!");
 };
 
 //this function prints the dog statistics to the screen for the given (searched for) dog
