@@ -6,6 +6,7 @@ var historyListEl = document.querySelector("#history-list");
 var clearHistoryButton = document.getElementById("clear-history-button");
 var wikipedia = document.getElementById("wikipedia"); //This is the element with the random dog facts inside. Should change the name to be something other than wikipedia later.
 var statistics = document.getElementById("statistics");
+var statsWrapper;
 var resultChopped;
 var dogFamily;
 var searchButtonOriginal = document.getElementById("orange");
@@ -26,7 +27,8 @@ function leavingHome() { //I put all of these in a function so I can just call t
     searchContainer.classList.add('searchHeadered');
     searchContainer.classList.add('search-container-translate')
     mainPageFlag = false;
-    console.log("On main page? "+mainPageFlag);
+
+    console.log("On main page? " + mainPageFlag);
 }
 
 const nav = document.querySelector("#header");
@@ -48,7 +50,7 @@ window.addEventListener("scroll", () => {
 });
 
 $("input").on("keydown", function search(e) {
-    if(e.keyCode == 13) {
+    if (e.keyCode == 13) {
         openPage($(this).val());
         clearSearch();
     } else { /* make it not error */ }
@@ -69,6 +71,7 @@ $(clearHistoryButton).on("click", function () {
 
 //this funtion listens for clicks on the history button list
 $(historyListEl).on("click", "button", function (event) {
+    statsWrapper = document.querySelector("#stats-wrapper");
     var melon = event.target.textContent;
     resultChopped = melon;
     var oldDogHistory = JSON.parse(localStorage.getItem("breeds"));
@@ -79,7 +82,7 @@ $(historyListEl).on("click", "button", function (event) {
         createHistoryButton();
     }
     leavingHome();
-    document.querySelector("#stats-wrapper").classList.remove('hidden');
+    statsWrapper.classList.remove('hidden');
     getBreed(resultChopped);
 })
 
@@ -155,8 +158,10 @@ const handleSearchInput = (event) => {
         //event listener for the card, so that when you click something in the dropdown from the search bar, you get the results from the clicked option
         $(card).on("click", function () {
             resultChopped = body.textContent;
+            statsWrapper = document.querySelector("#stats-wrapper");
             leavingHome();
-            document.querySelector("#stats-wrapper").classList.remove('hidden');
+            statsWrapper.classList.remove('hidden');
+
             getDogInfo();
             searchHistory(resultChopped);
             getBreed(resultChopped);
@@ -204,6 +209,13 @@ function getBreed(resultChopped) {
                         // add click event listener for sub-breed buttons
                         subBreedButtonEl.addEventListener("click", buttonClick);
                     }
+                    if (subBreedButtonEl.firstChild)
+                    {
+                        document.querySelector("#sub-breed-text").classList.remove('hidden');
+                    } else {
+                        document.querySelector("#sub-breed-text").classList.add('hidden');
+                    }
+
                     //this is to add a history button to the history button list for the given (searched for) dog
                     var oldDogHistory = JSON.parse(localStorage.getItem("breeds"));
                     if (oldDogHistory === null) {
@@ -242,7 +254,7 @@ function getBreed(resultChopped) {
                                         }
                                     }
                                 });
-                            } 
+                            }
                         });
                     }
                 }
@@ -262,9 +274,12 @@ function getBreed(resultChopped) {
             subImagesEl.textContent = "";
             subBreedButtonEl.textContent = "";
             console.log("dog breed not found");
+            statsWrapper = document.querySelector("#stats-wrapper");
+            statsWrapper.classList.add('hidden');
             document.querySelector("#error-page-box").classList.remove('hidden');
             document.querySelector("#error-page-content").classList.remove('hidden');
             document.querySelector("#dog-facts").classList.remove('hidden');
+            document.querySelector("#sub-breed-text").classList.add('hidden');
 
             while (statistics.firstChild) {
                 statistics.removeChild(statistics.firstChild);
@@ -307,7 +322,7 @@ function getBreedImage(resultChopped) {
                     }
                 }
             });
-        } 
+        }
     });
 }
 
@@ -495,11 +510,11 @@ function insteadFacts() {
             response.json().then(function (data) {
                 secondDataArr = data.facts;
                 for (var i = 0; i < secondDataArr.length; i++) {
-                var secondRandomFact = document.createElement("li");
-                secondRandomFact.classList.add("randomfact");
-                secondRandomFact.innerText = secondDataArr[i];
-                statistics.appendChild(secondRandomFact);
-                secondRandomFact.classList.add("factSpace");
+                    var secondRandomFact = document.createElement("li");
+                    secondRandomFact.classList.add("randomfact");
+                    secondRandomFact.innerText = secondDataArr[i];
+                    statistics.appendChild(secondRandomFact);
+                    secondRandomFact.classList.add("factSpace");
                 }
             })
         }
